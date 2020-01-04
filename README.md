@@ -4,7 +4,7 @@
 [![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
 
-<img src="logo.png" alt="logo" style="width:200px;"/>
+![logo](logo.png)
 
 - [What is Uni-Cron?](#what-is-uni-cron)
 - [Features](#features)
