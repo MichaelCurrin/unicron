@@ -1,9 +1,9 @@
-# Uni-Cron
+# Uni-Cron :one: :clock1:
 > A scheduler to tasks exactly once per day but will retry until a success.
 
-- [What is Uni-Cron?](#what-is-uni-cron)
-- [Features](#features)
-    - [What is the point of running once and retrying?](#what-is-the-point-of-running-once-and-retrying)
+- [What is Uni-Cron :unicorn:?](#what-is-uni-cron-unicorn)
+- [Features :hourglass_flowing_sand:](#features-hourglass_flowing_sand)
+    - [What is the point of running once but retrying :repeat_one:?](#what-is-the-point-of-running-once-but-retrying-repeat_one)
     - [What kind of tasks can you run?](#what-kind-of-tasks-can-you-run)
     - [Technical details](#technical-details)
 - [Alternative approaches](#alternative-approaches)
