@@ -1,5 +1,5 @@
 # Uni-Cron
-> Run scheduled tasks at most once per day and retry until a success.
+> A scheduler to tasks exactly once per day but will retry until a success.
 
 - [What is Uni-Cron?](#what-is-uni-cron)
 - [Features](#features)
