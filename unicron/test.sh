@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/bash -e
+
+export TEST=1
 
 echo "Reset"
 echo "==="

@@ -16,6 +16,8 @@
 #   ERROR: Critical message.
 
 # Environment variables:
+#   TEST: Set this to a non-empty value to run in test mode. This runs again an alternate directory
+#       instead of 'var'.
 #   VERBOSE: Set this to a non-empty value such as 1 to make the application print the DEBUG
 #       messages which are hidden.
 
@@ -29,13 +31,19 @@
 
 # TODO: start with main script's dir so this can run from anywhere.
 # TODO: Change to test dir for tests.
-VAR_DIR=var
+if [[ -n "$TEST" ]]; then
+    echo "Running in test mode."
+    VAR_DIR='_test_var'
+else
+    VAR_DIR='var'
+fi
+
 LAST_RUN_NAME='last_run'
-LAST_RUN_DIR=$VAR_DIR/$LAST_RUN_NAME
-TARGET_DIR=$VAR_DIR/targets
-RUN_EXT=.txt
-OUTPUT_DIR=$VAR_DIR/output
-APP_LOG_PATH=$VAR_DIR/app.log
+LAST_RUN_DIR="$VAR_DIR/$LAST_RUN_NAME"
+TARGET_DIR="$VAR_DIR/targets"
+RUN_EXT='.txt'
+OUTPUT_DIR="$VAR_DIR/output"
+APP_LOG_PATH="$VAR_DIR/app.log"
 
 today() {
     echo $(date +%Y%m%d)
