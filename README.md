@@ -107,3 +107,9 @@ Configure crontab to run the main script at an interval through the day such eve
 **To be completed.**
 
 <!-- Running test -->
+
+## License
+
+Released under [MIT License](LICENSE).
+
+Feel free to use this application and to use or modify the code. Please give credit with a link back to this repo.
