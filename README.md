@@ -93,4 +93,16 @@ Add executables or symlinks to executables in the target directory.
 
 Configure crontab to run the main script at an interval through the day such every 30 min (or every 1 hour). This can be more frequent, but there is not much benefit as this is aimed at scripts that only run once per day and the time doesn't matter.
 
+**To be completed.**
+
 <!-- TODO: How to setup crontab to disable mails -->
+
+## Usage
+
+**To be completed.**
+
+## Development
+
+**To be completed.**
+
+<!-- Running test -->
