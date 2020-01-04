@@ -1,0 +1,5 @@
+unicron/var/last_run/*.txt
+unicron/var/output/*.log
+unicron/var/targets/*
+
+unicron/var/app.log
