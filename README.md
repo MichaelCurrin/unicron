@@ -1,14 +1,14 @@
-# Uni-Cron :one: :clock1:
-> A scheduler to tasks exactly once per day but will retry until a success.
+# Uni-Cron :clock1:
+> A scheduler to tasks exactly once per day but will retry until a success.  :repeat_one::hourglass_flowing_sand::unicorn:
 
 [![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
 
 <img src="logo.png" alt="logo" style="width:200px;"/>
 
-- [What is Uni-Cron :unicorn:?](#what-is-uni-cron-unicorn)
-- [Features :hourglass_flowing_sand:](#features-hourglass_flowing_sand)
-    - [What is the point of running once but retrying :repeat_one:?](#what-is-the-point-of-running-once-but-retrying-repeat_one)
+- [What is Uni-Cron?](#what-is-uni-cron)
+- [Features](#features)
+    - [What is the point of running once but retrying?](#what-is-the-point-of-running-once-but-retrying)
     - [What kind of tasks can you run?](#what-kind-of-tasks-can-you-run)
     - [Technical details](#technical-details)
 - [Alternative approaches](#alternative-approaches)
@@ -18,7 +18,7 @@
     - [Clone](#clone)
     - [Configuration](#configuration)
 
-## What is Uni-Cron :unicorn:?
+## What is Uni-Cron?
 
 Get the right balance in scheduling automated tasks. Run often enough that tasks run reliably even on a laptop, but not too often that you increase costs.
 
@@ -27,14 +27,14 @@ Get the right balance in scheduling automated tasks. Run often enough that tasks
 
 Also, it sounds like _unicorn._
 
-## Features :hourglass_flowing_sand:
+## Features
 
 - Schedule daily tasks to each run exactly once per day.
 - No problem if the machine is off or asleep in the morning - the task will still run later in the day.
 - If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
 - Ideal for machines like laptops which not always awake and connected to the internet.
 
-### What is the point of running once but retrying :repeat_one:?
+### What is the point of running once but retrying?
 
 - Tasks will be run more than once a day where needed.
     - This avoids the issue where a task is scheduled with `cron.daily` or `crontab` for a time when the machine might be off or asleep.
