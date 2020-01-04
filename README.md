@@ -13,23 +13,23 @@
     - [Clone](#clone)
     - [Configuration](#configuration)
 
-## What is Uni-Cron?
-
-:unicorn:
+## What is Uni-Cron :unicorn:?
 
 Get the right balance in scheduling automated tasks. Run often enough that tasks run reliably even on a laptop, but not too often that you increase costs.
 
 - _Uni_ => one
 - _Cron_ => time
 
-## Features
+Also, it sounds like _unicorn._
+
+## Features :hourglass_flowing_sand:
 
 - Schedule daily tasks to each run exactly once per day.
 - No problem if the machine is off or asleep in the morning - the task will still run later in the day.
 - If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
 - Ideal for machines like laptops which not always awake and connected to the internet.
 
-### What is the point of running once and retrying?
+### What is the point of running once but retrying :repeat_one:?
 
 - Tasks will be run more than once a day where needed.
     - This avoids the issue where a task is scheduled with `cron.daily` or `crontab` for a time when the machine might be off or asleep.
