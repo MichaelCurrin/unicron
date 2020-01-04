@@ -1,7 +1,11 @@
 # Uni-Cron :one: :clock1:
 > A scheduler to tasks exactly once per day but will retry until a success.
 
+[![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
+
 <img src="logo.png" alt="logo" style="width:200px;"/>
+
 - [What is Uni-Cron :unicorn:?](#what-is-uni-cron-unicorn)
 - [Features :hourglass_flowing_sand:](#features-hourglass_flowing_sand)
     - [What is the point of running once but retrying :repeat_one:?](#what-is-the-point-of-running-once-but-retrying-repeat_one)
