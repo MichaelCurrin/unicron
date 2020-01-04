@@ -1,6 +1,7 @@
 # Uni-Cron :one: :clock1:
 > A scheduler to tasks exactly once per day but will retry until a success.
 
+<img src="logo.png" alt="logo" style="width:200px;"/>
 - [What is Uni-Cron :unicorn:?](#what-is-uni-cron-unicorn)
 - [Features :hourglass_flowing_sand:](#features-hourglass_flowing_sand)
     - [What is the point of running once but retrying :repeat_one:?](#what-is-the-point-of-running-once-but-retrying-repeat_one)
