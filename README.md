@@ -8,6 +8,7 @@ _:warning: **NOTICE**: This project is under development. It works as a prototyp
 ![logo](logo.png)
 
 - [What is Uni-Cron?](#what-is-uni-cron)
+- [Sample](#sample)
 - [Features](#features)
     - [What is the point of running once but retrying?](#what-is-the-point-of-running-once-but-retrying)
     - [What kind of tasks can you run?](#what-kind-of-tasks-can-you-run)
@@ -18,29 +19,12 @@ _:warning: **NOTICE**: This project is under development. It works as a prototyp
 - [Installation](#installation)
     - [Clone](#clone)
     - [Configuration](#configuration)
+- [Usage](#usage)
+    - [See Makefile help](#see-makefile-help)
+    - [Run main script](#run-main-script)
+- [Development](#development)
+- [License](#license)
 
-## Sample
-
-First run - runs the executable.
-
-```bash
-$ ./unicron.sh
-2020-01-05 19:23:05 INFO:unicron.sh hello.sh - Success.
-```
-
-Second run - skips the executable which just ran.
-
-```bash
-$ ./unicron.sh
-2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
-```
-
-This can be added to a _crontab_ file.
-
-<!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
-```
-*/30    *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
-```
 
 ## What is Uni-Cron?
 
@@ -50,6 +34,36 @@ Get the right balance in scheduling automated tasks. Run often enough that tasks
 - _Cron_ => time
 
 Also, it sounds like _unicorn._
+
+
+## Sample
+
+Given a configured script `hello.sh` in the targets directory.
+
+1. First run today - the script executes.
+    ```bash
+    $ ./unicron.sh
+    2020-01-05 19:23:05 INFO:unicron.sh hello.sh - Success.
+    ```
+2. Second run today - the script is skipped.
+    ```bash
+    $ ./unicron.sh
+    2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
+    ```
+3. First run tomorrow - the script executes.
+    ```bash
+    $ ./unicron.sh
+    2020-01-06 12:22:00 INFO:unicron.sh hello.sh - Success.
+    ```
+4. Scheduling - add the main script to a _crontab_ file so it can do this without you.
+    ```
+    */30    *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
+    ```
+
+<!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
+
+<!-- TODO: Repeat scheduling this in the usage/config section in more detail with `crontab -e`. -->
+
 
 ## Features
 
