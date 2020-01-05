@@ -19,6 +19,29 @@ _:warning: **NOTICE**: This project is under development. It works as a prototyp
     - [Clone](#clone)
     - [Configuration](#configuration)
 
+## Sample
+
+First run - runs the executable.
+
+```bash
+$ ./unicron.sh
+2020-01-05 19:23:05 INFO:unicron.sh hello.sh - Success.
+```
+
+Second run - skips the executable which just ran.
+
+```bash
+$ ./unicron.sh
+2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
+```
+
+This can be added to a _crontab_ file.
+
+<!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
+```
+*/30    *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
+```
+
 ## What is Uni-Cron?
 
 Get the right balance in scheduling automated tasks. Run often enough that tasks run reliably even on a laptop, but not too often that you increase costs.
@@ -83,7 +106,7 @@ There are a lot of tutorials and conversations online around scheduling tasks on
 
 ### Clone
 
-```sh
+```bash
 $ git clone git@github.com:MichaelCurrin/uni-cron.git
 $ cd uni-cron
 ```
@@ -94,19 +117,61 @@ Add executables or symlinks to executables in the target directory.
 
 Configure crontab to run the main script at an interval through the day such every 30 min (or every 1 hour). This can be more frequent, but there is not much benefit as this is aimed at scripts that only run once per day and the time doesn't matter.
 
-**To be completed.**
+<!-- TODO: How to setup crontab and to disable mails for it. -->
 
-<!-- TODO: How to setup crontab to disable mails -->
+Example of setting up and testing a script.
+
+```bash
+$ cd <PATH_TO_REPO>
+```
+
+Create test file.
+
+```bash
+$ echo '#!/bin/bash
+echo "Hello world!"
+' > unicron/var/targets/hello.sh
+$ chmod +x hello.sh
+```
+
+Test it in isolation.
+
+```bash
+$ unicron/var/targets/hello.sh
+Hello world!
+```
 
 ## Usage
 
-**To be completed.**
+```bash
+$ cd <PATH_TO_REPO>
+```
+
+### See Makefile help
+
+```bash
+$ make help
+```
+
+### Run main script
+
+```bash
+$ make run
+cd unicron && ./unicron.sh
+2020-01-05 19:23:05 INFO:unicron.sh hello.sh - Success.
+```
+
+```bash
+$ make run
+cd unicron && ./unicron.sh
+2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
+```
 
 ## Development
 
-**To be completed.**
-
-<!-- Running test -->
+```bash
+$ make test
+```
 
 ## License
 
