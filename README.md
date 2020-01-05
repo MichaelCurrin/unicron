@@ -4,7 +4,8 @@
 [![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
 
-_:warning: **NOTICE**: This project is under development. It works as a prototype against the test cases, but it has not been tested fully, there are still TODO items and the doc instructions are still to be completed._
+_:warning: **NOTICE**: This project is very new and still in pre-release stage. This project does works as a prototype to the extent shown in the [Usage](#usage) section, along with the logging. However, more changes are coming - such as handling mails as intended and all the TODOs and issues on this project. The first major tag and release (v1.0.0) will indicate it is stable and ready for use by people other than the author.
+
 ![logo](logo.png)
 
 - [What is Uni-Cron?](#what-is-uni-cron)
