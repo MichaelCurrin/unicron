@@ -144,16 +144,14 @@ Example of setting up and testing a script.
 $ cd <PATH_TO_REPO>
 ```
 
-Create test file.
+Create a test file and make it executable.
 
 ```bash
-$ echo '#!/bin/bash
-echo "Hello world!"
-' > unicron/var/targets/hello.sh
+$ echo echo -e '#!/bin/bash\necho "Hello world!"\n' > unicron/var/targets/hello.sh
 $ chmod +x hello.sh
 ```
 
-Test it in isolation.
+Run it manually.
 
 ```bash
 $ unicron/var/targets/hello.sh
