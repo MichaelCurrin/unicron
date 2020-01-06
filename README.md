@@ -56,9 +56,13 @@ Given a configured script `hello.sh` in the targets directory.
     $ ./unicron.sh
     2020-01-06 12:22:00 INFO:unicron.sh hello.sh - Success.
     ```
-4. Scheduling - add the main script to a _crontab_ file so it can do this without you.
+4. Scheduling - add the command to the _crontab_ file.
     ```
-    */30    *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
+    # Run every 30 minutes.
+    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
+    
+    # Or, run hourly.
+    0    *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
     ```
 
 <!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
@@ -182,11 +186,13 @@ cd unicron && ./unicron.sh
 2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
 ```
 
+<!--
 ## Development
 
 ```bash
 $ make test
 ```
+-->
 
 ## License
 
