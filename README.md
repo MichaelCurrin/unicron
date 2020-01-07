@@ -1,5 +1,5 @@
 # Uni-Cron :clock1:
-> A scheduler to tasks exactly once per day but will retry until a success. :repeat_one::hourglass_flowing_sand::unicorn:
+> A scheduler to run tasks exactly once per day but retry until a success. :repeat_one::hourglass_flowing_sand::unicorn:
 
 [![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
