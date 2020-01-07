@@ -37,7 +37,24 @@ Get the right balance in scheduling automated tasks. Run often enough that tasks
 Also, it sounds like _unicorn._
 
 
-## Sample
+## Features
+
+- **Efficient scheduling**
+    * Schedule daily tasks to each run exactly once per day. When set on a recurring cron job, any jobs already run today will be skipped.
+- **Reliable scheduling**
+    * It's no problem if the machine is off or asleep in the morning - the task will still run later in the day.
+    * If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
+    * Ideal for machines like laptops which not always awake and connected to the internet.
+- **Easy configuration**
+    * Add script or a symlink in the targets directory.
+    * _Future feature: configure with YAML config file._
+- **Logging*
+    * Reduce noise - successes are logged but don't create crontab mails.
+    * Successes and failures.
+    * A brief log for main app level and a detailed log for each task using the task's output (successes and failures).
+
+
+### Sample
 
 Given a configured script `hello.sh` in the targets directory.
 
@@ -69,13 +86,6 @@ Given a configured script `hello.sh` in the targets directory.
 
 <!-- TODO: Repeat scheduling this in the usage/config section in more detail with `crontab -e`. -->
 
-
-## Features
-
-- Schedule daily tasks to each run exactly once per day.
-- No problem if the machine is off or asleep in the morning - the task will still run later in the day.
-- If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
-- Ideal for machines like laptops which not always awake and connected to the internet.
 
 ### What is the point of running once but retrying?
 
