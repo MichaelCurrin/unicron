@@ -157,8 +157,8 @@ $ cd <PATH_TO_REPO>
 Create a test file and make it executable.
 
 ```bash
-$ echo echo -e '#!/bin/bash\necho "Hello world!"\n' > unicron/var/targets/hello.sh
-$ chmod +x hello.sh
+$ echo -e '#!/bin/bash\necho "Hello world!"\n' > unicron/var/targets/hello.sh
+$ chmod +x unicron/var/targets/hello.sh
 ```
 
 Run it manually.
