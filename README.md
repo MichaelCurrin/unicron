@@ -48,7 +48,7 @@ Also, it sounds like _unicorn._
 - **Easy configuration**
     * Add script or a symlink in the targets directory.
     * _Future feature: configure with YAML config file._
-- **Logging*
+- **Logging**
     * Reduce noise - successes are logged but don't create crontab mails.
     * Successes and failures.
     * A brief log for main app level and a detailed log for each task using the task's output (successes and failures).
