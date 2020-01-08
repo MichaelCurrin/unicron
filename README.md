@@ -43,15 +43,15 @@ Also, the name resembles _unicorn_.
 
 - **Efficient scheduling - avoid running tasks too often**
     * Schedule tasks to daily, exactly once.
-    * Tasks run as early as possibly in the day, attempting frequecy you set (e.g. every 30 minutes).
-    * When Uni-Cron runs again, it will skip any tasks which were successess.
+    * Tasks run as early as possibly in the day, attempting frequency you set (e.g. every 30 minutes).
+    * When Uni-Cron runs again, it will skip any tasks which were successes.
 - **Reliable scheduling to avoid missing tasks on a day**
     * It's no problem if the machine is off or asleep in the morning - the task will still run later in the day.
     * If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
 - **Easy task configuration**
     * Add a _single_ crontab entry and point it at Uni-Cron.
     * Add tasks you want to run to a single directory. Either as executable scripts or as symlinks. _Future feature: configure with YAML config file._
-    * Whenever Uni-Cron runs, the tasks queued up will run consequetively. No worrying about load on the memory or network traffic or that tasks might run simulateously. Without Uni-Cron, you'd have to check that all the crontab times are different and that long-running tasks do not overlap with each other.
+    * Whenever Uni-Cron runs, the tasks queued up will run consecutively. No worrying about load on the memory or network traffic or that tasks might run simultaneously. Without Uni-Cron, you'd have to check that all the crontab times are different and that long-running tasks do not overlap with each other.
 - **Logging**
     * Reduce noise - successes are logged but don't create crontab mails.
     * Successes and failures.
