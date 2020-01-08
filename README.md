@@ -4,7 +4,7 @@
 [![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
 
-_:warning: **NOTICE**: This project is very new and still in pre-release stage. It does work well as a prototype to the extent shown in the [Usage](#usage) section, including the logging which is currently too verbose. The first major tag and release (v1.0.0) will indicate it is moved to Python3 with unit tests plus better docs around quiet mails on crontab. In the meantime, you are welcome to use this as is (I am using it already). But know that the project main script will change - the idea is that ./unicorn.py will work the same but better._
+_:warning: **NOTICE**: This project is very new and still in pre-release stage. It does work well as a prototype to the extent shown in the [Usage](#usage) section, including the logging. The first major tag and release (v1.0.0) will indicate it is moved to Python3 with unit tests plus better docs around quiet mails on crontab. In the meantime, you are welcome to use this as is (I am using it already). But know that the project main script will change - the idea is that ./unicorn.py will work the same but better._
 
 ![logo](logo.png)
 
@@ -74,13 +74,17 @@ Given a configured script `hello.sh` in the targets directory.
     $ ./unicron.sh
     2020-01-06 12:22:00 INFO:unicron.sh hello.sh - Success.
     ```
-4. Scheduling - add the command to the _crontab_ file.
+4. Scheduling - add a command to the _crontab_ file.
+    ```bash
+    $ crontab -e
     ```
-    # Run every 30 minutes.
-    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
+    ```
+    SHELL=/bin/bash
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+    MAILTO=my-user
     
-    # Or, run hourly.
-    0    *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
+    # Run every 30 minutes and only send mail on failure.
+    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh > /dev/null
     ```
 
 <!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
@@ -193,6 +197,27 @@ cd unicron && ./unicron.sh
 $ make run
 cd unicron && ./unicron.sh
 2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
+```
+
+### View logs
+
+```bash
+$ make log
+==> output/hello.sh.log <==
+
+Hello world!
+2020-01-07 10:00:10 - Executing...
+
+
+Hello world!
+2020-01-08 10:30:10 - Executing...
+
+
+Hello world!
+
+==> app.log <==
+2020-01-08 16:00:00 INFO:unicron.sh hello.sh - Skipping, since already ran today.
+2020-01-08 16:30:00 INFO:unicron.sh hello.sh - Skipping, since already ran today.
 ```
 
 <!--
