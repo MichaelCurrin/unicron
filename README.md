@@ -4,7 +4,7 @@
 [![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
 
-_:warning: **NOTICE**: This project is very new and still in pre-release stage. It does work as a prototype to the extent shown in the [Usage](#usage) section, along with the logging output. The first major tag and release (v1.0.0) will indicate it is moved to Python3 with unit tests plus better docs around quiet mails on crontab. In the meantime, you are welcome to use this as is (I am using it already). But know that the project main script will change - the idea is that ./unicorn.py will work the same but better._
+_:warning: **NOTICE**: This project is very new and still in pre-release stage. It does work well as a prototype to the extent shown in the [Usage](#usage) section, including the logging which is currently too verbose. The first major tag and release (v1.0.0) will indicate it is moved to Python3 with unit tests plus better docs around quiet mails on crontab. In the meantime, you are welcome to use this as is (I am using it already). But know that the project main script will change - the idea is that ./unicorn.py will work the same but better._
 
 ![logo](logo.png)
 
@@ -45,9 +45,10 @@ Also, it sounds like _unicorn._
     * It's no problem if the machine is off or asleep in the morning - the task will still run later in the day.
     * If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
     * Ideal for machines like laptops which not always awake and connected to the internet.
-- **Easy configuration**
-    * Add script or a symlink in the targets directory.
-    * _Future feature: configure with YAML config file._
+- **Easy task configuration**
+    * Add a _single_ crontab entry and point it at Uni-Cron.
+    * Add tasks you want to run to a single directory. Either as executable scripts or as symlinks. _Future feature: configure with YAML config file._
+    * Whenever Uni-Cron runs, the tasks queued up will run consequetively. No worrying about load on the memory or network traffic or that tasks might run simulateously. Without Uni-Cron, you'd have to check that all the crontab times are different and that long-running tasks do not overlap with each other.
 - **Logging**
     * Reduce noise - successes are logged but don't create crontab mails.
     * Successes and failures.
