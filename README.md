@@ -29,22 +29,25 @@ _:warning: **NOTICE**: This project is very new and still in pre-release stage. 
 
 ## What is Uni-Cron?
 
-Get the right balance in scheduling automated tasks. Run often enough that tasks run reliably even on a laptop, but not too often that you increase costs.
+Get the right balance in scheduling automated tasks. Run often enough that tasks run reliably, but not too often that you increase costs. Uni-cron is targeted at developers who want to run tasks daily but on laptops that are not always awake or connected to the internet.
 
-- _Uni_ => one
-- _Cron_ => time
+Uni-Cron is:
 
-Also, it sounds like _unicorn._
+- _Uni_ (one) - run a task just once a day, if all goes well.
+- _Cron_ (time) - schedule task runs, especially for retries.
+
+Also, the name resembles _unicorn_.
 
 
 ## Features
 
-- **Efficient scheduling**
-    * Schedule daily tasks to each run exactly once per day. When set on a recurring cron job, any jobs already run today will be skipped.
-- **Reliable scheduling**
+- **Efficient scheduling - avoid running tasks too often**
+    * Schedule tasks to daily, exactly once.
+    * Tasks run as early as possibly in the day, attempting frequecy you set (e.g. every 30 minutes).
+    * When Uni-Cron runs again, it will skip any tasks which were successess.
+- **Reliable scheduling to avoid missing tasks on a day**
     * It's no problem if the machine is off or asleep in the morning - the task will still run later in the day.
     * If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
-    * Ideal for machines like laptops which not always awake and connected to the internet.
 - **Easy task configuration**
     * Add a _single_ crontab entry and point it at Uni-Cron.
     * Add tasks you want to run to a single directory. Either as executable scripts or as symlinks. _Future feature: configure with YAML config file._
