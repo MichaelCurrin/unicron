@@ -9,8 +9,8 @@ _:warning: **NOTICE**: This project is very new and still in pre-release stage. 
 ![logo](logo.png)
 
 - [What is Uni-Cron?](#what-is-uni-cron)
-- [Sample](#sample)
 - [Features](#features)
+    - [Sample](#sample)
     - [What is the point of running once but retrying?](#what-is-the-point-of-running-once-but-retrying)
     - [What kind of tasks can you run?](#what-kind-of-tasks-can-you-run)
     - [Technical details](#technical-details)
@@ -85,7 +85,7 @@ Given a configured script `hello.sh` in the targets directory.
     SHELL=/bin/bash
     PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
     MAILTO=my-user
-    
+
     # Run every 30 minutes and only send mail on failure.
     */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh > /dev/null
     ```
