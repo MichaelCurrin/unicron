@@ -62,12 +62,12 @@ Also, the name resembles _unicorn_.
 
 ### Basic structure
 
-- The main application script is [unicron.sh](/unicron/unicron.sh].
-- This works together with a directory of variable files - *unicron/var/*.
-    * User-defined tasks - *var/targets/*. 
-    * App-managed run events - *var/last_run/*.
+- The main application script is [unicron.sh](/unicron/unicron.sh)
+- This works together with a directory of variable files - *unicron/var/*
+    * User-defined tasks - *var/targets/* .
+    * App-managed run events - *var/last_run/*
     * Task log output - *var/log/*
-    * Application log - *var/app.log*.
+    * Application log - *var/app.log*
 
 ### Sample
 
