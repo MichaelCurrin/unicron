@@ -10,6 +10,8 @@ _:warning: **NOTICE**: This project is very new and still in pre-release stage. 
 
 - [What is Uni-Cron?](#what-is-uni-cron)
 - [Features](#features)
+    - [Benefits](#benefits)
+    - [Basic structure](#basic-structure)
     - [Sample](#sample)
     - [What is the point of running once but retrying?](#what-is-the-point-of-running-once-but-retrying)
     - [What kind of tasks can you run?](#what-kind-of-tasks-can-you-run)
@@ -41,6 +43,8 @@ Also, the name resembles _unicorn_.
 
 ## Features
 
+### Benefits
+
 - **Efficient scheduling - avoid running tasks too often**
     * Schedule tasks to daily, exactly once.
     * Tasks run as early as possibly in the day, attempting frequency you set (e.g. every 30 minutes).
@@ -56,6 +60,14 @@ Also, the name resembles _unicorn_.
     * A detailed log for each task, using the task's output (successes and failures).
     * A summary log at the main app level. You can  silence crontab mails which have no errors, you can still see Uni-Cron ran by checking the Uni-Cron app log.
 
+### Basic structure
+
+- The main application script is [unicron.sh](/unicron/unicron.sh].
+- This works together with a directory of variable files - *unicron/var/*.
+    * User-defined tasks - *var/targets/*. 
+    * App-managed run events - *var/last_run/*.
+    * Task log output - *var/log/*
+    * Application log - *var/app.log*.
 
 ### Sample
 
