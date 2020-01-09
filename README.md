@@ -52,10 +52,9 @@ Also, the name resembles _unicorn_.
     * Add a _single_ crontab entry and point it at Uni-Cron.
     * Add tasks you want to run to a single directory. Either as executable scripts or as symlinks. _Future feature: configure with YAML config file._
     * Whenever Uni-Cron runs, the tasks queued up will run consecutively. No worrying about load on the memory or network traffic or that tasks might run simultaneously. Without Uni-Cron, you'd have to check that all the crontab times are different and that long-running tasks do not overlap with each other.
-- **Logging**
-    * Reduce noise - successes are logged but don't create crontab mails.
-    * Successes and failures.
-    * A brief log for main app level and a detailed log for each task using the task's output (successes and failures).
+- **Logging which is informative but so noisy that is hides errors**
+    * A detailed log for each task, using the task's output (successes and failures).
+    * A summary log at the main app level. You can  silence crontab mails which have no errors, you can still see Uni-Cron ran by checking the Uni-Cron app log.
 
 
 ### Sample
