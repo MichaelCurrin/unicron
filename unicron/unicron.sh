@@ -1,13 +1,15 @@
 #!/bin/bash -e
 # Uni-Cron main script.
 #
-# Run targeted executables. If this main script is run multiple times in a day, it will still
-# only execute each script once, or as many times as it takes to get a success.
+# Run targeted executables. If this main script is run multiple times in a day,
+# it will still only execute each script once, or as many times as it takes to
+# get a success.
 #
 # How it works:
-#   Iterate through files in the configured targets directory. These should all be executables.
-#   If there is a record that says the executable has not run today, then run it and on success
-#   then add record that it ran today. If the script fails, leave the record as it was.
+#   Iterate through files in the configured targets directory. These should all
+#   be executables. If there is a record that says the executable has not run
+#   today, then run it and on success then add record that it ran today. If the
+#   script fails, leave the record as it was.
 #
 # This script uses levels of debugging to make viewing and filtering the log files easier.
 #   DEBUG: Low-priorty message which can normally be ignored. Used during development and
@@ -71,13 +73,14 @@ log() {
 }
 
 execute_file() {
-    # On a succesful run, set today's date in the last run event file for the executable, so
-    # that on subsequent runs today this executable will be ignored.
-    # On a failing run, do not update the file so we leave it marked as need to run today still.
+    # On a succesful run, set today's date in the last run event file for the
+    # executable, so that on subsequent runs today this executable will be
+    # ignored. On a failing run, do not update the file so we leave it marked
+    # as need to run today still.
     #
-    # Regardless of the executed file's output, capture all output and send it
-    # to a log file dedicated to that file. This makes it easy to view the executable's history
-    # later.
+    # Regardless of the executed task's output, capture all output and send it
+    # to a log file dedicated to that task. This makes it easy to view the
+    # executable's history later.
     if [ "$#" -ne 2 ]; then
         echo "Error: Incorrect args count for execute_file! Expected 2 but got: $#."
         exit 1
