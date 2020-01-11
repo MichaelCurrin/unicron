@@ -119,7 +119,7 @@ for TARGET_NAME in $(cd $TARGET_DIR && ls *); do
             continue
         fi
     else
-        log "DEBUG" "$TARGET_NAME" "Executing, run file is missing."
+        log "DEBUG" "$TARGET_NAME" "Executing, since run file is missing."
     fi
 
     execute_file "$TARGET_NAME" "$LAST_RUN_PATH"
