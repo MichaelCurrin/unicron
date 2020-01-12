@@ -10,10 +10,10 @@ echo
 
 echo "Main - first run"
 echo "==="
-./unicron.sh
+./unicron.py -v
 echo
 echo
 
 echo "Main - second run"
 echo "==="
-./unicron.sh
+./unicron.py -v
