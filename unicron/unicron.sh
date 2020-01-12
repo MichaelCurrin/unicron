@@ -23,15 +23,6 @@
 #   VERBOSE: Set this to a non-empty value such as 1 to make the application print the DEBUG
 #       messages which are hidden.
 
-# TODO: Check executable status.
-
-# TODO: Get path to this file
-# TODO: later - create lock file for it
-
-# don't need to lock individual tasks as they go in sequence.
-
-# TODO: start with main script's dir so this can run from anywhere.
-# TODO: Change to test dir for tests.
 if [[ -n "$TEST" ]]; then
     echo "Running in test mode."
     VAR_DIR='_test_var'
@@ -96,14 +87,12 @@ execute_file() {
     echo -e "$(now) - Executing...\n\n" >>$LOG_PATH
 
     set +e
-    # TODO: capture all output and write, do not print to main script's console.
     $CMD >>$LOG_PATH 2>&1
     if [ $? -eq 0 ]; then
         log "INFO" "$TARGET_NAME" "Success."
         echo $(today) >"$LAST_RUN_PATH"
     else
         log "ERROR" "$TARGET_NAME" "Exited with error! Check the log: $LOG_PATH"
-        # TODO: Send mail to user with helpful message and output.
     fi
     set -e
 }
