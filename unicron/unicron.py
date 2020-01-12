@@ -44,11 +44,11 @@ def setup_logger(name, log_file, is_task=False):
     It is safer to run this setup multiple in a script as the log file handler
     will only be added if it not there already.
 
-    >>> app_logger = setup_logger('foo', 'foo.log') app_logger.info('This is
-    >>> just an info message.')
+    >>> app_logger = setup_logger('foo', 'foo.log')
+    >>> app_logger.info('This is just an info message.')
 
     >>> task_logger = setup_logger('bar', 'bar.log', is_task=True)
-    >>> app_logger.info('This is just an info message.')
+    >>> task_logger.info('This is just an info message.')
     """
     formatter = TASK_FORMATTER if is_task else APP_FORMATTER
 
