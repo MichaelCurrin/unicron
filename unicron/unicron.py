@@ -35,23 +35,25 @@ import textwrap
 from pathlib import Path
 
 
-USE_TEST_MODE = os.environ.get('TEST') is not None
+USE_TEST_MODE = os.environ.get("TEST") is not None
 
 APP_DIR = Path(__file__).parent.resolve()
-VAR_DIR = APP_DIR / ('_test_var' if USE_TEST_MODE else 'var')
+VAR_DIR = APP_DIR / ("_test_var" if USE_TEST_MODE else "var")
 
-TASKS_DIR = VAR_DIR / 'targets'
-LAST_RUN_DIR = VAR_DIR / 'last_run'
-RUN_EXT = '.txt'
+TASKS_DIR = VAR_DIR / "targets"
+LAST_RUN_DIR = VAR_DIR / "last_run"
+RUN_EXT = ".txt"
 
-APP_LOG_PATH = VAR_DIR / 'app.log'
-OUTPUT_DIR = VAR_DIR / 'output'
-OUTPUT_EXT = '.log'
+APP_LOG_PATH = VAR_DIR / "app.log"
+OUTPUT_DIR = VAR_DIR / "output"
+OUTPUT_EXT = ".log"
 
 APP_FORMATTER = logging.Formatter(
-    '%(asctime)s %(levelname)s:%(filename)s %(task)s - %(message)s')
+    "%(asctime)s %(levelname)s:%(filename)s %(task)s - %(message)s"
+)
 TASK_FORMATTER = logging.Formatter(
-    '%(asctime)s %(levelname)s:%(filename)s - %(message)s')
+    "%(asctime)s %(levelname)s:%(filename)s - %(message)s"
+)
 
 VERBOSE = None
 
@@ -97,9 +99,7 @@ def run_in_shell(cmd: str):
 
     try:
         result = subprocess.check_output(
-            cmd_list,
-            stderr=subprocess.STDOUT,
-            shell=True
+            cmd_list, stderr=subprocess.STDOUT, shell=True
         )
     except subprocess.CalledProcessError as e:
         success = False
@@ -126,12 +126,12 @@ def get_last_run_date(task_name):
 
     last_run = last_run_path.read_text().strip()
 
-    return datetime.datetime.strptime(last_run, '%Y-%m-%d').date()
+    return datetime.datetime.strptime(last_run, "%Y-%m-%d").date()
 
 
 def check_need_to_run(task_name):
-    app_logger = setup_logger('unicron', APP_LOG_PATH)
-    extra = {'task': task_name}
+    app_logger = setup_logger("unicron", APP_LOG_PATH)
+    extra = {"task": task_name}
 
     last_run_date = get_last_run_date(task_name)
 
@@ -162,7 +162,7 @@ def execute(task_name):
     :return: None
     """
     last_run_path = mk_last_run_path(task_name)
-    app_logger = setup_logger('unicron', APP_LOG_PATH)
+    app_logger = setup_logger("unicron", APP_LOG_PATH)
 
     task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
@@ -172,7 +172,7 @@ def execute(task_name):
     success, output = run_in_shell(cmd)
 
     output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
-    extra = {'task': task_name}
+    extra = {"task": task_name}
 
     if success:
         app_logger.info("Success.", extra=extra)
@@ -181,7 +181,8 @@ def execute(task_name):
         last_run_path.write_text(str(today))
     else:
         app_logger.error(
-            "Exited with error status! Check this task's log.", extra=extra)
+            "Exited with error status! Check this task's log.", extra=extra
+        )
         task_logger.error(output_log_msg)
 
 
@@ -199,7 +200,7 @@ def handle_tasks():
     :return: None
     """
     globbed_tasks = sorted(TASKS_DIR.iterdir())
-    tasks = [p.name for p in globbed_tasks if not p.name.startswith('.')]
+    tasks = [p.name for p in globbed_tasks if not p.name.startswith(".")]
 
     for task_name in tasks:
         handle_task(task_name)
@@ -216,12 +217,13 @@ def main():
     parser = argparse.ArgumentParser(
         description="Uni-Cron task scheduler.",
         epilog="Run against the test var directory, using TEST=1 as"
-               " script prefix."
+        " script prefix.",
     )
     parser.add_argument(
-        "-v", "--verbose",
+        "-v",
+        "--verbose",
         help="If supplied print all app log messages to the console and not"
-             " just errors and higher",
+        " just errors and higher",
         action="store_true",
     )
     args = parser.parse_args()
@@ -231,5 +233,5 @@ def main():
     handle_tasks()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
