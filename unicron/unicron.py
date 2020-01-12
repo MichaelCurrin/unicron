@@ -26,12 +26,10 @@ APP_LOG_PATH = VAR_DIR / 'app.log'
 OUTPUT_DIR = VAR_DIR / 'output'
 OUTPUT_EXT = '.log'
 
-
 APP_FORMATTER = logging.Formatter(
     '%(asctime)s %(levelname)s:%(filename)s %(task)s - %(message)s')
 TASK_FORMATTER = logging.Formatter(
     '%(asctime)s %(levelname)s:%(filename)s - %(message)s')
-
 app_logger = None
 
 
@@ -64,7 +62,10 @@ def setup_logger(name, log_file, is_task=False):
 app_logger = setup_logger('unicron', APP_LOG_PATH)
 
 
-def run_in_shell(cmd):
+def run_in_shell(cmd: str):
+    """
+    Run given command in the shell.
+    """
     cmd_list = [cmd]
 
     try:
@@ -96,6 +97,8 @@ def execute(task_name, last_run_path, extra):
     Regardless of the executed task's output, capture all output and send it to
     a log file dedicated to that task. This makes it easy to view the
     executable's history later.
+
+    :return: None
     """
     task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
@@ -119,6 +122,8 @@ def execute(task_name, last_run_path, extra):
 def handle_tasks():
     """
     Find tasks, check their run status for today and run any if needed.
+
+    :return: None
     """
     today = datetime.date.today()
 
@@ -153,6 +158,8 @@ def handle_tasks():
 def main():
     """
     Main command-line argument parser.
+
+    :return: None
     """
     parser = argparse.ArgumentParser(description="Uni-Cron task scheduler.")
     args = parser.parse_args()
