@@ -5,12 +5,16 @@
 # But it is included anyway in case the file is mistakingly created by the main
 # script.
 
-cd _test_var/last_run/
+cd _test_var
 
+echo 'Set last run file fixtures.'
+cd last_run/
 echo $(date +%Y-%m-%d) >today.sh.txt
 echo "2020-01-01" >old.sh.txt
 rm never_run_before.sh.txt >/dev/null 2>&1 || true
 rm fail.sh.txt >/dev/null 2>&1 || true
+cd ..
 
-cd ../output
-rm *.log
+echo 'Remove logs.'
+rm app.log
+rm output/*.log
