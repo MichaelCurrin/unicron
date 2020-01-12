@@ -6,7 +6,7 @@
 
 cd _test_var/last_run/
 
-echo $(date +%Y%m%d) >today.sh.txt
-echo "20200101" >old.sh.txt
+echo $(date +%Y-%m-%d) >today.sh.txt
+echo "2020-01-01" >old.sh.txt
 rm never_run_before.sh.txt >/dev/null 2>&1 || true
 rm fail.sh.txt >/dev/null 2>&1 || true
