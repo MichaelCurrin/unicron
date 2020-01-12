@@ -2,7 +2,15 @@
 """
 Uni-Cron main application file.
 
-Check for configured tasks and run them if needed.
+Check for configured tasks and run them if needed.  If this main script is run
+multiple times in a day, it will still only execute each script once, or as
+many times as it takes to get a success.
+
+How it works:
+    Iterate through files in the configured targets directory. These should all
+    be executables. If there is a record that says the executable has not run
+    today, then run it and on success then add record that it ran today. If the
+    script fails, leave the record as it was.
 """
 import argparse
 import datetime
