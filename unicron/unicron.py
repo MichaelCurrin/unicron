@@ -115,10 +115,16 @@ def run_in_shell(cmd: str):
 
 
 def mk_last_run_path(task_name):
+    """
+    Return full path to a task's last run file.
+    """
     return LAST_RUN_DIR / "".join((task_name, RUN_EXT))
 
 
 def get_last_run_date(task_name):
+    """
+    Get data of task's last run file and return as datetime obj if set.
+    """
     last_run_path = mk_last_run_path(task_name)
 
     if last_run_path.exists():
@@ -130,6 +136,13 @@ def get_last_run_date(task_name):
 
 
 def check_need_to_run(task_name):
+    """
+    Check whether the given task needs to run today.
+
+    If a date is found in the last run file which is today's date, that means
+    the task completed successfully today and does not need to be attempted
+    again today.
+    """
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     extra = {"task": task_name}
 
@@ -187,6 +200,9 @@ def execute(task_name):
 
 
 def handle_task(task_name):
+    """
+    Run a task if it needs to run now.
+    """
     should_run = check_need_to_run(task_name)
 
     if should_run:
