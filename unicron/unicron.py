@@ -121,12 +121,12 @@ def mk_last_run_path(task_name):
 def get_last_run_date(task_name):
     last_run_path = mk_last_run_path(task_name)
 
-    if not last_run_path.exists():
-        return None
+    if last_run_path.exists():
+        last_run = last_run_path.read_text().strip()
+        if last_run:
+            return datetime.datetime.strptime(last_run, "%Y-%m-%d").date()
 
-    last_run = last_run_path.read_text().strip()
-
-    return datetime.datetime.strptime(last_run, "%Y-%m-%d").date()
+    return None
 
 
 def check_need_to_run(task_name):
