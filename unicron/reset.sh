@@ -10,3 +10,6 @@ echo $(date +%Y-%m-%d) >today.sh.txt
 echo "2020-01-01" >old.sh.txt
 rm never_run_before.sh.txt >/dev/null 2>&1 || true
 rm fail.sh.txt >/dev/null 2>&1 || true
+
+cd ../output
+rm *.log
