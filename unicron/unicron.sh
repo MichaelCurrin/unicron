@@ -28,7 +28,6 @@
 # TODO: Get path to this file
 # TODO: later - create lock file for it
 
-# read tasks from targets list. In future this can be symlinks.
 # don't need to lock individual tasks as they go in sequence.
 
 # TODO: start with main script's dir so this can run from anywhere.
@@ -115,7 +114,7 @@ for TARGET_NAME in $(cd $TARGET_DIR && ls *); do
     if [ -f $LAST_RUN_PATH ]; then
         RUN_DATE=$(<$LAST_RUN_PATH)
 
-        if [ "$RUN_DATE" -lt "$(today)" ]; then
+        if [ "$RUN_DATE" != "$(today)" ]; then
             log "DEBUG" "$TARGET_NAME" "Executing, since run file's date is old."
         else
             log "INFO" "$TARGET_NAME" "Skipping, since already ran today."
