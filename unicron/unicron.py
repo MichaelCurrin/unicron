@@ -8,6 +8,7 @@ import argparse
 import datetime
 import logging
 import subprocess
+import textwrap
 from pathlib import Path
 
 
@@ -33,15 +34,18 @@ APP_FORMATTER = logging.Formatter(
 TASK_FORMATTER = logging.Formatter(
     '%(asctime)s %(levelname)s:%(filename)s - %(message)s')
 
+app_logger = None
+
 
 def setup_logger(name, log_file, is_task=False):
     """
-    Allow easy creation of multiple loggers.
+    Configure a logger object and return it.
 
-    Write to a log file. In some cases, also print to the console, which is useful when debugging by hand.
+    It is safer to run this setup multiple in a script as the log file handler
+    will only be added if it not there already.
 
-    >>> app_logger = setup_logger('foo', 'foo.log')
-    >>> app_logger.info('This is just an info message.')
+    >>> app_logger = setup_logger('foo', 'foo.log') app_logger.info('This is
+    >>> just an info message.')
 
     >>> task_logger = setup_logger('bar', 'bar.log', is_task=True)
     >>> app_logger.info('This is just an info message.')
@@ -51,14 +55,40 @@ def setup_logger(name, log_file, is_task=False):
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
 
-    file_handler = logging.FileHandler(log_file)
-    file_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
+    if not logger.handlers:
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
 
     return logger
 
 
-def execute(task_name, last_run_path):
+app_logger = setup_logger('unicron', APP_LOG_PATH)
+
+
+def run_in_shell(cmd):
+    cmd_list = [cmd]
+
+    try:
+        result = subprocess.check_output(
+            cmd_list,
+            stderr=subprocess.STDOUT,
+            shell=True
+        )
+    except subprocess.CalledProcessError as e:
+        success = False
+        output = e.output.decode()
+    except OSError as e:
+        success = False
+        output = str(e)
+    else:
+        success = True
+        output = result.decode()
+
+    return success, output
+
+
+def execute(task_name, last_run_path, extra):
     """
     On a succesful run, set today's date in the last run event file for the
     executable, so that on subsequent runs today this executable will be
@@ -69,12 +99,23 @@ def execute(task_name, last_run_path):
     a log file dedicated to that task. This makes it easy to view the
     executable's history later.
     """
-    cmd = TASKS_DIR / task_name
-    output_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
-
     task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
+
     task_logger.info("Executing...")
+    cmd = TASKS_DIR / task_name
+    success, output = run_in_shell(cmd)
+
+    output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
+    if success:
+        app_logger.info("Success.", extra=extra)
+        task_logger.info(output_log_msg)
+        today = datetime.date.today()
+        last_run_path.write_text(today.strftime('%Y%m%d'))
+    else:
+        app_logger.error(
+            "Exited with error status! Check this task's log.", extra=extra)
+        task_logger.error(output_log_msg)
 
 
 def handle_tasks():
@@ -83,7 +124,8 @@ def handle_tasks():
     """
     today = datetime.date.today()
 
-    tasks = [p.name for p in TASKS_DIR.iterdir() if not p.name.startswith('.')]
+    globbed_tasks = sorted(TASKS_DIR.iterdir())
+    tasks = [p.name for p in globbed_tasks if not p.name.startswith('.')]
 
     for task_name in tasks:
         extra = {'task': task_name}
@@ -107,10 +149,7 @@ def handle_tasks():
             app_logger.info("Skipping, since already ran today.", extra=extra)
             continue
 
-        execute(task_name, last_run_path)
-
-
-app_logger = setup_logger('unicron', APP_LOG_PATH)
+        execute(task_name, last_run_path, extra)
 
 
 def main():
