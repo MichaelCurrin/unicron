@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# Run main app against testing directory using fixture data and show output.
 
 export TEST=1
 
