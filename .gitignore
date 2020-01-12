@@ -1,3 +1,9 @@
+# Python compiled binaries.
+__pycache__/
+
+# Python virtual environment.
+venv
+
 unicron/var/last_run/*.txt
 unicron/var/output/*.log
 unicron/var/targets/*
