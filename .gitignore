@@ -5,5 +5,4 @@ unicron/var/app.log
 
 unicron/_test_var/last_run/*.txt
 unicron/_test_var/output/*.log
-unicron/_test_var/targets/*
 unicron/_test_var/app.log
