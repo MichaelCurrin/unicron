@@ -2,15 +2,29 @@
 """
 Uni-Cron main application file.
 
-Check for configured tasks and run them if needed.  If this main script is run
+Purpose:
+
+Check for configured tasks and run them if needed. If this main script is run
 multiple times in a day, it will still only execute each script once, or as
 many times as it takes to get a success.
 
-How it works:
-    Iterate through files in the configured targets directory. These should all
-    be executables. If there is a record that says the executable has not run
-    today, then run it and on success then add record that it ran today. If the
-    script fails, leave the record as it was.
+Checking and running:
+
+Iterate through files in the configured targets directory. These should all be
+executables. If there is a record that says the executable has not run today,
+then run it and on success then add record that it ran today. If the script
+fails, leave the record as it was.
+
+Printing and logging:
+
+Whether any task need are attempted to run or not, nothing will print to the
+console unless there are any errors running a task. This allows the crontab run
+messages to be quiet. For manual testing, use the --verbose flag to see
+everything the main app does.
+
+The app always logs the same number messages to the app log file, regardless of
+verbosity level. Output of tasks is always logged to each tasks output file,
+using info or error level depending on task success or failure.
 """
 import argparse
 import datetime
@@ -38,7 +52,8 @@ APP_FORMATTER = logging.Formatter(
     '%(asctime)s %(levelname)s:%(filename)s %(task)s - %(message)s')
 TASK_FORMATTER = logging.Formatter(
     '%(asctime)s %(levelname)s:%(filename)s - %(message)s')
-app_logger = None
+
+VERBOSE = None
 
 
 def setup_logger(name, log_file, is_task=False):
@@ -64,10 +79,14 @@ def setup_logger(name, log_file, is_task=False):
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
 
+        if not is_task:
+            stream_handler = logging.StreamHandler()
+            stream_handler.setFormatter(formatter)
+            stream_lvl = logging.DEBUG if VERBOSE else logging.ERROR
+            stream_handler.setLevel(stream_lvl)
+            logger.addHandler(stream_handler)
+
     return logger
-
-
-app_logger = setup_logger('unicron', APP_LOG_PATH)
 
 
 def run_in_shell(cmd: str):
@@ -108,6 +127,8 @@ def execute(task_name, last_run_path, extra):
 
     :return: None
     """
+    app_logger = setup_logger('unicron', APP_LOG_PATH)
+
     task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
 
@@ -133,6 +154,8 @@ def handle_tasks():
 
     :return: None
     """
+    app_logger = setup_logger('unicron', APP_LOG_PATH)
+
     today = datetime.date.today()
 
     globbed_tasks = sorted(TASKS_DIR.iterdir())
@@ -152,10 +175,10 @@ def handle_tasks():
 
         if not last_run_date:
             app_logger.debug(
-                "Executing, since no run record.", extra=extra)
+                "Executing, since no run record found", extra=extra)
         elif last_run_date != today:
             app_logger.debug(
-                "Executing, since date is old.", extra=extra)
+                "Executing, since last run date is old.", extra=extra)
         else:
             app_logger.info("Skipping, since already ran today.", extra=extra)
             continue
@@ -169,8 +192,22 @@ def main():
 
     :return: None
     """
-    parser = argparse.ArgumentParser(description="Uni-Cron task scheduler.")
+    global VERBOSE
+
+    parser = argparse.ArgumentParser(
+        description="Uni-Cron task scheduler.",
+        epilog="Run against the test var directory, using TEST=1 as"
+               " script prefix."
+    )
+    parser.add_argument(
+        "-v", "--verbose",
+        help="If supplied print all app log messages to the console and not"
+             " just errors and higher",
+        action="store_true",
+    )
     args = parser.parse_args()
+    if args.verbose:
+        VERBOSE = True
 
     handle_tasks()
 
