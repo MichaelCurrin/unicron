@@ -9,9 +9,9 @@ dev-install:
 	pip install -r requirements-dev.txt
 
 
-# Run make application.
+# Run make application in verbose mode.
 run:
-	cd unicron && ./unicron.py
+	cd unicron && ./unicron.py -v
 
 
 # Run app against test directory.
