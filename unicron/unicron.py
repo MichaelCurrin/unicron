@@ -141,7 +141,7 @@ def execute(task_name, last_run_path, extra):
         app_logger.info("Success.", extra=extra)
         task_logger.info(output_log_msg)
         today = datetime.date.today()
-        last_run_path.write_text(today.strftime('%Y%m%d'))
+        last_run_path.write_text(str(today))
     else:
         app_logger.error(
             "Exited with error status! Check this task's log.", extra=extra)
@@ -169,7 +169,7 @@ def handle_tasks():
         if last_run_path.exists():
             last_run = last_run_path.read_text().strip()
             last_run_date = datetime.datetime.strptime(
-                last_run, '%Y%m%d').date()
+                last_run, '%Y-%m-%d').date()
         else:
             last_run_date = None
 
