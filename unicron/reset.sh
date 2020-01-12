@@ -16,5 +16,5 @@ rm fail.sh.txt >/dev/null 2>&1 || true
 cd ..
 
 echo 'Remove logs.'
-rm app.log
-rm output/*.log
+rm app.log >/dev/null 2>&1 || true
+rm output/*.log >/dev/null 2>&1 || true
