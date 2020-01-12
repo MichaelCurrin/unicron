@@ -114,7 +114,41 @@ def run_in_shell(cmd: str):
     return success, output
 
 
-def execute(task_name, last_run_path, extra):
+def mk_last_run_path(task_name):
+    return LAST_RUN_DIR / "".join((task_name, RUN_EXT))
+
+
+def get_last_run_date(task_name):
+    last_run_path = mk_last_run_path(task_name)
+
+    if not last_run_path.exists():
+        return None
+
+    last_run = last_run_path.read_text().strip()
+
+    return datetime.datetime.strptime(last_run, '%Y-%m-%d').date()
+
+
+def check_need_to_run(task_name):
+    app_logger = setup_logger('unicron', APP_LOG_PATH)
+    extra = {'task': task_name}
+
+    last_run_date = get_last_run_date(task_name)
+
+    if not last_run_date:
+        app_logger.debug("Executing, since no run record found.", extra=extra)
+        status = True
+    elif last_run_date != datetime.date.today():
+        app_logger.debug("Executing, since last run date is old.", extra=extra)
+        status = True
+    else:
+        app_logger.info("Skipping, since already ran today.", extra=extra)
+        status = False
+
+    return status
+
+
+def execute(task_name):
     """
     On a succesful run, set today's date in the last run event file for the
     executable, so that on subsequent runs today this executable will be
@@ -127,6 +161,7 @@ def execute(task_name, last_run_path, extra):
 
     :return: None
     """
+    last_run_path = mk_last_run_path(task_name)
     app_logger = setup_logger('unicron', APP_LOG_PATH)
 
     task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
@@ -137,6 +172,8 @@ def execute(task_name, last_run_path, extra):
     success, output = run_in_shell(cmd)
 
     output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
+    extra = {'task': task_name}
+
     if success:
         app_logger.info("Success.", extra=extra)
         task_logger.info(output_log_msg)
@@ -148,42 +185,24 @@ def execute(task_name, last_run_path, extra):
         task_logger.error(output_log_msg)
 
 
+def handle_task(task_name):
+    should_run = check_need_to_run(task_name)
+
+    if should_run:
+        execute(task_name)
+
+
 def handle_tasks():
     """
     Find tasks, check their run status for today and run any if needed.
 
     :return: None
     """
-    app_logger = setup_logger('unicron', APP_LOG_PATH)
-
-    today = datetime.date.today()
-
     globbed_tasks = sorted(TASKS_DIR.iterdir())
     tasks = [p.name for p in globbed_tasks if not p.name.startswith('.')]
 
     for task_name in tasks:
-        extra = {'task': task_name}
-
-        last_run_path = LAST_RUN_DIR / "".join((task_name, RUN_EXT))
-
-        if last_run_path.exists():
-            last_run = last_run_path.read_text().strip()
-            last_run_date = datetime.datetime.strptime(
-                last_run, '%Y-%m-%d').date()
-        else:
-            last_run_date = None
-
-        if not last_run_date:
-            app_logger.debug(
-                "Executing, since no run record found.", extra=extra)
-        elif last_run_date != today:
-            app_logger.debug(
-                "Executing, since last run date is old.", extra=extra)
-        else:
-            app_logger.info("Skipping, since already ran today.", extra=extra)
-            continue
-
-        execute(task_name, last_run_path, extra)
+        handle_task(task_name)
 
 
 def main():
