@@ -139,24 +139,27 @@ def check_need_to_run(task_name):
     """
     Check whether the given task needs to run today.
 
-    If a date is found in the last run file which is today's date, that means
-    the task completed successfully today and does not need to be attempted
-    again today.
+    If a last run file exists for the task, the file is non-empty and contains
+    a valid YYYY-MM-DD date which matches today's date, then the task can be
+    skipped. Otherwise it needs to be run today.
     """
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     extra = {"task": task_name}
 
     last_run_date = get_last_run_date(task_name)
 
-    if not last_run_date:
+    if last_run_date:
+        if last_run_date == datetime.date.today():
+            app_logger.info("Skipping, since already ran today.", extra=extra)
+            status = False
+        else:
+            app_logger.debug(
+                "Executing, since last run date is old.", extra=extra
+            )
+            status = True
+    else:
         app_logger.debug("Executing, since no run record found.", extra=extra)
         status = True
-    elif last_run_date != datetime.date.today():
-        app_logger.debug("Executing, since last run date is old.", extra=extra)
-        status = True
-    else:
-        app_logger.info("Skipping, since already ran today.", extra=extra)
-        status = False
 
     return status
 
