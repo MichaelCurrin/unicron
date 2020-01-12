@@ -175,7 +175,7 @@ def handle_tasks():
 
         if not last_run_date:
             app_logger.debug(
-                "Executing, since no run record found", extra=extra)
+                "Executing, since no run record found.", extra=extra)
         elif last_run_date != today:
             app_logger.debug(
                 "Executing, since last run date is old.", extra=extra)
