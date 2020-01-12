@@ -9,3 +9,5 @@ test:
 
 log:
 	cd unicron/var && tail -f output/*.log app.log
+log-test:
+	cd unicron/_test_var && tail -f output/*.log app.log
