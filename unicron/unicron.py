@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """
-Uni-Cron application entry point.
+Uni-Cron main application file.
+
+Check for configured tasks and run them if needed.
 """
 import argparse
 import datetime
