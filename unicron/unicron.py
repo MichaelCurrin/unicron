@@ -8,17 +8,15 @@ import argparse
 import datetime
 import logging
 import subprocess
+import os
 import textwrap
 from pathlib import Path
 
 
-APP_DIR = Path(__file__).parent.resolve()
+USE_TEST_MODE = os.environ.get('TEST') is not None
 
-# TODO: Check for env variable or flags.
-if True:
-    VAR_DIR = APP_DIR / '_test_var'
-else:
-    VAR_DIR = APP_DIR / 'var'
+APP_DIR = Path(__file__).parent.resolve()
+VAR_DIR = APP_DIR / ('_test_var' if USE_TEST_MODE else 'var')
 
 TASKS_DIR = VAR_DIR / 'targets'
 LAST_RUN_DIR = VAR_DIR / 'last_run'
