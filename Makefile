@@ -29,8 +29,14 @@ log-test:
 
 
 # Apply Black formatting to Python files.
-fmt:
+format:
 	black . -l 79
+
+# Lint with Pylint.
+lint:
+	pylint unicron/unicron.py
+
+check: format lint
 
 
 # Make all tasks executable.
