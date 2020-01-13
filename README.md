@@ -1,10 +1,8 @@
 # Uni-Cron :clock1:
 > A scheduler to run tasks exactly once per day but retry until a success. :repeat_one::hourglass_flowing_sand::unicorn:
 
-[![Made with Bash](https://img.shields.io/badge/Made%20with-Bash-blue.svg)](https://www.gnu.org/software/bash/)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/py-project-template/blob/master/LICENSE)
-
-_:warning: **NOTICE**: This project is very new and still in pre-release stage. It does work well as a prototype to the extent shown in the [Usage](#usage) section, including the logging. The first major tag and release (v1.0.0) will indicate it is moved to Python3 with unit tests plus better docs around quiet mails on crontab. In the meantime, you are welcome to use this as is (I am using it already). But know that the project main script will change - the idea is that ./unicorn.py will work the same but better._
+[![Actions status](https://github.com/MichaelCurrin/uni-cron/workflows/Python%20application/badge.svg)](https://github.com/MichaelCurrin/uni-cron/actions)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/uni-cron/blob/master/LICENSE)
 
 <p align="center">
   <img width="250" src="logo.png">
