@@ -62,7 +62,7 @@ Also, the name resembles _unicorn_.
 
 ### Basic structure
 
-- The main application script is [unicron.sh](/unicron/unicron.sh)
+- The main application script is a Python script - [unicron.py](/unicron/unicron.py).
 - This works together with a directory of variable files - *unicron/var/*
     * User-defined tasks - *var/targets/*
     * App-managed run events - *var/last_run/*
