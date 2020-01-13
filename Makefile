@@ -9,13 +9,13 @@ dev-install:
 	pip install -r requirements-dev.txt
 
 
-# Run make application in verbose mode.
+# Run main application.
 run:
-	unicron/unicron.py -v
+	unicron/unicron.py --verbose
 
 
 # Run app in verbose mode against test var directory.
-test-output:
+o test-output:
 	cd unicron && ./test.sh
 
 
@@ -37,7 +37,7 @@ lint:
 	pylint unicron/unicron.py
 
 # Apply formatting and lint.
-check: format lint
+c check: format lint
 
 
 # Make all tasks executable.
