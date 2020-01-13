@@ -6,7 +6,4 @@
 
     "editor.rulers": [79],
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [
-        "-l 79"
-    ],
 }

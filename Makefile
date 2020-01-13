@@ -30,7 +30,7 @@ log-test:
 
 # Apply Black formatting to Python files.
 format:
-	black . -l 79
+	black .
 
 # Lint with Pylint.
 lint:
