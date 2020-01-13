@@ -21,11 +21,11 @@ test-output:
 
 # Tail the log files.
 log:
-	cd unicron/var && tail -f output/*.log app.log
+	cd unicron/var && tail -F output/*.log app.log
 
 # Tail the test logs.
 log-test:
-	cd unicron/_test_var && tail -f output/*.log app.log
+	cd unicron/_test_var && tail -F output/*.log app.log
 
 
 # Apply Black formatting to Python files.
