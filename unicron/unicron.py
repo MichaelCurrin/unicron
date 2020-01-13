@@ -234,7 +234,7 @@ def main():
 
     :return: None
     """
-    global VERBOSE
+    global VERBOSE  # pylint: disable=global-statement
 
     parser = argparse.ArgumentParser(
         description="Uni-Cron task scheduler.",
