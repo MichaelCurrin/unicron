@@ -58,7 +58,7 @@ Also, the name resembles _unicorn_.
     * Whenever Uni-Cron runs, the tasks queued up will run consecutively. No worrying about load on the memory or network traffic or that tasks might run simultaneously. Without Uni-Cron, you'd have to check that all the crontab times are different and that long-running tasks do not overlap with each other.
 - **Logging which is informative but so noisy that is hides errors**
     * A detailed log for each task, using the task's output (successes and failures).
-    * A summary log at the main app level. You can  silence crontab mails which have no errors, you can still see Uni-Cron ran by checking the Uni-Cron app log.
+    * A summary log at the main app level. By default, Uni-Cron runs with no output if successful, which means you can run it with crontab without generating mails unless there are failures.
 
 ### Basic structure
 
@@ -98,7 +98,7 @@ Given a configured script `hello.sh` in the targets directory.
     MAILTO=my-user
 
     # Run every 30 minutes and only send mail on failure.
-    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh > /dev/null
+    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
     ```
 
 <!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
@@ -180,7 +180,7 @@ $ echo -e '#!/bin/bash\necho "Hello world!"\n' > unicron/var/targets/hello.sh
 $ chmod +x unicron/var/targets/hello.sh
 ```
 
-Run it manually.
+Run it directly to check works fine.
 
 ```bash
 $ unicron/var/targets/hello.sh
@@ -201,45 +201,49 @@ $ make help
 
 ### Run main script
 
-```bash
-$ make run
-cd unicron && ./unicron.sh
-2020-01-05 19:23:05 INFO:unicron.sh hello.sh - Success.
-```
+Run by hand.
 
-```bash
-$ make run
-cd unicron && ./unicron.sh
-2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
-```
+This step uses the verbose mode. This is so that INFO and DEBUG messages that would normally be hidden from printing are still shown on the console.
+
+The example output below is for the script which was setup using [Installation](#installation) instructions.
+
+- First run.
+    ```bash
+    $ make run
+    unicron/unicron.py -v
+    2020-01-13 22:49:12,770 DEBUG:unicron.py hello.sh - Executing, since no run record found.
+    2020-01-13 22:49:12,781 INFO:unicron.py hello.sh - Success.
+    ```
+- Second run.
+    ```bash
+    $ make run
+    unicron/unicron.py -v
+    2020-01-13 22:49:30,438 INFO:unicron.py hello.sh - Skipping, since already ran today.
+    ```
 
 ### View logs
 
-Run this command to tail the app and task logs.
+Run this command to tail the app and task logs. Sample output is for the run commands above.
 
 ```bash
 $ make log
 ==> output/hello.sh.log <==
 
-Hello world!
-2020-01-07 10:00:10 - Executing...
+2020-01-13 22:49:12,770 INFO:unicron.py - Executing...
+2020-01-13 22:49:12,782 INFO:unicron.py - Output:
+    Hello world!
 
-
-Hello world!
-2020-01-08 10:30:10 - Executing...
-
-
-Hello world!
 
 ==> app.log <==
-2020-01-08 16:00:00 INFO:unicron.sh hello.sh - Skipping, since already ran today.
-2020-01-08 16:30:00 INFO:unicron.sh hello.sh - Skipping, since already ran today.
+2020-01-13 22:49:12,770 DEBUG:unicron.py hello.sh - Executing, since no run record found.
+2020-01-13 22:49:12,781 INFO:unicron.py hello.sh - Success.
+2020-01-13 22:49:30,438 INFO:unicron.py hello.sh - Skipping, since already ran today.
 ```
 
 
 ## Development
 
-Available commands.
+See available commands.
 
 ```bash
 $ make help
