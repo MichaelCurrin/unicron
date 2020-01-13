@@ -217,6 +217,8 @@ cd unicron && ./unicron.sh
 
 ### View logs
 
+Run this command to tail the app and task logs.
+
 ```bash
 $ make log
 ==> output/hello.sh.log <==
@@ -236,13 +238,27 @@ Hello world!
 2020-01-08 16:30:00 INFO:unicron.sh hello.sh - Skipping, since already ran today.
 ```
 
-<!--
+
 ## Development
 
+Available commands.
+
 ```bash
-$ make test
+$ make help
 ```
--->
+
+Run formatting and linting.
+
+```bash
+$ make check
+```
+
+Run tests script.
+
+```bash
+$ make test-output
+```
+
 
 ## License
 
