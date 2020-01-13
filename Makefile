@@ -11,7 +11,7 @@ dev-install:
 
 # Run make application in verbose mode.
 run:
-	cd unicron && ./unicron.py -v
+	unicron/unicron.py -v
 
 
 # Run app in verbose mode against test var directory.
@@ -36,6 +36,7 @@ format:
 lint:
 	pylint unicron/unicron.py
 
+# Apply formatting and lint.
 check: format lint
 
 
