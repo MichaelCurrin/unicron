@@ -142,6 +142,9 @@ def check_need_to_run(task_name):
     If a last run file exists for the task, the file is non-empty and contains
     a valid YYYY-MM-DD date which matches today's date, then the task can be
     skipped. Otherwise it needs to be run today.
+
+    The debug-level messages here are useful for in development for  checking on
+    the reason for executing, but otherwise they can be ignored.
     """
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     extra = {"task": task_name}
