@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
-        run: make i
+        run: make dev-install
       - name: Check formatting.
         run: make format
       - name: Lint with Pylint.
