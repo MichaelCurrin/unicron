@@ -25,6 +25,7 @@
 - [Usage](#usage)
     - [See Makefile help](#see-makefile-help)
     - [Run main script](#run-main-script)
+    - [View logs](#view-logs)
 - [Development](#development)
 - [License](#license)
 
