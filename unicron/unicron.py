@@ -101,12 +101,12 @@ def run_in_shell(cmd: str):
         result = subprocess.check_output(
             cmd_list, stderr=subprocess.STDOUT, shell=True
         )
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError as shell_err:
         success = False
-        output = e.output.decode()
-    except OSError as e:
+        output = shell_err.output.decode()
+    except OSError as os_err:
         success = False
-        output = str(e)
+        output = str(os_err)
     else:
         success = True
         output = result.decode()
