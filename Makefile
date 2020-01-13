@@ -14,7 +14,7 @@ run:
 	cd unicron && ./unicron.py -v
 
 
-# Run app against test directory.
+# Run app in verbose mode against test var directory.
 test-output:
 	cd unicron && ./test.sh
 
@@ -31,3 +31,8 @@ log-test:
 # Apply Black formatting to Python files.
 fmt:
 	black . -l 79
+
+
+# Make all tasks executable.
+p permission:
+	chmod +x unicron/var/targets/*
