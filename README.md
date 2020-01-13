@@ -74,19 +74,21 @@ Also, the name resembles _unicorn_.
 
 Given a configured script `hello.sh` in the targets directory.
 
+<!-- TODO: Update with new output -->
+
 1. First run today - the script executes.
     ```bash
-    $ ./unicron.sh
+    $ ./unicron.py
     2020-01-05 19:23:05 INFO:unicron.sh hello.sh - Success.
     ```
 2. Second run today - the script is skipped.
     ```bash
-    $ ./unicron.sh
+    $ ./unicron.py
     2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
     ```
 3. First run tomorrow - the script executes.
     ```bash
-    $ ./unicron.sh
+    $ ./unicron.py
     2020-01-06 12:22:00 INFO:unicron.sh hello.sh - Success.
     ```
 4. Scheduling - add a command to the _crontab_ file.
