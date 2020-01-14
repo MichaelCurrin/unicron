@@ -82,18 +82,18 @@ Given a configured script `hello.sh` in the targets directory.
 
 1. First run today - the script executes.
     ```bash
-    $ ./unicron.py
-    2020-01-05 19:23:05 INFO:unicron.sh hello.sh - Success.
+    $ ./unicron.py --verbose
+    2020-01-05 19:23:05 INFO:unicron hello.sh - Success.
     ```
 2. Second run today - the script is skipped.
     ```bash
-    $ ./unicron.py
-    2020-01-05 19:23:56 INFO:unicron.sh hello.sh - Skipping, since already ran today.
+    $ ./unicron.py --verbose
+    2020-01-05 19:23:56 INFO:unicron hello.sh - Skipping, since already ran today.
     ```
 3. First run tomorrow - the script executes.
     ```bash
-    $ ./unicron.py
-    2020-01-06 12:22:00 INFO:unicron.sh hello.sh - Success.
+    $ ./unicron.py --verbose
+    2020-01-06 12:22:00 INFO:unicron hello.sh - Success.
     ```
 4. Scheduling - add a command to the _crontab_ file.
     ```bash
@@ -105,7 +105,7 @@ Given a configured script `hello.sh` in the targets directory.
     MAILTO=my-user
 
     # Run every 30 minutes and only send mail on failure.
-    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.sh
+    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.py
     ```
 
 <!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
