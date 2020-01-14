@@ -1,0 +1,9 @@
+{
+    "terminal.integrated.cwd": "unicron",
+    "code-runner.cwd": "unicron",
+
+    "python.pythonPath": "venv/bin/python",
+
+    "editor.rulers": [79],
+    "python.formatting.provider": "black",
+}

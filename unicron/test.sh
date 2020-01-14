@@ -1,6 +1,5 @@
 #!/bin/bash -e
-
-export TEST=1
+# Run main app against testing directory using fixture data and show output.
 
 echo "Reset"
 echo "==="
@@ -10,10 +9,10 @@ echo
 
 echo "Main - first run"
 echo "==="
-./unicron.sh
+TEST=true ./unicron.py -v
 echo
 echo
 
 echo "Main - second run"
 echo "==="
-./unicron.sh
+TEST=true ./unicron.py -v
