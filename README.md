@@ -145,12 +145,12 @@ Note that making a process sleep is inefficient for memory and also does not hel
 
 ## Existing tools
 
-I did find a possible solution that was recommended online using a combination of `anacron` and `at` together. But the drawback is that those tools only work on _Linux_ and I need to solve the case on _macOS_. So I made this tool.
+Why code something new? Well, I did find a possible solution that was recommended online using a combination of `anacron` and `at` together (covered further below). But, the drawback is that those tools only work on _Linux_ and I need to solve the case on _macOS_. So I made _Uni-Cron_.
 
-There are a lot of tutorials and conversations online around scheduling tasks on Unix-like systems with `cron`, `crontab`, `anacron` and `at`. These are summarized below.
+I read some tutorials and conversations online around scheduling tasks on Unix-like systems with `cron`, `crontab`, `anacron` and `at`. These tools are summarized below.
 
 - `cron` - Run tasks at a varying frequencies, from every minute to once a year. If the machine is off during a schedule time, the job will not run.
-- `anacron` - Run tasks up to once per day using `cron` configuration, except this tool expects that the machine may not be on all the time so is able catch up on any missed tasks.
+- `anacron` - Run tasks up to once per day using `cron` configuration, except this `anacron` expects that the machine may not be on all the time so is able catch up on any missed tasks. The downside though is that if a daily task fails, `anacron` will not retry it.
 - `at` - Schedule a task in the future in a queue of tasks, when system resources allow.
 - `anacron` with `at` - It has been suggested online to use `anacron` to kick off the jobs when the machine comes online. Then every time there is a failure, use `at` to get the job to schedule another run off itself later in the day. Repeat this until a success.
 
