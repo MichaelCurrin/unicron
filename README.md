@@ -5,7 +5,7 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/uni-cron/blob/master/LICENSE)
 
 <p align="center">
-  <img width="250" src="logo.png">
+    <img width="250" src="logo.png">
 </p>
 
 - [What is Uni-Cron?](#what-is-uni-cron)
