@@ -39,7 +39,7 @@ Uni-Cron is:
 - _Uni_ (one) - run a task just once a day, if all goes well.
 - _Cron_ (time) - schedule task runs, especially for retries.
 
-Also, the name resembles _unicorn_.
+And since the name is close to _unicorn_, that symbol is used in the docs.
 
 
 ## Features
