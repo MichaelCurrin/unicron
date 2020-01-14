@@ -42,6 +42,9 @@ Uni-Cron is:
 
 And since the name is close to _unicorn_, that symbol is used in the docs.
 
+See also:
+- [Unicron](https://en.wikipedia.org/wiki/Unicron) the Transformer.
+- [Unicron](https://en.wikipedia.org/wiki/MF_Doom_%26_Trunks_Presents_Unicron) the rap album.
 
 ## Features
 
