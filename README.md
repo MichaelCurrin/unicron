@@ -6,7 +6,9 @@
 
 _:warning: **NOTICE**: This project is very new and still in pre-release stage. It does work well as a prototype to the extent shown in the [Usage](#usage) section, including the logging. The first major tag and release (v1.0.0) will indicate it is moved to Python3 with unit tests plus better docs around quiet mails on crontab. In the meantime, you are welcome to use this as is (I am using it already). But know that the project main script will change - the idea is that ./unicorn.py will work the same but better._
 
-![logo](logo.png)
+<p align="center">
+  <img width="250" src="logo.png">
+</p>
 
 - [What is Uni-Cron?](#what-is-uni-cron)
 - [Features](#features)
