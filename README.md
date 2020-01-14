@@ -258,6 +258,8 @@ Run formatting and linting.
 $ make check
 ```
 
+See the config file for those settings - [pyproject.toml](pyproject.toml).
+
 Run tests script.
 
 ```bash
