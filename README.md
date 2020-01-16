@@ -20,7 +20,7 @@
     - [Technical details](#technical-details)
 - [Alternative approaches](#alternative-approaches)
     - [Sleeping](#sleeping)
-- [Existing tools](#existing-tools)
+    - [Existing tools](#existing-tools)
 - [Installation](#installation)
     - [Clone](#clone)
     - [Configuration](#configuration)
@@ -155,7 +155,7 @@ My usecase for for this tool is for scraping webpages, for fetching Twitter API 
 
 Note that making a process sleep is inefficient for memory and also does not help if your machine restarts during the day and loses the process. Therefore use an **existing** background process (`crond`) that runs every minute to kick off any configured jobs.
 
-## Existing tools
+### Existing tools
 
 Why code something new? Well, I did find a possible solution that was recommended online using a combination of `anacron` and `at` together (covered further below). But, the drawback is that those tools only work on _Linux_ and I need to solve the case on _macOS_. So I made _Uni-Cron_.
 
