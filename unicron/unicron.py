@@ -167,6 +167,32 @@ def check_need_to_run(task_name):
     return status
 
 
+def proccess_cmd_result(
+    task_name, task_log_path, last_run_path, success, output
+):
+    """
+    Log activity for a task and update the last run date if task was
+    successful.
+    """
+    app_logger = setup_logger("unicron", APP_LOG_PATH)
+    task_logger = setup_logger(task_name, task_log_path, is_task=True)
+
+    extra = {"task": task_name}
+    output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
+
+    if success:
+        app_logger.info("Success.", extra=extra)
+        task_logger.info(output_log_msg)
+
+        today = datetime.date.today()
+        last_run_path.write_text(str(today))
+    else:
+        app_logger.error(
+            "Exited with error status! Check this task's log.", extra=extra
+        )
+        task_logger.error(output_log_msg)
+
+
 def execute(task_name):
     """
     On a succesful run, set today's date in the last run event file for the
@@ -181,7 +207,6 @@ def execute(task_name):
     :return: None
     """
     last_run_path = mk_last_run_path(task_name)
-    app_logger = setup_logger("unicron", APP_LOG_PATH)
 
     task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
@@ -190,29 +215,27 @@ def execute(task_name):
     cmd = TASKS_DIR / task_name
     success, output = run_in_shell(cmd)
 
-    output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
-    extra = {"task": task_name}
+    proccess_cmd_result(
+        task_name, task_log_path, last_run_path, success, output
+    )
 
-    if success:
-        app_logger.info("Success.", extra=extra)
-        task_logger.info(output_log_msg)
-        today = datetime.date.today()
-        last_run_path.write_text(str(today))
-    else:
-        app_logger.error(
-            "Exited with error status! Check this task's log.", extra=extra
-        )
-        task_logger.error(output_log_msg)
+    return success
 
 
 def handle_task(task_name):
     """
-    Run a task if it needs to run now.
+    Run a task, if it needs to run now.
+
+    :return: True on task success, False on failure and None on not running.
     """
     should_run = check_need_to_run(task_name)
 
     if should_run:
-        execute(task_name)
+        success = execute(task_name)
+    else:
+        success = None
+
+    return success
 
 
 def handle_tasks():
