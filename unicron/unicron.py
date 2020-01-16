@@ -168,19 +168,23 @@ def check_need_to_run(task_name):
 
 
 def proccess_cmd_result(
-    task_name, task_log_path, last_run_path, success, output
+    task_name, task_log_path, last_run_path, status, output
 ):
     """
     Log activity for a task and update the last run date if task was
     successful.
     """
+    assert (
+        status is not None
+    ), "Status must indicate success (True) or fail (False)"
+
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
 
     extra = {"task": task_name}
     output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
 
-    if success:
+    if status:
         app_logger.info("Success.", extra=extra)
         task_logger.info(output_log_msg)
 
@@ -213,42 +217,59 @@ def execute(task_name):
 
     task_logger.info("Executing...")
     cmd = TASKS_DIR / task_name
-    success, output = run_in_shell(cmd)
+    status, output = run_in_shell(cmd)
 
     proccess_cmd_result(
-        task_name, task_log_path, last_run_path, success, output
+        task_name, task_log_path, last_run_path, status, output
     )
 
-    return success
+    return status
 
 
 def handle_task(task_name):
     """
     Run a task, if it needs to run now.
 
-    :return: True on task success, False on failure and None on not running.
+    :return status: True on task success, False on failure and None on not
+        running.
     """
     should_run = check_need_to_run(task_name)
 
     if should_run:
-        success = execute(task_name)
+        status = execute(task_name)
     else:
-        success = None
+        status = None
 
-    return success
+    return status
+
+
+def get_tasks():
+    """
+    Get Path objects for tasks in the configured tasks diectory.
+    """
+    globbed_tasks = sorted(TASKS_DIR.iterdir())
+
+    return [p.name for p in globbed_tasks if not p.name.startswith(".")]
 
 
 def handle_tasks():
     """
     Find tasks, check their run status for today and run any if needed.
 
-    :return: None
+    :return: dict of run results.
     """
-    globbed_tasks = sorted(TASKS_DIR.iterdir())
-    tasks = [p.name for p in globbed_tasks if not p.name.startswith(".")]
+    success = fail = skipped = 0
 
-    for task_name in tasks:
-        handle_task(task_name)
+    for task_name in get_tasks():
+        status = handle_task(task_name)
+        if status is True:
+            success += 1
+        elif status is False:
+            fail += 1
+        else:
+            skipped += 1
+
+    return dict(success=success, fail=fail, skipped=skipped,)
 
 
 def main():
