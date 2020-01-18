@@ -40,6 +40,14 @@ lint:
 c check: format lint
 
 
+# Reset tasks and logs in the test var dir.
+reset:
+	cd unicron && ./reset.sh
+
+# Run unit tests.
+unit: reset
+	pytest
+
 # Make all tasks executable.
-p permission:
+permission:
 	chmod +x unicron/var/targets/*
