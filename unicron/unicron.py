@@ -119,6 +119,10 @@ def mk_last_run_path(task_name):
     return LAST_RUN_DIR / "".join((task_name, RUN_EXT))
 
 
+def mk_output_path(task_name):
+    return OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
+
+
 def get_last_run_date(task_name):
     """
     Get data of task's last run file and return as datetime obj if set.
@@ -204,7 +208,7 @@ def execute(task_name):
     """
     last_run_path = mk_last_run_path(task_name)
 
-    task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
+    task_log_path = mk_output_path(task_name)
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
 
     task_logger.info("Executing...")
