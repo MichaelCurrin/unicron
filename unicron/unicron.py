@@ -91,25 +91,27 @@ def setup_logger(name, log_file, is_task=False):
     return logger
 
 
-def run_in_shell(cmd: str):
+def run_in_shell(cmd):
     """
-    Run given command in the shell.
-    """
-    cmd_list = [cmd]
+    Run given command in the shell and return result of the command.
 
+    Usually a malformed command or error in the executed code will result in
+    the CalledProcessError and then that message is shown. During development
+    of this project, the OSError was experienced so this is covered below too.
+
+    :return success: True if not error, False otherwise.
+    :return output: Text result of the command. If there was an error, this will
+        be the error message.
+    """
     try:
-        result = subprocess.check_output(cmd_list, stderr=subprocess.STDOUT, shell=True)
-    except subprocess.CalledProcessError as shell_err:
-        success = False
-        output = shell_err.output.decode()
+        exitcode, output = subprocess.getstatusoutput(cmd)
     except OSError as os_err:
         success = False
         output = str(os_err)
     else:
-        success = True
-        output = result.decode()
+        success = exitcode == 0
 
-    return success, output.strip()
+    return success, output
 
 
 def mk_last_run_path(task_name):
