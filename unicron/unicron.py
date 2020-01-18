@@ -176,7 +176,7 @@ def proccess_cmd_result(
     """
     assert (
         status is not None
-    ), "Status must indicate success (True) or fail (False)"
+    ), "Status must indicate success (True) or fail (False)."
 
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
