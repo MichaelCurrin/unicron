@@ -1,9 +1,14 @@
 {
-    "terminal.integrated.cwd": "unicron",
-    "code-runner.cwd": "unicron",
-
     "python.pythonPath": "venv/bin/python",
 
     "editor.rulers": [79],
     "python.formatting.provider": "black",
+    "python.linting.pylintPath": "pylint",
+
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
 }
