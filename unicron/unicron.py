@@ -107,9 +107,9 @@ def run_in_shell(cmd: str):
         output = str(os_err)
     else:
         success = True
-        output = result.decode().rstrip()
+        output = result.decode()
 
-    return success, output
+    return success, output.strip()
 
 
 def mk_last_run_path(task_name):

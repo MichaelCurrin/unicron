@@ -32,7 +32,7 @@ def test_run_in_shell_success():
 
 
 def test_run_in_shell_fail():
-    cmd = "false"
+    cmd = "echo Fail! ; exit 1"
     success, output = run_in_shell(cmd)
     assert not success
-    assert output == ""
+    assert output == "Fail!"
