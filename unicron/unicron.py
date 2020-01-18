@@ -107,7 +107,7 @@ def run_in_shell(cmd: str):
         output = str(os_err)
     else:
         success = True
-        output = result.decode()
+        output = result.decode().rstrip()
 
     return success, output
 
