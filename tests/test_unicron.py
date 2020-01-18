@@ -11,7 +11,7 @@ from pathlib import Path
 # keep the main one clean. This must be done before unicron imports.
 os.environ["TEST"] = "true"
 
-from unicron.unicron import setup_logger
+from unicron.unicron import setup_logger, run_in_shell
 
 
 APP_DIR = Path("unicron")
@@ -22,3 +22,17 @@ LOG_DIR = VAR_DIR / "last_run"
 def test_setup_logger():
     app_logger = setup_logger(__name__, VAR_DIR / "app.log", is_task=False)
     task_logger = setup_logger(__name__, LOG_DIR / "unit_task.log", is_task=True)
+
+
+def test_run_in_shell_success():
+    cmd = 'echo "Test output"'
+    success, output = run_in_shell(cmd)
+    assert success
+    assert output == "Test output"
+
+
+def test_run_in_shell_fail():
+    cmd = "false"
+    success, output = run_in_shell(cmd)
+    assert not success
+    assert output == ""
