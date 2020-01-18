@@ -98,9 +98,7 @@ def run_in_shell(cmd: str):
     cmd_list = [cmd]
 
     try:
-        result = subprocess.check_output(
-            cmd_list, stderr=subprocess.STDOUT, shell=True
-        )
+        result = subprocess.check_output(cmd_list, stderr=subprocess.STDOUT, shell=True)
     except subprocess.CalledProcessError as shell_err:
         success = False
         output = shell_err.output.decode()
@@ -156,9 +154,7 @@ def check_need_to_run(task_name):
             app_logger.info("Skipping, since already ran today.", extra=extra)
             status = False
         else:
-            app_logger.debug(
-                "Executing, since last run date is old.", extra=extra
-            )
+            app_logger.debug("Executing, since last run date is old.", extra=extra)
             status = True
     else:
         app_logger.debug("Executing, since no run record found.", extra=extra)
@@ -167,16 +163,12 @@ def check_need_to_run(task_name):
     return status
 
 
-def proccess_cmd_result(
-    task_name, task_log_path, last_run_path, status, output
-):
+def proccess_cmd_result(task_name, task_log_path, last_run_path, status, output):
     """
     Log activity for a task and update the last run date if task was
     successful.
     """
-    assert (
-        status is not None
-    ), "Status must indicate success (True) or fail (False)."
+    assert status is not None, "Status must indicate success (True) or fail (False)."
 
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
@@ -219,9 +211,7 @@ def execute(task_name):
     cmd = TASKS_DIR / task_name
     status, output = run_in_shell(cmd)
 
-    proccess_cmd_result(
-        task_name, task_log_path, last_run_path, status, output
-    )
+    proccess_cmd_result(task_name, task_log_path, last_run_path, status, output)
 
     return status
 
@@ -282,8 +272,7 @@ def main():
 
     parser = argparse.ArgumentParser(
         description="Uni-Cron task scheduler.",
-        epilog="Run against the test var directory, using TEST=1 as"
-        " script prefix.",
+        epilog="Run against the test var directory, using TEST=1 as" " script prefix.",
     )
     parser.add_argument(
         "-v",
