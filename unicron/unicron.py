@@ -215,7 +215,7 @@ def execute(task_name):
 
     task_logger.info("Executing...")
     cmd = TASKS_DIR / task_name
-    status, output = run_in_shell(cmd)
+    status, output = run_in_shell(str(cmd))
 
     proccess_cmd_result(task_name, task_log_path, last_run_path, status, output)
 
