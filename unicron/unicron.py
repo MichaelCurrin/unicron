@@ -268,7 +268,7 @@ def handle_tasks():
         else:
             skipped += 1
 
-    return dict(success=success, fail=fail, skipped=skipped,)
+    return dict(success=success, fail=fail, skipped=skipped)
 
 
 def main():
