@@ -100,8 +100,8 @@ def run_in_shell(cmd):
     of this project, the OSError was experienced so this is covered below too.
 
     :return success: True if not error, False otherwise.
-    :return output: Text result of the command. If there was an error, this will
-        be the error message.
+    :return output: Text result of the command. If there was an error, this
+        will be the error message.
     """
     try:
         exitcode, output = subprocess.getstatusoutput(cmd)
@@ -150,8 +150,8 @@ def check_need_to_run(task_name):
     a valid YYYY-MM-DD date which matches today's date, then the task can be
     skipped. Otherwise it needs to be run today.
 
-    The debug-level messages here are useful for in development for  checking on
-    the reason for executing, but otherwise they can be ignored.
+    The debug-level messages here are useful for in development for checking
+    on the reason for executing, but otherwise they can be ignored.
     """
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     extra = {"task": task_name}
@@ -289,7 +289,7 @@ def main():
 
     parser = argparse.ArgumentParser(
         description="Uni-Cron task scheduler.",
-        epilog="Run against the test var directory, using TEST=1 as" " script prefix.",
+        epilog="Run against the test var directory, using TEST=1 as script prefix.",
     )
     parser.add_argument(
         "-v",
