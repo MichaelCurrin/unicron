@@ -21,7 +21,10 @@ LOG_DIR = VAR_DIR / "last_run"
 
 def test_setup_logger():
     app_logger = setup_logger(__name__, VAR_DIR / "app.log", is_task=False)
+    app_logger.debug("test_setup_logger", extra={"task": "pytest"})
+
     task_logger = setup_logger(__name__, LOG_DIR / "unit_task.log", is_task=True)
+    task_logger.debug("test_setup_logger")
 
 
 def test_run_in_shell_success():
