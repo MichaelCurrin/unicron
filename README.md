@@ -104,7 +104,7 @@ Given a configured script `hello.sh` in the targets directory.
     $ ./unicron.py --verbose
     2020-01-06 12:22:00 INFO:unicron hello.sh - Success.
     ```
-4. Scheduling - add a command to the _crontab_ file.
+4. Scheduling - add a command to the _crontab_ file. Here run every 30 minutes and only send mail if at least one job fails (since verbose flag is omitted).
     ```bash
     $ crontab -e
     ```
@@ -113,7 +113,6 @@ Given a configured script `hello.sh` in the targets directory.
     PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
     MAILTO=my-user
 
-    # Run every 30 minutes and only send mail on failure.
     */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.py
     ```
 
