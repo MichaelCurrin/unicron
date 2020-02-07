@@ -122,6 +122,9 @@ def mk_last_run_path(task_name):
 
 
 def mk_output_path(task_name):
+    """
+    Return output file path for a task.
+    """
     return OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
 
 
