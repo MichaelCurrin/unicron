@@ -254,13 +254,19 @@ def get_tasks():
 def handle_tasks():
     """
     Find tasks, check their run status for today and run any if needed.
-
-    :return: dict with count of tasks grouped by status.
     """
     success = fail = skipped = 0
 
-    for task_name in get_tasks():
+    app_logger = setup_logger("unicron", APP_LOG_PATH, is_task=False)
+    extra = {"task": "unicron"}
+
+    tasks = get_tasks()
+    msg = f"Task count: {len(tasks)}"
+    app_logger.info(msg, extra=extra)
+
+    for task_name in tasks:
         status = handle_task(task_name)
+
         if status is True:
             success += 1
         elif status is False:
@@ -268,7 +274,9 @@ def handle_tasks():
         else:
             skipped += 1
 
-    return dict(success=success, fail=fail, skipped=skipped)
+    results = dict(success=success, fail=fail, skipped=skipped)
+    msg = f"Results: {results}"
+    app_logger.info(msg, extra=extra)
 
 
 def main():
