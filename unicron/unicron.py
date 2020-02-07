@@ -255,7 +255,7 @@ def handle_tasks():
     """
     Find tasks, check their run status for today and run any if needed.
 
-    :return: dict of run results.
+    :return: dict with count of tasks grouped by status.
     """
     success = fail = skipped = 0
 
