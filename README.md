@@ -10,7 +10,7 @@
 </p>
 
 - [What is Uni-Cron?](#what-is-uni-cron)
-    - [Audience](#audience) 
+    - [Audience](#audience)
 - [Features](#features)
     - [Benefits](#benefits)
     - [Basic structure](#basic-structure)
@@ -34,7 +34,7 @@
 
 ## What is Uni-Cron?
 
-Get the right balance in scheduling automated tasks. It runs often enough that tasks run reliably (will not be missed on a day), but not too often that you increase costs (tasks are skipped if they already succeeded today). 
+Get the right balance in scheduling automated tasks. It runs often enough that tasks run reliably (will not be missed on a day), but not too often that you increase costs (tasks are skipped if they already succeeded today).
 
 Uni-Cron is:
 
@@ -50,7 +50,7 @@ See also:
 ### Audience
 
 - Uni-Cron works on Unix-like environments - **Linux** and **macOS**.
-- To use Uni-Cron, you should be familiar with running **Bash** commands in the terminal. 
+- To use Uni-Cron, you should be familiar with running **Bash** commands in the terminal.
 - The tool require **Python** to be installed, but you do not have to know anything about Python to use this tool.
 - Uni-cron was built for developers who want to run tasks daily but on **laptops** that are not always awake or connected to the internet.
 - It also works great for machines that are **always online**. Output will be logged for successes and failures at the task level so you have that full history, but the crontab mail system will only send messages on failures to avoid noisy messages.
@@ -185,29 +185,21 @@ Configure crontab to run the main script at an interval through the day such eve
 
 Example of setting up and testing a script.
 
-```bash
-$ cd <PATH_TO_REPO>
-```
-
-Create a test file and make it executable.
-
-```bash
-$ echo -e '#!/bin/bash\necho "Hello world!"\n' > unicron/var/targets/hello.sh
-$ chmod +x unicron/var/targets/hello.sh
-```
-
-Run it directly to check works fine.
-
-```bash
-$ unicron/var/targets/hello.sh
-Hello world!
-```
+1. Start from the repo root.
+2. Create a test file and make it executable.
+    ```bash
+    $ echo -e '#!/bin/bash\necho "Hello world!"\n' > unicron/var/targets/hello.sh
+    $ chmod +x unicron/var/targets/hello.sh
+    ```
+3. Run it directly to check works fine.
+    ```bash
+    $ unicron/var/targets/hello.sh
+    Hello world!
+    ```
 
 ## Usage
 
-```bash
-$ cd <PATH_TO_REPO>
-```
+Run these commands from the repo root.
 
 ### See Makefile help
 
@@ -258,12 +250,6 @@ $ make log
 
 
 ## Development
-
-See available commands.
-
-```bash
-$ make help
-```
 
 Run formatting and linting.
 
