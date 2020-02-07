@@ -4,14 +4,24 @@ Test Unicron application.
 You may have to run reset.sh before this test. Note that will delete all test
 logs.
 """
+import datetime
 import os
 from pathlib import Path
 
 # Ensure that main app var file references are in the test var directory, to
-# keep the main one clean. This must be done before unicron imports.
+# keep the main one clean.
+# NB. This must be done BEFORE unicron imports.
 os.environ["TEST"] = "true"
 
-from unicron.unicron import setup_logger, run_in_shell, mk_last_run_path, mk_output_path
+
+from unicron.unicron import (
+    setup_logger,
+    run_in_shell,
+    mk_last_run_path,
+    mk_output_path,
+    get_last_run_date,
+    check_need_to_run,
+)
 
 
 APP_DIR = Path("unicron")
