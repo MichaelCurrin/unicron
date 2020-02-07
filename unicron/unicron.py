@@ -130,7 +130,7 @@ def mk_output_path(task_name):
 
 def get_last_run_date(task_name):
     """
-    Get data of task's last run file and return as datetime obj if set.
+    Get data of task's last run file and return as datetime object if set.
     """
     last_run_path = mk_last_run_path(task_name)
 
