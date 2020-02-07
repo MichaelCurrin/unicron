@@ -91,25 +91,25 @@ def setup_logger(name, log_file, is_task=False):
     return logger
 
 
-def run_in_shell(cmd: str):
+def run_in_shell(cmd):
     """
-    Run given command in the shell.
-    """
-    cmd_list = [cmd]
+    Run given command in the shell and return result of the command.
 
+    Usually a malformed command or error in the executed code will result in
+    the CalledProcessError and then that message is shown. During development
+    of this project, the OSError was experienced so this is covered below too.
+
+    :return success: True if not error, False otherwise.
+    :return output: Text result of the command. If there was an error, this
+        will be the error message.
+    """
     try:
-        result = subprocess.check_output(
-            cmd_list, stderr=subprocess.STDOUT, shell=True
-        )
-    except subprocess.CalledProcessError as shell_err:
-        success = False
-        output = shell_err.output.decode()
+        exitcode, output = subprocess.getstatusoutput(cmd)
     except OSError as os_err:
         success = False
         output = str(os_err)
     else:
-        success = True
-        output = result.decode()
+        success = exitcode == 0
 
     return success, output
 
@@ -119,6 +119,13 @@ def mk_last_run_path(task_name):
     Return full path to a task's last run file.
     """
     return LAST_RUN_DIR / "".join((task_name, RUN_EXT))
+
+
+def mk_output_path(task_name):
+    """
+    Return output file path for a task.
+    """
+    return OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
 
 
 def get_last_run_date(task_name):
@@ -143,8 +150,8 @@ def check_need_to_run(task_name):
     a valid YYYY-MM-DD date which matches today's date, then the task can be
     skipped. Otherwise it needs to be run today.
 
-    The debug-level messages here are useful for in development for  checking on
-    the reason for executing, but otherwise they can be ignored.
+    The debug-level messages here are useful for in development for checking
+    on the reason for executing, but otherwise they can be ignored.
     """
     app_logger = setup_logger("unicron", APP_LOG_PATH)
     extra = {"task": task_name}
@@ -156,15 +163,39 @@ def check_need_to_run(task_name):
             app_logger.info("Skipping, since already ran today.", extra=extra)
             status = False
         else:
-            app_logger.debug(
-                "Executing, since last run date is old.", extra=extra
-            )
+            app_logger.debug("Executing, since last run date is old.", extra=extra)
             status = True
     else:
         app_logger.debug("Executing, since no run record found.", extra=extra)
         status = True
 
     return status
+
+
+def proccess_cmd_result(task_name, task_log_path, last_run_path, status, output):
+    """
+    Log activity for a task and update the last run date if task was
+    successful.
+    """
+    assert status is not None, "Status must indicate success (True) or fail (False)."
+
+    app_logger = setup_logger("unicron", APP_LOG_PATH)
+    task_logger = setup_logger(task_name, task_log_path, is_task=True)
+
+    extra = {"task": task_name}
+    output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
+
+    if status:
+        app_logger.info("Success.", extra=extra)
+        task_logger.info(output_log_msg)
+
+        today = datetime.date.today()
+        last_run_path.write_text(str(today))
+    else:
+        app_logger.error(
+            "Exited with error status! Check this task's log.", extra=extra
+        )
+        task_logger.error(output_log_msg)
 
 
 def execute(task_name):
@@ -181,51 +212,71 @@ def execute(task_name):
     :return: None
     """
     last_run_path = mk_last_run_path(task_name)
-    app_logger = setup_logger("unicron", APP_LOG_PATH)
 
-    task_log_path = OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
+    task_log_path = mk_output_path(task_name)
     task_logger = setup_logger(task_name, task_log_path, is_task=True)
 
     task_logger.info("Executing...")
     cmd = TASKS_DIR / task_name
-    success, output = run_in_shell(cmd)
+    status, output = run_in_shell(str(cmd))
 
-    output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
-    extra = {"task": task_name}
+    proccess_cmd_result(task_name, task_log_path, last_run_path, status, output)
 
-    if success:
-        app_logger.info("Success.", extra=extra)
-        task_logger.info(output_log_msg)
-        today = datetime.date.today()
-        last_run_path.write_text(str(today))
-    else:
-        app_logger.error(
-            "Exited with error status! Check this task's log.", extra=extra
-        )
-        task_logger.error(output_log_msg)
+    return status
 
 
 def handle_task(task_name):
     """
-    Run a task if it needs to run now.
+    Run a task, if it needs to run now.
+
+    :return status: True on task success, False on failure and None on not
+        running.
     """
     should_run = check_need_to_run(task_name)
 
     if should_run:
-        execute(task_name)
+        status = execute(task_name)
+    else:
+        status = None
+
+    return status
+
+
+def get_tasks():
+    """
+    Get Path objects for tasks in the configured tasks diectory.
+    """
+    globbed_tasks = sorted(TASKS_DIR.iterdir())
+
+    return [p.name for p in globbed_tasks if not p.name.startswith(".")]
 
 
 def handle_tasks():
     """
     Find tasks, check their run status for today and run any if needed.
-
-    :return: None
     """
-    globbed_tasks = sorted(TASKS_DIR.iterdir())
-    tasks = [p.name for p in globbed_tasks if not p.name.startswith(".")]
+    success = fail = skipped = 0
+
+    app_logger = setup_logger("unicron", APP_LOG_PATH, is_task=False)
+    extra = {"task": "unicron"}
+
+    tasks = get_tasks()
+    msg = f"Task count: {len(tasks)}"
+    app_logger.info(msg, extra=extra)
 
     for task_name in tasks:
-        handle_task(task_name)
+        status = handle_task(task_name)
+
+        if status is True:
+            success += 1
+        elif status is False:
+            fail += 1
+        else:
+            skipped += 1
+
+    results = dict(success=success, fail=fail, skipped=skipped)
+    msg = f"Results: {results}"
+    app_logger.info(msg, extra=extra)
 
 
 def main():
@@ -238,8 +289,7 @@ def main():
 
     parser = argparse.ArgumentParser(
         description="Uni-Cron task scheduler.",
-        epilog="Run against the test var directory, using TEST=1 as"
-        " script prefix.",
+        epilog="Run against the test var directory, using TEST=1 as script prefix.",
     )
     parser.add_argument(
         "-v",
