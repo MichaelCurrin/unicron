@@ -31,6 +31,7 @@ import datetime
 import logging
 import subprocess
 import os
+import sys
 import textwrap
 from pathlib import Path
 
@@ -274,9 +275,10 @@ def handle_tasks():
         else:
             skipped += 1
 
-    results = dict(success=success, fail=fail, skipped=skipped)
-    msg = f"Results: {results}"
+    msg = f"Succeeded: {success} Failed: {fail} Skipped: {skipped}"
     app_logger.info(msg, extra=extra)
+
+    return success, fail, skipped
 
 
 def main():
@@ -302,7 +304,10 @@ def main():
     if args.verbose:
         VERBOSE = True
 
-    handle_tasks()
+    _, fail, _ = handle_tasks()
+
+    if fail != 0:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
