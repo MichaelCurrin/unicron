@@ -277,7 +277,7 @@ def handle_tasks():
         else:
             skipped += 1
 
-    msg = f"Succeeded: {success} Failed: {fail} Skipped: {skipped}"
+    msg = f"Succeeded: {success}; Failed: {fail}; Skipped: {skipped}"
     app_logger.info(msg, extra=extra)
 
     return success, fail, skipped
