@@ -232,6 +232,13 @@ The example output below is for the script which was setup using [Installation](
     2020-01-13 22:49:30,438 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
     ```
 
+Once Unicron has attempted all tasks, if any task failed then Unicron will exit with an error status. This can be useful for control flow when using cron and `mail`. If running through `make`, the error will appear as follows:
+
+```
+...
+make: *** [run] Error 1
+```
+
 ### View logs
 
 Run this command to tail the app and task logs. Sample output is for the run commands above.
