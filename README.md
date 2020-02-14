@@ -218,14 +218,18 @@ The example output below is for the script which was setup using [Installation](
     ```bash
     $ make run
     unicron/unicron.py -v
+    2020-01-13 22:49:12,770 INFO:unicron.py unicron - Task count: 1
     2020-01-13 22:49:12,770 DEBUG:unicron.py hello.sh - Executing, since no run record found.
     2020-01-13 22:49:12,781 INFO:unicron.py hello.sh - Success.
+    2020-01-13 22:49:12,781 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
     ```
 - Second run.
     ```bash
     $ make run
     unicron/unicron.py -v
+    2020-01-13 22:49:30,438 INFO:unicron.py unicron - Task count: 1
     2020-01-13 22:49:30,438 INFO:unicron.py hello.sh - Skipping, since already ran today.
+    2020-01-13 22:49:30,438 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
     ```
 
 ### View logs
@@ -242,9 +246,13 @@ $ make log
 
 
 ==> app.log <==
+2020-01-13 22:49:12,770 INFO:unicron.py unicron - Task count: 1
 2020-01-13 22:49:12,770 DEBUG:unicron.py hello.sh - Executing, since no run record found.
 2020-01-13 22:49:12,781 INFO:unicron.py hello.sh - Success.
+2020-01-13 22:49:12,781 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
+2020-01-13 22:49:30,438 INFO:unicron.py unicron - Task count: 1
 2020-01-13 22:49:30,438 INFO:unicron.py hello.sh - Skipping, since already ran today.
+2020-01-13 22:49:30,438 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
 ```
 
 
