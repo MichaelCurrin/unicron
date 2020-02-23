@@ -104,7 +104,7 @@ Given a configured script `hello.sh` in the targets directory.
     $ ./unicron.py --verbose
     2020-01-06 12:22:00 INFO:unicron hello.sh - Success.
     ```
-4. Scheduling - add a command to the _crontab_ file.
+4. Scheduling - add a command to the _crontab_ file. Here run every 30 minutes and only send mail if at least one job fails (since verbose flag is omitted).
     ```bash
     $ crontab -e
     ```
@@ -113,7 +113,6 @@ Given a configured script `hello.sh` in the targets directory.
     PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
     MAILTO=my-user
 
-    # Run every 30 minutes and only send mail on failure.
     */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.py
     ```
 
@@ -219,15 +218,26 @@ The example output below is for the script which was setup using [Installation](
     ```bash
     $ make run
     unicron/unicron.py -v
+    2020-01-13 22:49:12,770 INFO:unicron.py unicron - Task count: 1
     2020-01-13 22:49:12,770 DEBUG:unicron.py hello.sh - Executing, since no run record found.
     2020-01-13 22:49:12,781 INFO:unicron.py hello.sh - Success.
+    2020-01-13 22:49:12,781 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
     ```
 - Second run.
     ```bash
     $ make run
     unicron/unicron.py -v
+    2020-01-13 22:49:30,438 INFO:unicron.py unicron - Task count: 1
     2020-01-13 22:49:30,438 INFO:unicron.py hello.sh - Skipping, since already ran today.
+    2020-01-13 22:49:30,438 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
     ```
+
+Once Unicron has attempted all tasks, if any task failed then Unicron will exit with an error status. This can be useful for control flow when using cron and `mail`. If running through `make`, the error will appear as follows:
+
+```
+...
+make: *** [run] Error 1
+```
 
 ### View logs
 
@@ -243,9 +253,13 @@ $ make log
 
 
 ==> app.log <==
+2020-01-13 22:49:12,770 INFO:unicron.py unicron - Task count: 1
 2020-01-13 22:49:12,770 DEBUG:unicron.py hello.sh - Executing, since no run record found.
 2020-01-13 22:49:12,781 INFO:unicron.py hello.sh - Success.
+2020-01-13 22:49:12,781 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
+2020-01-13 22:49:30,438 INFO:unicron.py unicron - Task count: 1
 2020-01-13 22:49:30,438 INFO:unicron.py hello.sh - Skipping, since already ran today.
+2020-01-13 22:49:30,438 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
 ```
 
 
