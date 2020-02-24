@@ -283,3 +283,5 @@ $ make test-output
 Released under [MIT License](LICENSE).
 
 Feel free to use this application and to use or modify the code. Please give credit with a link back to this repo.
+
+Logo made using [logomakr](https://logomakr.com/) tool and their stock images.
