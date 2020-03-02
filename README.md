@@ -104,17 +104,28 @@ Given a configured script `hello.sh` in the targets directory.
     $ ./unicron.py --verbose
     2020-01-06 12:22:00 INFO:unicron hello.sh - Success.
     ```
-4. Scheduling - add a command to the _crontab_ file. Here run every 30 minutes and only send mail if at least one job fails (since verbose flag is omitted).
+4. Scheduling - add a command to the _crontab_ file. Here run every 30 minutes and only send mail if at least one job fails (since the verbose flag is omitted).
     ```bash
     $ crontab -e
     ```
     ```
     SHELL=/bin/bash
     PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
-    MAILTO=my-user
+    MAILTO=$USER
 
     */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.py
     ```
+
+
+#### Crontab mail note
+
+After updating macOS to Catalina, I found that `crontab` would not send mail even when the task has actually run. But I found that this works:
+
+```
+*/30    *       *       *       *       RESULT="$(cd ~/repos/uni-cron/unicron && ./unicron.py 2>&1)"; [[ $? -ne 0 ]] || echo "$RESULT" | mail -s 'Unicron task!' $USER
+```
+
+<!-- TODO move command above to SH script -->
 
 <!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
 
