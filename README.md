@@ -3,7 +3,7 @@
 
 [![Actions status](https://github.com/MichaelCurrin/uni-cron/workflows/Python%20package/badge.svg)](https://github.com/MichaelCurrin/uni-cron/actions)
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/uni-cron.svg)](https://GitHub.com/MichaelCurrin/uni-cron/tags/)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/uni-cron/blob/master/LICENSE)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](#license)
 
 <p align="center">
     <img width="250" src="logo.png">
@@ -254,7 +254,7 @@ make: *** [run] Error 1
 
 Run this command to tail the app and task logs. Sample output is for the run commands above.
 
-```bash
+```
 $ make log
 ==> output/hello.sh.log <==
 
