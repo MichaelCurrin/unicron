@@ -19,7 +19,7 @@ $ cd unicron
 
 There are _no_ project dependencies needed to run the main application.
 
-Optionally see the [Development](development.md) doc if you want to install and use the dev dependencies.
+I you want to install and use the dev dependencies for local development, see the [Development](development.md) page.
 
 
 ## Setup Unicron tasks
