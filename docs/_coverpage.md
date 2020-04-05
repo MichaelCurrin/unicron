@@ -2,6 +2,10 @@
 
 [![GitHub tags](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
 
+<p align="center">
+    <img width="250" src="_media/logo_transparent.png">
+</p>
+
 > Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails
 
 - Efficient scheduling - avoid running tasks too often

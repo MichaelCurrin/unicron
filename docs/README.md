@@ -5,10 +5,6 @@
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/blob/master/LICENSE)
 
-<p align="center">
-    <img width="250" src="_media/logo.png">
-</p>
-
 
 ## What is Unicron?
 
