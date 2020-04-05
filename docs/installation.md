@@ -45,7 +45,6 @@ Repeat setup for all tasks that you want automated through _Unicron_. Once you h
 
 ## Setup a single cron job
 
-
 <!-- TODO move command above to SH script -->
 
 <!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
@@ -74,6 +73,8 @@ MAILTO=$USER
 Pick a frequency - such as every 30 minutes (`*/30`) or every hour (`0`). This could be more frequent, but there is not much benefit, as Unicron is aimed at scripts that only run once per day and when the time doesn't matter. So as long as you are online _sometime_ for 30 minutes to an hour during a day and then turn your laptop off, you'll get your tasks to run.
 
 Omit the `--verbose` flag so that Unicron will **only** send an email if there is an error. Note that app and task runs _always_ go to the log files, in case mails are quiet from successes but you still want to check history and output.
+
+If there are any errors, they will appear in the [Mail](mail.md) utility.
 
 #### Note for macOS
 

@@ -44,9 +44,10 @@ Searching for Unicron will show the following on Wikipedia:
 ## Docs
 
 - [Features](features.md)
-- [Installation](/docs/installation.md)
-- [Usage](/docs/usage.md)
-- [Development](/docs/development.md)
+- [Installation](installation.md)
+- [Mail](mail.md)
+- [Usage](usage.md)
+- [Development](development.md)
 
 
 ## License
