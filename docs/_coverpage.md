@@ -1,7 +1,5 @@
 # Unicron
 
-[![GitHub tags](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
-
 <p align="center">
     <img width="250" src="_media/logo_transparent.png">
 </p>
