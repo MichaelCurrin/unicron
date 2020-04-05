@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Uni-Cron main application file.
+Unicron main application file.
 
 Purpose:
 
@@ -292,7 +292,7 @@ def main():
     global VERBOSE  # pylint: disable=global-statement
 
     parser = argparse.ArgumentParser(
-        description="Uni-Cron task scheduler.",
+        description="Uniron task scheduler.",
         epilog="Run against the test var directory, using TEST=1 as script prefix.",
     )
     parser.add_argument(

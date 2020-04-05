@@ -5,21 +5,21 @@
 - **Efficient scheduling - avoid running tasks too often**
     * Schedule tasks to daily, exactly once.
     * Tasks run as early as possibly in the day, attempting frequency you set (e.g. every 30 minutes).
-    * When Uni-Cron runs again, it will skip any tasks which were successes.
+    * When Unicron runs again, it will skip any tasks which were successes.
 - **Reliable scheduling to avoid missing tasks on a day**
     * It's no problem if the machine is off or asleep in the morning - the task will still run later in the day.
     * If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
 - **Easy task configuration**
-    * Add a _single_ crontab entry and point it at Uni-Cron.
+    * Add a _single_ crontab entry and point it at Unicron.
     * Add tasks you want to run to a single directory. Either as executable scripts or as symlinks. _Future feature: configure with YAML config file._
-    * Whenever Uni-Cron runs, the tasks queued up will run consecutively. No worrying about load on the memory or network traffic or that tasks might run simultaneously. Without Uni-Cron, you'd have to check that all the crontab times are different and that long-running tasks do not overlap with each other.
+    * Whenever Unicron runs, the tasks queued up will run consecutively. No worrying about load on the memory or network traffic or that tasks might run simultaneously. Without Unicron, you'd have to check that all the crontab times are different and that long-running tasks do not overlap with each other.
 - **Logging which is informative but so noisy that is hides errors**
     * A detailed log for each task, using the task's output (successes and failures).
-    * A summary log at the main app level. By default, Uni-Cron runs with no output if successful, which means you can run it with crontab without generating mails unless there are failures.
+    * A summary log at the main app level. By default, Unicron runs with no output if successful, which means you can run it with crontab without generating mails unless there are failures.
 
 ## Basic structure
 
-- The main application script is a Python script - [unicron.py](https://github.com/MichaelCurrin/uni-cron/blob/master/unicron/unicron.py).
+- The main application script is a Python script - [unicron.py](https://github.com/MichaelCurrin/unicron/blob/master/unicron/unicron.py).
 - This works together with a `var` directory. hat contains subdirectories which contain unversioned files:
     * User-defined tasks - *var/targets/*
     * App-managed run events - *var/last_run/*
@@ -86,4 +86,4 @@ Note that making a process sleep is inefficient for memory and also does not hel
 
 ### Existing tools
 
-Why code something new? Well, I _did_ find a possible solution that was recommended online using a combination of `anacron` and `at` together and I covered this [here](https://github.com/MichaelCurrin/learn-to-code/blob/master/Shell/Scheduling/README.md). But, the drawback is that those tools only work on _Linux_ and I need to solve the case on _macOS_. So I made _Uni-Cron_.
+Why code something new? Well, I _did_ find a possible solution that was recommended online using a combination of `anacron` and `at` together and I covered this [here](https://github.com/MichaelCurrin/learn-to-code/blob/master/Shell/Scheduling/README.md). But, the drawback is that those tools only work on _Linux_ and I need to solve the case on _macOS_. So I made _Unicron_.
