@@ -19,7 +19,7 @@
 
 ## Basic structure
 
-- The main application script is a Python script - [unicron.py](https://github.com/MichaelCurrin/uni-cron/blob/master/unicron/unicron.py).
+- The main application script is a Python script - [unicron.py](https://github.com/MichaelCurrin/unicron/blob/master/unicron/unicron.py).
 - This works together with a `var` directory. hat contains subdirectories which contain unversioned files:
     * User-defined tasks - *var/targets/*
     * App-managed run events - *var/last_run/*

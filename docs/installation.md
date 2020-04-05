@@ -11,8 +11,8 @@
 ## Clone
 
 ```bash
-$ git clone git@github.com:MichaelCurrin/uni-cron.git
-$ cd uni-cron
+$ git clone git@github.com:MichaelCurrin/unicron.git
+$ cd unicron
 ```
 
 ## Project dependencies
@@ -68,7 +68,7 @@ SHELL=/bin/bash
 PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 MAILTO=$USER
 
-*/30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.py
+*/30 *    *    *    *    cd ~/repos/unicron/unicron && ./unicron.py
 ```
 
 Pick a frequency - such as every 30 minutes (`*/30`) or every hour (`0`). This could be more frequent, but there is not much benefit, as Unicron is aimed at scripts that only run once per day and when the time doesn't matter. So as long as you are online _sometime_ for 30 minutes to an hour during a day and then turn your laptop off, you'll get your tasks to run.
@@ -82,5 +82,5 @@ After updating macOS to Catalina, I found that `crontab` would **not** send mail
 But I found that does work as an alternative to the setup above. Though it is longer:
 
 ```
-*/30    *       *       *       *       RESULT="$(cd ~/repos/uni-cron/unicron && ./unicron.py 2>&1)"; [[ $? -ne 0 ]] || echo "$RESULT" | mail -s 'Unicron task!' $USER
+*/30    *       *       *       *       RESULT="$(cd ~/repos/unicron/unicron && ./unicron.py 2>&1)"; [[ $? -ne 0 ]] || echo "$RESULT" | mail -s 'Unicron task!' $USER
 ```
