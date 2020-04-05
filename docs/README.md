@@ -1,4 +1,4 @@
-# Uni-Cron :clock1:
+# Unicron :clock1:
 > Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails :repeat_one::hourglass_flowing_sand::unicorn:
 
 [![Actions status](https://github.com/MichaelCurrin/uni-cron/workflows/Python%20package/badge.svg)](https://github.com/MichaelCurrin/uni-cron/actions)
@@ -10,18 +10,18 @@
 </p>
 
 
-## What is Uni-Cron?
+## What is Unicron?
 
 Get the right balance in scheduling automated tasks. It runs often enough that tasks run reliably (will not be missed on a day), but not too often that you increase costs (tasks are skipped if they already succeeded today).
 
-Uni-Cron is:
+The Unicron name comes from two parts:
 
-- _Uni_ (one) - run a task just once a day, if all goes well.
-- _Cron_ (time) - schedule task runs, especially for retries.
+- _Uni_ (one) - it run a task just _once_ a day, if all goes well.
+- _Cron_ (time) - it is used for scheduled task runs, especially for retries.
 
-And since the name is close to _unicorn_, that symbol is used in the docs.
+And since the name is close to the mythical _unicorn_, that symbol is used in the docs.
 
-See also:
+Searching for Unicron will show the following on Wikipedia:
 
 - [Unicron](https://en.wikipedia.org/wiki/Unicron) the Transformer.
 - [Unicron](https://en.wikipedia.org/wiki/MF_Doom_%26_Trunks_Presents_Unicron) the rap album.
