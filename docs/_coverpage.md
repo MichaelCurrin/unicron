@@ -1,8 +1,7 @@
 # Unicron
 
-<p align="center">
-    <img width="250" src="_media/logo_transparent.png">
-</p>
+<img width="150" src="_media/logo_transparent.png">
+
 
 > Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails
 
