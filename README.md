@@ -9,4 +9,4 @@
     <img width="250" src="logo.png">
 </p>
 
-- [Documentation](/docs/)
+View the [Documentation](/docs/)
