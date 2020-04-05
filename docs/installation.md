@@ -19,7 +19,7 @@ $ cd uni-cron
 
 There are _no_ project dependencies needed to run the main application.
 
-Optionally see the [Development](#development) section if you want to install and use the dev dependencies.
+Optionally see the [Development](development.md) doc if you want to install and use the dev dependencies.
 
 
 ## Setup Unicron tasks
