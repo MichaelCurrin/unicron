@@ -1,5 +1,5 @@
-# Unicron :clock1:
-> Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails :repeat_one::hourglass_flowing_sand::unicorn:
+# Unicron homepage
+> Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails
 
 [![Actions status](https://github.com/MichaelCurrin/unicron/workflows/Python%20package/badge.svg)](https://github.com/MichaelCurrin/unicron/actions)
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
@@ -43,12 +43,7 @@ Searching for Unicron will show the following on Wikipedia:
 
 ## Docs
 
-- [Features](features.md)
-- [Installation](installation.md)
-- [Mail](mail.md)
-- [Usage](usage.md)
-- [Development](development.md)
-
+See the side navbar.
 
 ## License
 

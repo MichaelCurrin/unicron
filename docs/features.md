@@ -6,7 +6,7 @@
     * Schedule tasks to daily, exactly once.
     * Tasks run as early as possibly in the day, attempting frequency you set (e.g. every 30 minutes).
     * When Unicron runs again, it will skip any tasks which were successes.
-- **Reliable scheduling to avoid missing tasks on a day**
+- **Reliable scheduling - avoid missing tasks on a day**
     * It's no problem if the machine is off or asleep in the morning - the task will still run later in the day.
     * If a task fails (such as bad internet connection), the task will be retried later in the day until it succeeds.
 - **Easy task configuration**
