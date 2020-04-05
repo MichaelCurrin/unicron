@@ -148,14 +148,7 @@ Note that making a process sleep is inefficient for memory and also does not hel
 
 ### Existing tools
 
-Why code something new? Well, I did find a possible solution that was recommended online using a combination of `anacron` and `at` together (covered further below). But, the drawback is that those tools only work on _Linux_ and I need to solve the case on _macOS_. So I made _Uni-Cron_.
-
-I read some tutorials and conversations online around scheduling tasks on Unix-like systems with `cron`, `crontab`, `anacron` and `at`. These tools are summarized below.
-
-- `cron` - Run tasks at a varying frequencies, from every minute to once a year. If the machine is off during a schedule time, the job will not run.
-- `anacron` - Run tasks up to once per day using `cron` configuration, except this `anacron` expects that the machine may not be on all the time so is able catch up on any missed tasks. The downside though is that if a daily task fails, `anacron` will not retry it.
-- `at` - Schedule a task in the future in a queue of tasks, when system resources allow.
-- `anacron` with `at` - It has been suggested online to use `anacron` to kick off the jobs when the machine comes online. Then every time there is a failure, use `at` to get the job to schedule another run off itself later in the day. Repeat this until a success.
+Why code something new? Well, I _did_ find a possible solution that was recommended online using a combination of `anacron` and `at` together and I covered this [here](https://github.com/MichaelCurrin/learn-to-code/blob/master/Shell/Scheduling/README.md). But, the drawback is that those tools only work on _Linux_ and I need to solve the case on _macOS_. So I made _Uni-Cron_.
 
 
 ## Requirements
@@ -163,12 +156,14 @@ I read some tutorials and conversations online around scheduling tasks on Unix-l
 - Python 3
 - Crontab
 
+
 ## Installation
 
-## Install system dependencies
+## System dependencies
 
-- Install [python 3](https://python.org/)
-- Ensure you have _crontab_ installed. This is available for macOS and Linux.
+- Install [Python 3](https://python.org/)
+- Install _crontab_
+    - This is available for macOS and Linux and so might be installed already.
 
 
 ### Clone
@@ -225,7 +220,7 @@ Pick a frequency for the the first item - such as every 30 minutes (`*/30`) or e
 
 Omit the `--verbose` flag so it will **only** send an email if there is an error. Note that app and task runs _always_ go to the log files, in case mails are quiet from successes but you still want to check history and output.
 
-#### Note for mac
+#### Note for macOS
 
 After updating macOS to Catalina, I found that `crontab` would **not** send mail, for _Unicron_ or anything else. Even when the task has actually run and when `mail` command works alone.
 
