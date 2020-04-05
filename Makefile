@@ -78,3 +78,8 @@ reset:
 # Run unit tests.
 unit: reset
 	pytest
+
+.PHONY: docs
+# Serve docs site.
+docs:
+	docsify serve docs

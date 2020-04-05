@@ -28,3 +28,27 @@ Run tests script.
 ```bash
 $ make test-output
 ```
+
+## Docs site
+
+Built on [Docsify-JS](docsify.js.org/).
+
+### Locally
+
+Install [Docsify CLI](https://www.npmjs.com/package/docsify-cli):
+
+```sh
+npm install -g docsify-cli
+```
+
+Run local docs server from root:
+
+```sh
+make docs
+```
+
+### Remote
+
+Start serving as a Github Pages or Netlify site, serving from the docs directory.
+
+No build command is needed.
