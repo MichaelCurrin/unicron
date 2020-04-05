@@ -6,7 +6,7 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/blob/master/LICENSE)
 
 <p align="center">
-    <img width="250" src="logo.png">
+    <img width="250" src="docs/_media/logo.png">
 </p>
 
 ## Online docs
