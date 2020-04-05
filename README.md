@@ -9,4 +9,6 @@
     <img width="250" src="logo.png">
 </p>
 
-View the [Documentation](/docs/)
+## Online docs
+
+- [michaelcurrin.github.io/uni-cron/](https://michaelcurrin.github.io/uni-cron/)
