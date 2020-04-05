@@ -21,14 +21,20 @@
 - [Alternative approaches](#alternative-approaches)
     - [Sleeping](#sleeping)
     - [Existing tools](#existing-tools)
+- [Requirements](#requirements)
 - [Installation](#installation)
+- [Install system dependencies](#install-system-dependencies)
     - [Clone](#clone)
-    - [Configuration](#configuration)
+    - [Setup tasks](#setup-tasks)
+    - [Setup one cron job](#setup-one-cron-job)
+        - [Note for mac](#note-for-mac)
 - [Usage](#usage)
     - [See Makefile help](#see-makefile-help)
     - [Run main script](#run-main-script)
     - [View logs](#view-logs)
 - [Development](#development)
+    - [Setup](#setup)
+    - [Checks](#checks)
 - [License](#license)
 
 
@@ -104,32 +110,7 @@ Given a configured script `hello.sh` in the targets directory.
     $ ./unicron.py --verbose
     2020-01-06 12:22:00 INFO:unicron hello.sh - Success.
     ```
-4. Scheduling - add a command to the _crontab_ file. Here run every 30 minutes and only send mail if at least one job fails (since the verbose flag is omitted).
-    ```bash
-    $ crontab -e
-    ```
-    ```
-    SHELL=/bin/bash
-    PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
-    MAILTO=$USER
-
-    */30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.py
-    ```
-
-
-#### Crontab mail note
-
-After updating macOS to Catalina, I found that `crontab` would not send mail even when the task has actually run. But I found that this works:
-
-```
-*/30    *       *       *       *       RESULT="$(cd ~/repos/uni-cron/unicron && ./unicron.py 2>&1)"; [[ $? -ne 0 ]] || echo "$RESULT" | mail -s 'Unicron task!' $USER
-```
-
-<!-- TODO move command above to SH script -->
-
-<!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
-
-<!-- TODO: Repeat scheduling this in the usage/config section in more detail with `crontab -e`. -->
+4. Scheduling - add a single command to your _crontab_ configuration. For example, run every 30 minutes and only send mail if at least one job fails.
 
 
 ### What is the point of running once but retrying?
@@ -176,7 +157,19 @@ I read some tutorials and conversations online around scheduling tasks on Unix-l
 - `at` - Schedule a task in the future in a queue of tasks, when system resources allow.
 - `anacron` with `at` - It has been suggested online to use `anacron` to kick off the jobs when the machine comes online. Then every time there is a failure, use `at` to get the job to schedule another run off itself later in the day. Repeat this until a success.
 
+
+## Requirements
+
+- Python 3
+- Crontab
+
 ## Installation
+
+## Install system dependencies
+
+- Install [python 3](https://python.org/)
+- Ensure you have _crontab_ installed. This is available for macOS and Linux.
+
 
 ### Clone
 
@@ -185,27 +178,70 @@ $ git clone git@github.com:MichaelCurrin/uni-cron.git
 $ cd uni-cron
 ```
 
-### Configuration
+There are no project dependencies to run the main application.
 
-Add executables or symlinks to executables in the target directory.
+Optionally see the [Development](#development) section if you want to install and use the dev dependencies.
 
-Configure crontab to run the main script at an interval through the day such every 30 min (or every 1 hour). This can be more frequent, but there is not much benefit as this is aimed at scripts that only run once per day and the time doesn't matter.
+### Setup tasks
 
-<!-- TODO: How to setup crontab and to disable mails for it. -->
-
-Example of setting up and testing a script.
+_Unicron_ will run tasks for you if you set it up - you can add executables or symlinks to executables in the targets directory.
 
 1. Start from the repo root.
-2. Create a test file and make it executable.
+2. Create a script and make it executable. e.g.
     ```bash
     $ echo -e '#!/bin/bash\necho "Hello world!"\n' > unicron/var/targets/hello.sh
     $ chmod +x unicron/var/targets/hello.sh
     ```
-3. Run it directly to check works fine.
+3. Run the script directly to check that it works fine. e.g
     ```bash
     $ unicron/var/targets/hello.sh
     Hello world!
     ```
+
+Repeat setup for all tasks that you want automated through _Unicron_.
+
+
+### Setup one cron job
+
+Follow instructions below to configure crontab to run the main _Unicron_ script at an interval throughout the day.
+
+```bash
+$ crontab -e
+```
+
+You only need to add a **single** _Unicron_ item to _crontab_, regardless of how many task you have configured in _Unicron_.
+
+
+Here we add a task to run daily.
+```
+SHELL=/bin/bash
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+MAILTO=$USER
+
+*/30 *    *    *    *    cd ~/repos/uni-cron/unicron && ./unicron.py
+```
+
+Pick a frequency for the the first item - such as every 30 minutes (`*/30`) or every hour (`0`). This could be more frequent, but there is not much benefit, as Unicron is aimed at scripts that only run once per day and when the time doesn't matter. So as long as you are online _sometime_ for 30 minutes to an hour during a day and then turn your laptop off, you'll get your tasks to run.
+
+Omit the `--verbose` flag so it will **only** send an email if there is an error. Note that app and task runs _always_ go to the log files, in case mails are quiet from successes but you still want to check history and output.
+
+#### Note for mac
+
+After updating macOS to Catalina, I found that `crontab` would **not** send mail, for _Unicron_ or anything else. Even when the task has actually run and when `mail` command works alone.
+
+But I found that does work as an alternative to the setup above. Though it is longer:
+
+```
+*/30    *       *       *       *       RESULT="$(cd ~/repos/uni-cron/unicron && ./unicron.py 2>&1)"; [[ $? -ne 0 ]] || echo "$RESULT" | mail -s 'Unicron task!' $USER
+```
+
+<!-- TODO move command above to SH script -->
+
+<!-- TODO: Make executable without cd then update here. Also consider if make should be used here. -->
+
+<!-- TODO: Repeat scheduling this in the usage/config section in more detail with `crontab -e`. -->
+
+
 
 ## Usage
 
@@ -243,7 +279,7 @@ The example output below is for the script which was setup using [Installation](
     2020-01-13 22:49:30,438 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
     ```
 
-Once Unicron has attempted all tasks, if any task failed then Unicron will exit with an error status. This can be useful for control flow when using cron and `mail`. If running through `make`, the error will appear as follows:
+Once _Unicron_ has attempted all tasks, if any task failed then _Unicron_ will exit with an error status. This can be useful for control flow when using cron and `mail`. If running through `make`, the error will appear as follows:
 
 ```
 ...
@@ -276,7 +312,25 @@ $ make log
 
 ## Development
 
-Run formatting and linting.
+
+### Setup
+
+Create a virtual environment at the project root and activate it.
+
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
+```
+
+Install dev dependencies.
+
+```bash
+$ make dev-install
+```
+
+### Checks
+
+Format Python files and run linting checks.
 
 ```bash
 $ make check
@@ -291,7 +345,7 @@ $ make test-output
 
 ## License
 
-Released under [MIT License](LICENSE).
+Released under [MIT License](/LICENSE).
 
 Feel free to use this application and to use or modify the code. Please give credit with a link back to this repo.
 
