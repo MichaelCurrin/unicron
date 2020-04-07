@@ -15,6 +15,7 @@ $ git clone git@github.com:MichaelCurrin/unicron.git
 $ cd unicron
 ```
 
+
 ## Project dependencies
 
 There are _no_ project dependencies needed to run the main application.
@@ -56,7 +57,7 @@ You only need to add a **single** _Unicron_ item to _crontab_, regardless of how
 
 Follow instructions below to configure _crontab_ to run the main _Unicron_ script at an interval throughout the day.
 
-```bash
+```sh
 $ crontab -e
 ```
 
@@ -67,7 +68,7 @@ SHELL=/bin/bash
 PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 MAILTO=$USER
 
-*/30 *    *    *    *    cd ~/repos/unicron/unicron && ./unicron.py
+*/30    *       *       *       *       cd ~/repos/unicron/unicron && ./unicron.py
 ```
 
 Pick a frequency - such as every 30 minutes (`*/30`) or every hour (`0`). This could be more frequent, but there is not much benefit, as Unicron is aimed at scripts that only run once per day and when the time doesn't matter. So as long as you are online _sometime_ for 30 minutes to an hour during a day and then turn your laptop off, you'll get your tasks to run.
@@ -80,8 +81,15 @@ If there are any errors, they will appear in the [Mail](mail.md) utility.
 
 After updating macOS to Catalina, I found that `crontab` would **not** send mail, for _Unicron_ or anything else. Even when the task has actually run and when `mail` command works alone.
 
-But I found that does work as an alternative to the setup above. Though it is longer:
+But I found the solution below does work. Assuming sending using `MAILTO` does not work, or is disabled globally or inline as `MAILTO=''`.
+
 
 ```
-*/30    *       *       *       *       RESULT="$(cd ~/repos/unicron/unicron && ./unicron.py 2>&1)"; [[ $? -ne 0 ]] || echo "$RESULT" | mail -s 'Unicron task!' $USER
+MAILTO=''
+*/30    *       *       *       *       RESULT="$(cd ~/repos/uni-cron/unicron && ./unicron.py 2>&1)"; \
+                                          if [[ $? -ne 0 ]]; then echo "$RESULT" | mail -s 'Unicron task failed!' $USER
 ```
+
+There might be a more efficient way, but this captures stdout and stderr as a variable. If there is any content in the variable, send a `mail`. We send the content to the `mail` command and set the subject and target user.
+
+ 
