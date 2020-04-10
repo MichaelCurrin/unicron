@@ -10,6 +10,4 @@
     <img width="250" src="docs/_media/logo.png">
 </p>
 
-## Online docs
-
-- [michaelcurrin.github.io/unicron/](https://michaelcurrin.github.io/unicron/)
+[![Github Pages site](https://img.shields.io/badge/docs-Github%20Pages-blue?style=for-the-badge)](https://michaelcurrin.github.io/unicron/)
