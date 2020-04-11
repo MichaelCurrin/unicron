@@ -2,7 +2,7 @@
 - [Features](features.md)
 - Setup
     - [Installation](installation.md)
-    - [Setup cron](setup_cron.md)
+    - [Configure crontab](cron.md)
     - [Configure tasks](tasks.md)
 - Run
     - [Check mail](mail.md)
