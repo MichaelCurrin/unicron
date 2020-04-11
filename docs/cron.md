@@ -12,6 +12,7 @@ You only need to add a **single** _Unicron_ item to _crontab_, regardless of how
 
 Follow instructions below to configure _crontab_ to run the main _Unicron_ script at an interval throughout the day.
 
+
 ## Frequency
 
 Pick a frequency - such as every 30 minutes (`*/30`) or every hour (`0`). This could be more frequent, but there is not much benefit, as Unicron is aimed at scripts that only run once per day and when the time doesn't matter. So as long as you are online _sometime_ for 30 minutes to an hour during a day and then turn your laptop off, you'll get your tasks to run.
@@ -21,6 +22,7 @@ Example:
 ```
 */30    *       *       *       *
 ```
+
 
 ## Script name
 
@@ -51,21 +53,24 @@ SHELL=/bin/bash
 PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 MAILTO=$USER
 
-*/30    *       *       *       *       ~/repos/unicron/unicron.py
+*/30    *       *       *       *       ~/repos/unicron/unicron/unicron.py
 ```
 
+## Alternative cron target
 
-## Note for macOS
+Rather than relying on crontab to send the mail, you can be more explicit and use the `mail` command on any errors.
 
-After updating macOS to Catalina, I found that `crontab` would **not** send mail, for _Unicron_ or anything else. Even when the task has actually run and when `mail` command works alone.
+An optional shell script is provided to handle that for you. So then replace the cron target above with [~/repos/unicron/bin/cron_target.sh](https://github.com/MichaelCurrin/unicron/blob/master/bin/cron_target.sh), shown here:
 
-But I found the solution below does work. Assuming sending using `MAILTO` does not work, or is disabled globally or inline as `MAILTO=''`.
+[Cron target](https://raw.githubusercontent.com/MichaelCurrin/unicron/master/bin/cron_target.sh ':include :type=code')
+
+Just make sure to set `MAILTO=''` _before_ that target is run, to disable the standard crontab mailing.
+
+Note this script will run quietly on success, so if you run it in the terminal it may return without out which is fine.
 
 
-```
-MAILTO=''
-*/30    *       *       *       *       RESULT="$(cd ~/repos/unicron/unicron && ./unicron.py 2>&1)"; \
-                                          if [[ $? -ne 0 ]]; then echo "$RESULT" | mail -s 'Unicron task failed!' $USER
-```
+### macOS note
+
+In fact if you are running macOS, this is approach might be **necessary**, as the former approach does not work. After upgrading to _Catalina_, I found that `crontab` would **not** send mail in general for any task (even `echo 'Test'`). Even when the task has actually run and when `mail` command does work when run alone.
 
 There might be a more efficient way, but this captures stdout and stderr as a variable. If there is any content in the variable, send a `mail`. We send the content to the `mail` command and set the subject and target user.
