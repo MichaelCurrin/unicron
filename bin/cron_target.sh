@@ -3,6 +3,8 @@
 #
 # On success, be silent.
 # On error, send all output to the user's local mailbox.
+#
+# This script can be run from anywhere.
 
 SCRIPT_DIR=$(dirname $(realpath $0))
 SCRIPT_FILEPATH="$SCRIPT_DIR/../unicron/unicron.py"
