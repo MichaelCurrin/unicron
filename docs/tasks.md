@@ -1,6 +1,5 @@
-## Configure tasks
-
-_Unicron_ will run tasks for you if you set it up.
+# Configure tasks
+> Setup tasks for Unicron to manage
 
 Follow instructions below to add add executables (or symlinks to executables) in the _targets_ directory. You might want to actually the example script as below - you can use it to confirm Unicorn works as expected and see what output it gives.
 
