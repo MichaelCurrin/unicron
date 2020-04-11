@@ -1,6 +1,10 @@
 - [Home](/#unicron-homepage)
 - [Features](features.md)
-- [Installation](installation.md)
-- [Mail](mail.md)
-- [Usage](usage.md)
+- Setup
+    - [Installation](installation.md)
+    - [Configure crontab](cron.md)
+    - [Configure tasks](tasks.md)
+- Run
+    - [Check mail](mail.md)
+    - [Usage](usage.md)
 - [Development](development.md)

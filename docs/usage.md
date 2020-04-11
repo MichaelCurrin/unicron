@@ -1,11 +1,15 @@
 # Usage
 > How to use Unicron to run tasks, manage tasks and view logs
 
-You can [run tasks](#run-tasks) through Unicron directly, either manually (does not require crontab setup) or by adding a Unicron run command to crontab (see [Installation](installation.md) guide).
+The commands in this guide are all run with `make` and should be run from the root directory.
 
-You can use commands here to [View logs](#view-logs) to see the history of tasks and to see detailed errors from your task runs.
+The main things you to do with _Unicron_ are:
 
-Run these commands from the repo root.
+- Run tasks
+    - You can [run tasks](#run-tasks) through Unicron directly, either manually (does not require crontab setup) or by adding a Unicron run command to crontab (see [Installation](installation.md) guide).
+- View logs
+    - You can use commands here to [View logs](#view-logs) to see the history of tasks and to see detailed errors from your task runs.
+
 
 ## Available make commands
 
@@ -18,69 +22,7 @@ $ make help
 
 </summary>
 
-```
-# Show make targets and comments then exit.
-help:
-
-
-# Install dev dependencies.
-dev-install:
-
-
-# Use Unicron to run all configured tasks.
-run:
-
-# Run app in VERBOSE mode against the TEST VAR directory.
-run-test:
-
-
-# View configured tasks.
-ls-tasks:
-
-# View last run dates for configured tasks.
-ls-runs:
-
-
-# Make all tasks executable.
-permission:
-
-
-# Tail the app log.
-log-app:
-# Same as above but with longer history.
-log-app-long:
-
-
-# Tail the task logs.
-log-tasks:
-# Same as above but with longer history.
-log-tasks-long:
-
-# Tail both the app and task logs.
-log:
-
-
-# Tail all the test logs for task and app. Make it clear that test is in the
-# path.
-log-tests:
-
-
-# Apply Black formatting to Python files.
-format:
-
-# Lint with Pylint.
-lint:
-
-# Apply formatting and lint.
-c check: format lint
-
-
-# Reset tasks and logs in the test var dir.
-reset:
-
-# Run unit tests.
-unit: reset
-```
+[Makefile](https://raw.githubusercontent.com/MichaelCurrin/unicron/master/Makefile ':include :type=code')
 
 </details>
 
@@ -89,14 +31,16 @@ unit: reset
 
 ### Main
 
-```
+```sh
 make ls-tasks
 ```
 
 ### Test
 
-```
+```sh
 make ls-test-tasks
+```
+```
 -rwxr-xr-x  1 user  151928526  84  7 Feb 13:18 fail.sh
 -rwxr-xr-x  1 user  151928526  21  7 Feb 13:18 never_run_before.sh
 -rw-r--r--  1 user  151928526  13  7 Feb 13:18 not_executable.sh
@@ -114,8 +58,10 @@ This step uses the verbose mode. This is so that _INFO_ and _DEBUG_ messages tha
 The example output below is for the demo script which was setup using [Installation](installation.md) instructions.
 
 - First run.
-    ```
+    ```sh
     $ make run
+    ```
+    ```
     unicron/unicron.py -v
     2020-04-05 10:00:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:00:00,429 DEBUG:unicron.py hello.sh - Executing, since last run date is old.
@@ -123,8 +69,10 @@ The example output below is for the demo script which was setup using [Installat
     2020-04-05 10:00:02,300 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
     ```
 - Second run.
-    ```
+    ```sh
     $ make run
+    ```
+    ```
     unicron/unicron.py -v
     2020-04-05 10:10:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:10:00,429 INFO:unicron.py hello.sh - Skipping, since already ran today.
@@ -143,7 +91,7 @@ make: *** [run] Error 1
 
 Without any custom tasks setup, you start test _Unicron_ immediately by running the versioned test tasks.
 
-```bash
+```sh
 $ make run-test
 ```
 
@@ -152,14 +100,16 @@ $ make run-test
 
 ### Main
 
-```
+```sh
 $ make ls-runs
 ```
 
 ### Test
 
-```
+```sh
 $ make ls-test-runs
+```
+```
 cd unicron/_test_var/last_run/ && tail *
 ==> never_run_before.sh.txt <==
 2020-04-05
