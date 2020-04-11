@@ -8,3 +8,4 @@
     - [Check mail](mail.md)
     - [Usage](usage.md)
 - [Development](development.md)
+- [License](license.md)
