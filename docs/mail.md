@@ -1,4 +1,4 @@
-# Mail
+# Check mail
 > How to check for Unicron errors through the mail utility.
 
 - [mail manpage](https://linux.die.net/man/1/mail) for Linux
