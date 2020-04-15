@@ -16,3 +16,7 @@ Follow instructions below to add add executables (or symlinks to executables) in
     ```
 
 Repeat setup for all tasks that you want automated through _Unicron_. Once you have one executable script setup, you can easily copy the file for each new task.
+
+Move a script to this directory to prevent it from running:
+
+- `unicron/var/disabled_targets/`
