@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Run Unicron as a cron command.
 #
 # On success, be silent.
