@@ -16,7 +16,7 @@ OUTPUT="$($SCRIPT_FILEPATH 2>&1)"
 
 if [[ $? -ne 0 ]]; then
     set -e
-    echo "$RESULT" | mail -s 'Unicron task failed!' $USER
+    echo "$OUTPUT" | mail -s 'Unicron task failed!' $USER
 
     exit 1
 fi
