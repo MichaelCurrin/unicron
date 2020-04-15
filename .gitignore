@@ -8,6 +8,7 @@ venv
 unicron/var/last_run/*.txt
 unicron/var/output/*.log
 unicron/var/targets/*
+unicron/var/disabled_targets/*
 unicron/var/app.log
 
 unicron/_test_var/last_run/*.txt
