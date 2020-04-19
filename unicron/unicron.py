@@ -25,6 +25,13 @@ everything the main app does.
 The app always logs the same number messages to the app log file, regardless of
 verbosity level. Output of tasks is always logged to each tasks output file,
 using info or error level depending on task success or failure.
+
+Dev notes:
+
+Regarding APP_DIR - make sure to resolve to absolute path first, so it works if
+we an symlink to this without getting the parent directory of the symlink. This
+problem would  not apparent when running the script directly without using a
+symlink.
 """
 import argparse
 import datetime
@@ -38,7 +45,7 @@ from pathlib import Path
 
 USE_TEST_MODE = os.environ.get("TEST") is not None
 
-APP_DIR = Path(__file__).parent.resolve()
+APP_DIR = Path(__file__).resolve().parent
 VAR_DIR = APP_DIR / ("_test_var" if USE_TEST_MODE else "var")
 
 TASKS_DIR = VAR_DIR / "targets"
