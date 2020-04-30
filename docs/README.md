@@ -11,14 +11,14 @@
 
 Get the right balance in scheduling automated tasks. It runs often enough that tasks run reliably (will not be missed on a day), but not too often that you increase costs (tasks are skipped if they already succeeded today).
 
-The Unicron name comes from two parts:
+The "Unicron" name is made up based on two ideas:
 
-- _Uni_ (one) - it run a task just _once_ a day, if all goes well.
-- _Cron_ (time) - it is used for scheduled task runs, especially for retries.
+- **Uni** meaning one - as it run's a task just _once_ a day only (if all goes well).
+- **Cron** meaning time - as it works best on a schedule
 
-And since the name is close to the mythical _unicorn_, that symbol is used in the docs.
+Since the name is close to the mythical _unicorn_, that symbol is used for the logo.
 
-Searching for Unicron will show the following on Wikipedia:
+For interest, here are things on Wikipedia also called Unicron:
 
 - [Unicron](https://en.wikipedia.org/wiki/Unicron) the Transformer.
 - [Unicron](https://en.wikipedia.org/wiki/MF_Doom_%26_Trunks_Presents_Unicron) the rap album.
@@ -34,5 +34,6 @@ Searching for Unicron will show the following on Wikipedia:
 
 ## Requirements
 
+- Linux or macOS
 - Python 3
 - Crontab
