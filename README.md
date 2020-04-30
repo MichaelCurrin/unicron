@@ -9,6 +9,6 @@
 <div align="center">
     <img width="250" src="docs/_media/logo.png">
     
-[![Github Pages site](https://img.shields.io/badge/docs-Github_Pages-blue?style=for-the-badge)](https://michaelcurrin.github.io/unicron/)
+[![Github Pages site](https://img.shields.io/badge/docs-Github_Pages-f967f9?style=for-the-badge)](https://michaelcurrin.github.io/unicron/)
 
 </div>
