@@ -9,6 +9,7 @@
 <div align="center">
     <a href="https://michaelcurrin.github.io/unicron/">
         <img width="250" src="docs/_media/logo.png" alt="Unicron logo">
+        <br>
         <img src="https://img.shields.io/badge/docs-Github_Pages-f967f9?style=for-the-badge" alt="Github Pages site"/>
     </a>
 </div>
