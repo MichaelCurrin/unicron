@@ -12,4 +12,3 @@
 [![Github Pages site](https://img.shields.io/badge/docs-Github_Pages-blue?style=for-the-badge)](https://michaelcurrin.github.io/unicron/)
 
 </div>
-
