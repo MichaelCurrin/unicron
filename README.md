@@ -8,6 +8,8 @@
 
 <p align="center">
     <img width="250" src="docs/_media/logo.png">
+    
+[![Github Pages site](https://img.shields.io/badge/docs-Github_Pages-blue?style=for-the-badge)](https://michaelcurrin.github.io/unicron/)
+
 </p>
 
-[![Github Pages site](https://img.shields.io/badge/docs-Github%20Pages-blue?style=for-the-badge)](https://michaelcurrin.github.io/unicron/)
