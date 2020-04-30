@@ -7,8 +7,10 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/blob/master/LICENSE)
 
 <div align="center">
-    <img width="250" src="docs/_media/logo.png">
-    
-[![Github Pages site](https://img.shields.io/badge/docs-Github_Pages-f967f9?style=for-the-badge)](https://michaelcurrin.github.io/unicron/)
+    <a href="https://michaelcurrin.github.io/unicron/">
+        <img width="250" src="docs/_media/logo.png" />
+        
+![Github Pages site](https://img.shields.io/badge/docs-Github_Pages-f967f9?style=for-the-badge)
+    </a>
 
 </div>
