@@ -3,7 +3,7 @@ help:
 	@egrep '(^\S)|^$$' Makefile
 
 
-# Install dev dependencies. There no core dependencies.
+# Install dev dependencies. There are no core dependencies.
 dev-install:
 	pip install pip --upgrade
 	pip install -r requirements-dev.txt
