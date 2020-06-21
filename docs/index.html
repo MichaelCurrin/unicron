@@ -10,33 +10,43 @@
     <title>Unicron</title>
     <meta name="description"
         content="Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails ">
-    <meta name="keywords" content="doc,docs,documentation,cron,unicron,github,python,automation,scheduler">
 
     <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
-    <style>
-        /* Fix issue on mobile devices where a custom cover image goes off the screen. */
-        section.cover.show {
-            height: 100%;
-        }
 
-    </style>
+    <!-- Plugins needed before app definition. -->
+    <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
+
 </head>
 
 <body>
     <div id="app"></div>
     <script>
+        var repo = 'https://github.com/MichaelCurrin/unicron';
+
         window.$docsify = {
             name: 'Unicron',
-            repo: 'https://github.com/MichaelCurrin/unicron',
+            repo: repo,
             auto2top: true,
             coverpage: true,
             loadSidebar: true,
             subMaxLevel: 2,
             themeColor: '#e774f2',
-        }
+
+            plugins: [
+                EditOnGithubPlugin.create(
+                    repo + '/blob/master/docs/'
+                )
+            ],
+        };
 
     </script>
+
+    <!-- Docsify core -->
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+
+    <!-- Syntax highlighting -->
+    <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+
 </body>
 
 </html>
