@@ -31,13 +31,13 @@ $ make help
 
 ### Main
 
-```sh
+```bash
 make ls-tasks
 ```
 
 ### Test
 
-```sh
+```bash
 make ls-test-tasks
 ```
 ```
@@ -58,7 +58,7 @@ This step uses the verbose mode. This is so that _INFO_ and _DEBUG_ messages tha
 The example output below is for the demo script which was setup using [Installation](installation.md) instructions.
 
 - First run.
-    ```sh
+    ```bash
     $ make run
     ```
     ```
@@ -69,7 +69,7 @@ The example output below is for the demo script which was setup using [Installat
     2020-04-05 10:00:02,300 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
     ```
 - Second run.
-    ```sh
+    ```bash
     $ make run
     ```
     ```
@@ -91,7 +91,7 @@ make: *** [run] Error 1
 
 Without any custom tasks setup, you start test _Unicron_ immediately by running the versioned test tasks.
 
-```sh
+```bash
 $ make run-test
 ```
 
@@ -100,13 +100,13 @@ $ make run-test
 
 ### Main
 
-```sh
+```bash
 $ make ls-runs
 ```
 
 ### Test
 
-```sh
+```bash
 $ make ls-test-runs
 ```
 ```
@@ -218,7 +218,7 @@ Instead of going through `make`, you can run the Python script directly:
 
 You can Unicron directly to test that it runs.
 
-```sh
+```bash
 cd ~/repos/unicron/unicron
 ./unicron.py --help
 ```

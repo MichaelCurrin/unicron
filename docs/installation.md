@@ -39,12 +39,12 @@ Optionally allow _Unicron_ to be executable from anywhere.
     - `/usr/local/bin` - Standard for Unix steps.
     - `~/bin` - This will need to be created and added to `PATH`.
 2. Add a symlink to Unicron. e.g.
-    ```sh
+    ```bash
     $ cd <BIN_DIR>
     $ ln -s ~/repos/unicron/unicron/unicron.py
     ```
 3. Test the script.
-    ```sh
+    ```bash
     $ cd ~
     $ unicron.py --help
     ...

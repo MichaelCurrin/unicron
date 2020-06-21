@@ -13,13 +13,13 @@ The local mailbox is useful for debugging tasks that Unicron runs. Based on the 
 
 This will be sent to the mailbox by _crontab_. The message will say what task failed and it will tell you to look at the task's log. This log output will help you here.
 
-```sh
+```bash
 $ make log-tasks
 ```
 
 Alternatively, you can view just the log for that task.
 
-```sh
+```bash
 $ view unicron/var/output/my_task.log
 ```
 
@@ -35,13 +35,13 @@ Install the `mail` utility to use the command-line to manage mail sent by cronta
 
 You can view mails by starting `mail` and using the interactive prompt.
 
-```sh
+```bash
 $ mail
 ```
 
 Example:
 
-```sh
+```bash
 $ mail
 "/var/mail/my-user": 60 messages 60 unread
 >U  1 my-user@host  Sat Mar 28 16:15  15/666   "Unicron task failed!"

@@ -42,7 +42,7 @@ If there are any errors, they will appear in the [Mail](mail.md) utility.
 
 ## Put it all together
 
-```sh
+```bash
 $ crontab -e
 ```
 
@@ -55,6 +55,7 @@ MAILTO=$USER
 
 */30    *       *       *       *       ~/repos/unicron/unicron/unicron.py
 ```
+
 
 ## Alternative cron target
 

@@ -56,14 +56,14 @@ Built on [DocsifyJS](docsify.js.org/).
 
 Install [Docsify CLI](https://www.npmjs.com/package/docsify-cli):
 
-```sh
-npm install -g docsify-cli
+```bash
+$ npm install -g docsify-cli
 ```
 
 Run local docs server from root:
 
-```sh
-make docs
+```bash
+$ make docs
 ```
 
 ### Remote
