@@ -11,7 +11,8 @@
 - :mouse: Logging which is informative but so noisy that is hides errors
 - :snail: No external dependencies
 
-[GitHub](https://github.com/MichaelCurrin/unicron/)
+[Install](installation.md)
+[Usage](usage.md)
 [Getting Started](#unicron-homepage)
 
 ![color](#b3f0ff)
