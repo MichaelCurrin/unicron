@@ -4,9 +4,21 @@
 
 ## System dependencies
 
-Install Python 3.
+### Install Python 3
 
-Install Crontab - This is available for macOS and Linux and might be installed already.
+[install_python_3.md](//gist.githubusercontent.com/MichaelCurrin/57caae30bd7b0991098e9804a9494c23/raw/install_python_3.md ':include')
+
+### Install Crontab
+
+I found this is installed usually on a fresh macOS or Linux setup.
+
+Otherwise follow instructions below to install.
+
+On Debian/Ubuntu:
+
+```bash
+$ sudo apt install python3-crontab
+```
 
 
 ## Clone
