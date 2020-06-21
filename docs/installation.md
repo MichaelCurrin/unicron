@@ -4,9 +4,9 @@
 
 ## System dependencies
 
-- Install [Python 3](https://python.org/)
-- Install _crontab_
-    - This is available for macOS and Linux and so might be installed already.
+Install Python 3.
+
+Install Crontab - This is available for macOS and Linux and might be installed already.
 
 
 ## Clone
@@ -19,25 +19,19 @@ $ cd unicron
 
 ## Project dependencies
 
-There are _no_ project dependencies needed to run the main application.
+There are _no_ Python packages needed to run the main application.
 
-I you want to install and use the dev dependencies for local development, see the [Development](development.md) page.
+But if you want to install and use the dev dependencies for local development, see the [Development](development.md) page.
+
+If this is your first time using Unicron, you can skip ahead to the [Usage](usage.md) doc to see how to run Unicron. 
 
 
-Run Unicron directly to test that it runs.
+## Setup Unicron as a scheduled task
 
-- Using _Python_
-    ```sh
-    $ cd ~/repos/unicron/unicron
-    $ ./unicron.py --help
-    ```
-- Using `make`.
-    ```sh
-    $ cd ~/repos/unicron/
-    make usage
-    ```
+Continue to the [Setup cron](setup_cron.md) page to setup Unicron as scheduled item which manages your configured tasks.
 
-## Run as a bin script
+
+## Setup as a bin script
 
 Optionally allow _Unicron_ to be executable from anywhere.
 
@@ -55,5 +49,3 @@ Optionally allow _Unicron_ to be executable from anywhere.
     $ unicron.py --help
     ...
     ```
-
-Continue to the [Setup cron](setup_cron.md) page.

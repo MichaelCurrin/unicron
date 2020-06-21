@@ -209,3 +209,16 @@ cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
 ```
 
 </details>
+
+
+## Python CLI
+
+Instead of going through `make`, you can run the Python script directly:
+
+
+You can Unicron directly to test that it runs.
+
+```sh
+cd ~/repos/unicron/unicron
+./unicron.py --help
+```
