@@ -3,7 +3,7 @@ help:
 	@egrep '(^\S)|^$$' Makefile
 
 
-# Install dev dependencies.
+# Install dev dependencies. There are no core dependencies.
 dev-install:
 	pip install pip --upgrade
 	pip install -r requirements-dev.txt
@@ -59,16 +59,22 @@ log-tests:
 	cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
 
 
-# Apply Black formatting to Python files.
 format:
+	# Apply Black formatting fixes to Python files.
 	black .
+format-check:
+	# Show any  necessary changes and exit on error if they are needed.
+	black . --diff --check 
 
-# Lint with Pylint.
 lint:
+	# Lint with Pylint.
 	pylint unicron/unicron.py
+lint-check:
+	# Exit on error code if needed.
+	pylint unicron/unicron.py || pylint-exit $?
 
-# Apply formatting and lint.
-c check: format lint
+# Apply formatting and linting fixes.
+fix: format lint
 
 
 # Reset tasks and logs in the test var dir.
@@ -79,7 +85,7 @@ reset:
 unit: reset
 	pytest
 
-.PHONY: docs
 # Serve docs site.
+.PHONY: docs
 docs:
 	docsify serve docs
