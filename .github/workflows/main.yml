@@ -1,4 +1,4 @@
-name: Python package
+name: Python application
 
 on: [push]
 
@@ -25,4 +25,7 @@ jobs:
         run: make format-check
 
       - name: Lint
-        run: make lint-check
+        run: make lint
+
+      - name: Unit tests
+        run: make unit
