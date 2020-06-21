@@ -4,7 +4,7 @@
 [![Actions status](https://github.com/MichaelCurrin/unicron/workflows/Python%20application/badge.svg)](https://github.com/MichaelCurrin/unicron/actions)
 [![Docs with Docsify](https://img.shields.io/badge/docs-Docsify-blue.svg)](https://docsify.js.org/)
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/#license)
 
 <div align="center">
     <a href="https://michaelcurrin.github.io/unicron/">
