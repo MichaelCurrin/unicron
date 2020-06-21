@@ -22,7 +22,7 @@ jobs:
         run: make dev-install
 
       - name: Check formatting
-        run: make format
+        run: make format-check
 
-      - name: Lint with Pylint
-        run: make lint
+      - name: Lint
+        run: make lint-check
