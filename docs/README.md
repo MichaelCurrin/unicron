@@ -2,9 +2,9 @@
 > Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails
 
 [![Actions status](https://github.com/MichaelCurrin/unicron/workflows/Python%20package/badge.svg)](https://github.com/MichaelCurrin/unicron/actions)
-[![Made with Docsify](https://img.shields.io/badge/Made%20with-Docsify-blue.svg)](https://docsify.js.org/)
+[![Made with Docsify](https://img.shields.io/badge/Made_with-Docsify-blue.svg)](https://docsify.js.org/)
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/blob/master/LICENSE)
 
 
 ## What is Unicron?
@@ -34,6 +34,6 @@ For interest, here are things on Wikipedia also called Unicron:
 
 ## Requirements
 
-- Linux or macOS
-- Python 3
-- Crontab
+- OS - Linux or macOS
+- [Python 3](https://python.org/)
+- Crontab (recommended for scheduling on macOS or Linux)
