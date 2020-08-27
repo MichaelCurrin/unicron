@@ -73,7 +73,7 @@ pylint:
 lint: pylint
 
 # Validate types.
-types:
+typecheck:
 	mypy unicron tests
 
 # Apply formatting and linting fixes.
