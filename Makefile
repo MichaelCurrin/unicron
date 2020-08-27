@@ -63,7 +63,7 @@ format:
 	black .
 format-check:
 	# Show any necessary changes and exit on error if they are needed.
-	black . --diff --check 
+	black . --diff --check
 
 # Lint with Pylint.
 pylint:
@@ -72,6 +72,10 @@ pylint:
 
 lint: pylint
 
+# Validate types.
+types:
+	mypy unicron tests
+
 # Apply formatting and linting fixes.
 fix: format lint
 
@@ -79,7 +83,7 @@ fix: format lint
 # Reset tasks and logs in the test var dir.
 reset:
 	cd unicron && ./reset.sh
-	
+
 # Run unit tests.
 unit: reset
 	pytest
