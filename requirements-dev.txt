@@ -1,4 +1,7 @@
 black
+
+mypy
+
 pylint
 pylint-exit
 

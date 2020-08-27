@@ -1,6 +1,6 @@
 name: Python application
 
-on: [push]
+on: push
 
 jobs:
   build:
@@ -23,6 +23,9 @@ jobs:
 
       - name: Check formatting
         run: make format-check
+
+      - name: Check types
+        run: make typecheck
 
       - name: Lint
         run: make lint

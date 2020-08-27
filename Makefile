@@ -63,14 +63,18 @@ format:
 	black .
 format-check:
 	# Show any necessary changes and exit on error if they are needed.
-	black . --diff --check 
+	black . --diff --check
 
 # Lint with Pylint.
 pylint:
 	# Exit on error code if needed.
-	pylint unicron/unicron.py || pylint-exit $?
+	pylint unicron/unicron.py || pylint-exit $$?
 
 lint: pylint
+
+# Validate types.
+typecheck:
+	mypy unicron tests
 
 # Apply formatting and linting fixes.
 fix: format lint
@@ -79,11 +83,13 @@ fix: format lint
 # Reset tasks and logs in the test var dir.
 reset:
 	cd unicron && ./reset.sh
-	
+
 # Run unit tests.
 unit: reset
 	pytest
 
+# Local pre-deploy checks to match GH Actions pipeline.
+check-all: format-check typecheck lint unit
 
 # Serve docs site.
 .PHONY: docs

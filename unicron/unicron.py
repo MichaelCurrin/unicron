@@ -41,6 +41,7 @@ import os
 import sys
 import textwrap
 from pathlib import Path
+from typing import List, Tuple
 
 
 USE_TEST_MODE = os.environ.get("TEST") is not None
@@ -66,7 +67,7 @@ TASK_FORMATTER = logging.Formatter(
 VERBOSE = None
 
 
-def setup_logger(name, log_file, is_task=False):
+def setup_logger(name: str, log_file: Path, is_task: bool = False):
     """
     Configure a logger object and return it.
 
@@ -99,7 +100,7 @@ def setup_logger(name, log_file, is_task=False):
     return logger
 
 
-def run_in_shell(cmd):
+def run_in_shell(cmd: str) -> Tuple[bool, str]:
     """
     Run given command in the shell and return result of the command.
 
@@ -122,21 +123,21 @@ def run_in_shell(cmd):
     return success, output
 
 
-def mk_last_run_path(task_name):
+def mk_last_run_path(task_name: str) -> Path:
     """
     Return full path to a task's last run file.
     """
     return LAST_RUN_DIR / "".join((task_name, RUN_EXT))
 
 
-def mk_output_path(task_name):
+def mk_output_path(task_name: str) -> Path:
     """
     Return output file path for a task.
     """
     return OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
 
 
-def get_last_run_date(task_name):
+def get_last_run_date(task_name: str):
     """
     Get data of task's last run file and return as datetime object if set.
     """
@@ -150,7 +151,7 @@ def get_last_run_date(task_name):
     return None
 
 
-def check_need_to_run(task_name):
+def check_need_to_run(task_name: str) -> bool:
     """
     Check whether the given task needs to run today.
 
@@ -180,9 +181,13 @@ def check_need_to_run(task_name):
     return status
 
 
-def proccess_cmd_result(task_name, task_log_path, last_run_path, status, output):
+def proccess_cmd_result(
+    task_name: str, task_log_path: Path, last_run_path: Path, status: bool, output: str
+) -> None:
     """
-    Log activity for a task and update the last run date if task was
+    Process the result of running a command.
+
+    Log activity for the task and update the last run date if the task was
     successful.
     """
     assert status is not None, "Status must indicate success (True) or fail (False)."
@@ -201,12 +206,14 @@ def proccess_cmd_result(task_name, task_log_path, last_run_path, status, output)
         last_run_path.write_text(str(today))
     else:
         app_logger.error(
-            "Exited with error status! Check this task's log.", extra=extra
+            "Task exited with error status! Check this task's log: %s",
+            task_log_path,
+            extra=extra,
         )
         task_logger.error(output_log_msg)
 
 
-def execute(task_name):
+def execute(task_name: str) -> bool:
     """
     On a succesful run, set today's date in the last run event file for the
     executable, so that on subsequent runs today this executable will be
@@ -250,7 +257,7 @@ def handle_task(task_name):
     return status
 
 
-def get_tasks():
+def get_tasks() -> List[str]:
     """
     Get Path objects for tasks in the configured tasks diectory.
     """
@@ -259,7 +266,7 @@ def get_tasks():
     return [p.name for p in globbed_tasks if not p.name.startswith(".")]
 
 
-def handle_tasks():
+def handle_tasks() -> Tuple[int, int, int]:
     """
     Find tasks, check their run status for today and run any if needed.
 
@@ -290,11 +297,11 @@ def handle_tasks():
     return success, fail, skipped
 
 
-def main():
+def main() -> None:
     """
     Main command-line argument parser.
 
-    :return: None. Exit script on error code if there are any failures.
+    :raises: Exit script on error code if there are any failures.
     """
     global VERBOSE  # pylint: disable=global-statement
 
