@@ -68,7 +68,7 @@ format-check:
 # Lint with Pylint.
 pylint:
 	# Exit on error code if needed.
-	pylint unicron/unicron.py || pylint-exit $?
+	pylint unicron/unicron.py || pylint-exit $$?
 
 lint: pylint
 
@@ -88,6 +88,8 @@ reset:
 unit: reset
 	pytest
 
+# Local pre-deploy checks to match GH Actions pipeline.
+check-all: format-check typecheck lint unit
 
 # Serve docs site.
 .PHONY: docs
