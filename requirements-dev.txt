@@ -2,4 +2,6 @@ black
 pylint
 pylint-exit
 
+mypy
+
 pytest
