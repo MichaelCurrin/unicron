@@ -6,9 +6,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/#license)
 
 [![Python](https://img.shields.io/badge/python->=3.6-blue.svg)](https://python.org/)
-[![Made with Docsify](https://img.shields.io/badge/made_with-docsify.js-blue.svg)](https://docsify.js.org/)
+[![Made with Docsify](https://img.shields.io/badge/docs_made_with-docsify.js-blue.svg)](https://docsify.js.org/)
 
-No Python packages needed. Just clone, configure and run. :snake: :tada: :unicorn:
+Zero Python packages needed! Just clone, configure and run. :snake: :tada: :unicorn:
+
 
 <div align="center">
     <a href="https://michaelcurrin.github.io/unicron/">
