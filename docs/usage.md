@@ -15,6 +15,8 @@ The main things you to do with _Unicron_ are:
 
 <details>
 <summary>
+    
+Click to expand.
 
 ```bash
 $ make help
@@ -32,13 +34,13 @@ $ make help
 ### Main
 
 ```bash
-make ls-tasks
+$ make ls-tasks
 ```
 
 ### Test
 
 ```bash
-make ls-test-tasks
+$ make ls-test-tasks
 ```
 ```
 -rwxr-xr-x  1 user  151928526  84  7 Feb 13:18 fail.sh
@@ -134,7 +136,9 @@ Here we tail the task logs and app log as the same time. If you do this in one t
 <details>
 <summary>
 
-```
+Click to expand.
+
+```bash
 $ make log
 ```
 
@@ -164,7 +168,9 @@ $ make log
 <details>
 <summary>
 
-```
+Click to expand.
+
+```bash
 $ make log-test
 ```
 
@@ -214,8 +220,6 @@ cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
 ## Python CLI
 
 Instead of going through `make`, you can run the Python script directly:
-
-
 
 ```bash
 $ cd ~/repos/unicron/unicron
