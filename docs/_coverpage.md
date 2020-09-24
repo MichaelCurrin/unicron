@@ -13,6 +13,6 @@
 
 [Install](installation.md)
 [Usage](usage.md)
-[Getting Started](#unicron-homepage)
+[Get Started](#unicron-homepage)
 
 ![color](#b3f0ff)
