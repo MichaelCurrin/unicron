@@ -5,7 +5,7 @@
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/unicron/#license)
 
-[![Python](https://img.shields.io/badge/python->=3.6-blue.svg?logo=python)](https://python.org/)
+[![Python](https://img.shields.io/badge/python->=3.6-blue.svg?logo=python&logoColor=white)](https://python.org/)
 [![Made with Docsify](https://img.shields.io/badge/docs-docsify.js-blue.svg)](https://docsify.js.org/)
 
 
