@@ -8,7 +8,9 @@
 [![Python](https://img.shields.io/badge/python->=3.6-blue.svg?logo=python)](https://python.org/)
 [![Made with Docsify](https://img.shields.io/badge/docs-docsify.js-blue.svg)](https://docsify.js.org/)
 
-No Python packages needed. Just clone, configure and run. :snake: :tada: :unicorn:
+No Python packages needed. Just clone, configure and run. 🐍 🎉 🦄
+
+<!-- Note Docsify does not support :unicorn: so use unicode above instead. -->
 
 
 ## What is Unicron?
