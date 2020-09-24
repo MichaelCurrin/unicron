@@ -20,6 +20,6 @@
 - Zero Python packages needed! 
 - Just clone, configure and run. :snake: :tada: :unicorn:
 
-<img src="https://img.shields.io/badge/Show_me_how-View_the_docs-f967f9?style=for-the-badge" alt="Github Pages site"/>
+<img src="https://img.shields.io/badge/docs-Show_me_how-f967f9?style=for-the-badge" alt="Github Pages site"/>
 
 </div>
