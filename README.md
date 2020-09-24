@@ -13,13 +13,13 @@
     
 <a href="https://michaelcurrin.github.io/unicron/">
     <img width="250" src="docs/_media/logo.png" alt="Unicron logo">
-    <br>
-    <img src="https://img.shields.io/badge/docs-Show_me_how-f967f9?style=for-the-badge" alt="Github Pages site"/>
 </a>
 
 - The easy way to take control of your scheduled tasks
 - Integrates with `crontab`.
 - Zero Python packages needed! 
 - Just clone, configure and run. :snake: :tada: :unicorn:
+
+<img src="https://img.shields.io/badge/Show_me_how-View_the_docs-f967f9?style=for-the-badge" alt="Github Pages site"/>
 
 </div>
