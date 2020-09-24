@@ -8,17 +8,17 @@
 [![Python](https://img.shields.io/badge/python->=3.6-blue.svg?logo=python)](https://python.org/)
 [![Made with Docsify](https://img.shields.io/badge/docs-docsify.js-blue.svg)](https://docsify.js.org/)
 
-The easy way to take control of your scheduled tasks and hook into `cron`.
-
-Zero Python packages needed! 
-
-Just clone, configure and run. :snake: :tada: :unicorn:
-
 
 <div align="center">
-    <a href="https://michaelcurrin.github.io/unicron/">
-        <img width="250" src="docs/_media/logo.png" alt="Unicron logo">
-        <br>
-        <img src="https://img.shields.io/badge/docs-Learn_more-f967f9?style=for-the-badge" alt="Github Pages site"/>
-    </a>
+    
+<a href="https://michaelcurrin.github.io/unicron/">
+    <img width="250" src="docs/_media/logo.png" alt="Unicron logo">
+    <br>
+    <img src="https://img.shields.io/badge/docs-Show_me_how-f967f9?style=for-the-badge" alt="Github Pages site"/>
+</a>
+
+- The easy way to take control of your scheduled tasks and hook into `cron`.
+- Zero Python packages needed! 
+- Just clone, configure and run. :snake: :tada: :unicorn:
+
 </div>
