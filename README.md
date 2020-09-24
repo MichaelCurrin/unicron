@@ -17,7 +17,8 @@
     <img src="https://img.shields.io/badge/docs-Show_me_how-f967f9?style=for-the-badge" alt="Github Pages site"/>
 </a>
 
-- The easy way to take control of your scheduled tasks and hook into `cron`.
+- The easy way to take control of your scheduled tasks
+- Integrates with `crontab`.
 - Zero Python packages needed! 
 - Just clone, configure and run. :snake: :tada: :unicorn:
 
