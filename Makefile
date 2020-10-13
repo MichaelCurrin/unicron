@@ -1,3 +1,5 @@
+default: install-dev
+
 # Show make targets and comments then exit.
 help:
 	@egrep '(^\S)|^$$' Makefile
