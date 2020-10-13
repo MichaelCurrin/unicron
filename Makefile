@@ -2,9 +2,10 @@
 help:
 	@egrep '(^\S)|^$$' Makefile
 
+all: install-dev check-all run-test
 
-# Install dev dependencies. There are no core dependencies.
-dev-install:
+# Install dev dependencies.
+install-dev:
 	pip install pip --upgrade
 	pip install -r requirements-dev.txt
 
@@ -13,9 +14,10 @@ dev-install:
 run:
 	unicron/unicron.py --verbose
 
+# Integration test.
 # Run app in VERBOSE mode against the TEST VAR directory.
 run-test:
-	cd unicron && ./test.sh
+	cd unicron && ./test.sh || true
 
 
 # View configured tasks.
