@@ -19,7 +19,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: make dev-install
+        run: make install-dev
 
       - name: Check formatting
         run: make format-check
