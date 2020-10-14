@@ -1,7 +1,7 @@
 default: install-dev
 
 # Show make targets and comments then exit.
-help:
+h help:
 	@egrep '(^\S)|^$$' Makefile
 
 all: install-dev check-all run-test
