@@ -76,7 +76,6 @@ pylint:
 
 lint: pylint
 
-# Validate types.
 typecheck:
 	mypy unicron tests
 
