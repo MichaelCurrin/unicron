@@ -1,6 +1,6 @@
 default: install-dev
 
-all: install-dev format-check lint typecheck unit run-test
+all: install-dev format-check lint typecheck unit run-debug
 
 
 # Show make targets and comments then exit.
@@ -20,8 +20,8 @@ run:
 
 # Integration test.
 # Run app in VERBOSE mode against the TEST VAR directory.
-run-test:
-	cd unicron && ./test.sh || true
+ig run-debug:
+	cd unicron && ./test.sh
 
 
 # View configured tasks.
