@@ -1,10 +1,12 @@
 default: install-dev
 
+all: install-dev format-check lint typecheck unit run-test
+
+
 # Show make targets and comments then exit.
 h help:
 	@egrep '(^\S)|^$$' Makefile
 
-all: install-dev check-all run-test
 
 # Install dev dependencies.
 install-dev:
@@ -91,8 +93,6 @@ reset:
 unit: reset
 	pytest
 
-# Local pre-deploy checks to match GH Actions pipeline.
-check-all: format-check typecheck lint unit
 
 # Serve docs site.
 .PHONY: docs
