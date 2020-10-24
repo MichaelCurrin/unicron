@@ -3,18 +3,17 @@ default: install-dev
 all: install-dev format-check lint typecheck unit run-debug
 
 
-# Show make targets and comments then exit.
+# Show make targets and comments.
 h help:
 	@egrep '(^\S)|^$$' Makefile
 
 
-# Install dev dependencies.
 install-dev:
 	pip install pip --upgrade
-	pip install -r requirements-dev.txt
+	pip install -r requirements-dev.txt --upgrade
 
 
-# Use Unicron to run all configured tasks.
+# Run all configured tasks.
 run:
 	unicron/unicron.py --verbose
 
@@ -37,7 +36,7 @@ ls-test-runs:
 	cd unicron/_test_var/last_run/ && tail *
 
 
-# Make all tasks executable.
+# Make all task scripts executable.
 permission:
 	chmod +x unicron/var/targets/*
 
@@ -64,25 +63,22 @@ log:
 log-tests:
 	cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
 
-# Apply Black formatting fixes to Python files.
 format:
 	black .
 format-check:
-	# Show any necessary changes and exit on error if they are needed.
 	black . --diff --check
 
-# Lint with Pylint.
 pylint:
 	# Exit on error code if needed.
 	pylint unicron/unicron.py || pylint-exit $$?
 
 lint: pylint
 
-typecheck:
-	mypy unicron tests
-
 # Apply formatting and linting fixes.
 fix: format lint
+
+typecheck:
+	mypy unicron tests
 
 
 # Reset tasks and logs in the test var dir.
