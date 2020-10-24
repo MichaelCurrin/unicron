@@ -1,7 +1,7 @@
 default: install-dev
 
 # Local pre-deploy command.
-all: install-dev format-check lint typecheck unit run-debug
+all: install-dev format-check lint typecheck unit
 
 
 # Show make targets and comments.
@@ -14,14 +14,9 @@ install-dev:
 	pip install -r requirements-dev.txt --upgrade
 
 
-# Run all configured tasks.
+# Run all configured tasks in main VAR targets dir.
 run:
 	unicron/unicron.py --verbose
-
-# Integration test.
-# Run app in VERBOSE mode against the TEST VAR directory.
-ig run-debug:
-	cd unicron && ./test.sh
 
 
 # View configured tasks.
@@ -53,6 +48,7 @@ log-app-long:
 # Tail the task logs.
 log-tasks:
 	cd unicron/var && tail -F output/*.log
+
 # Same as above but with longer history.
 log-tasks-long:
 	cd unicron/var && tail -n50 -F output/*.log
@@ -60,9 +56,11 @@ log-tasks-long:
 # Tail both the app and task logs.
 log:
 	cd unicron/var && tail -F output/*.log app.log
+
 # As above, for test tasks. We make the _test_var path shown here for clarity.
 log-tests:
 	cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
+
 
 format:
 	black .
@@ -82,13 +80,17 @@ typecheck:
 	mypy unicron tests
 
 
-# Reset tasks and logs in the test var dir.
+# Reset tasks and logs in the TEST VAR dir.
 reset:
-	cd unicron && ./reset.sh
+	bin/reset.sh
 
 # Run unit tests.
 unit: reset
 	pytest
+
+# Integration test.
+debug: reset
+	bin/test.sh
 
 
 # Serve docs site.
