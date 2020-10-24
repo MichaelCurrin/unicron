@@ -1,5 +1,6 @@
 default: install-dev
 
+# Local pre-deploy command.
 all: install-dev format-check lint typecheck unit run-debug
 
 
