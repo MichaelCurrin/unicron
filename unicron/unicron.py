@@ -64,7 +64,7 @@ TASK_FORMATTER = logging.Formatter(
     "%(asctime)s %(levelname)s:%(filename)s - %(message)s"
 )
 
-VERBOSE = None
+VERBOSE = False
 
 
 def setup_logger(name: str, log_file: Path, is_task: bool = False):
