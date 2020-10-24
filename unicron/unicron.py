@@ -35,69 +35,15 @@ symlink.
 """
 import argparse
 import datetime
-import logging
 import subprocess
-import os
 import sys
 import textwrap
 from pathlib import Path
 from typing import List, Tuple
 
-
-USE_TEST_MODE = os.environ.get("TEST") is not None
-
-APP_DIR = Path(__file__).resolve().parent
-VAR_DIR = APP_DIR / ("_test_var" if USE_TEST_MODE else "var")
-
-TASKS_DIR = VAR_DIR / "targets"
-LAST_RUN_DIR = VAR_DIR / "last_run"
-RUN_EXT = ".txt"
-
-APP_LOG_PATH = VAR_DIR / "app.log"
-OUTPUT_DIR = VAR_DIR / "output"
-OUTPUT_EXT = ".log"
-
-APP_FORMATTER = logging.Formatter(
-    "%(asctime)s %(levelname)s:%(filename)s %(task)s - %(message)s"
-)
-TASK_FORMATTER = logging.Formatter(
-    "%(asctime)s %(levelname)s:%(filename)s - %(message)s"
-)
-
-VERBOSE = False
-
-
-def setup_logger(name: str, log_file: Path, is_task: bool = False):
-    """
-    Configure a logger object and return it.
-
-    It is safer to run this setup multiple in a script as the log file handler
-    will only be added if it not there already.
-
-    >>> app_logger = setup_logger('foo', 'foo.log')
-    >>> app_logger.info('This is just an info message.')
-
-    >>> task_logger = setup_logger('bar', 'bar.log', is_task=True)
-    >>> task_logger.info('This is just an info message.')
-    """
-    formatter = TASK_FORMATTER if is_task else APP_FORMATTER
-
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.DEBUG)
-
-    if not logger.handlers:
-        file_handler = logging.FileHandler(log_file)
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
-
-        if not is_task:
-            stream_handler = logging.StreamHandler()
-            stream_handler.setFormatter(formatter)
-            stream_lvl = logging.DEBUG if VERBOSE else logging.ERROR
-            stream_handler.setLevel(stream_lvl)
-            logger.addHandler(stream_handler)
-
-    return logger
+# Only python -m works now because of the relative imports.
+from . import logger
+from . import constants
 
 
 def run_in_shell(cmd: str) -> Tuple[bool, str]:
@@ -127,14 +73,14 @@ def mk_last_run_path(task_name: str) -> Path:
     """
     Return full path to a task's last run file.
     """
-    return LAST_RUN_DIR / "".join((task_name, RUN_EXT))
+    return constants.LAST_RUN_DIR / "".join((task_name, constants.RUN_EXT))
 
 
 def mk_output_path(task_name: str) -> Path:
     """
     Return output file path for a task.
     """
-    return OUTPUT_DIR / "".join((task_name, OUTPUT_EXT))
+    return constants.OUTPUT_DIR / "".join((task_name, constants.OUTPUT_EXT))
 
 
 def get_last_run_date(task_name: str):
@@ -162,7 +108,7 @@ def check_need_to_run(task_name: str) -> bool:
     The debug-level messages here are useful for in development for checking
     on the reason for executing, but otherwise they can be ignored.
     """
-    app_logger = setup_logger("unicron", APP_LOG_PATH)
+    app_logger = logger.setup_logger("unicron", constants.APP_LOG_PATH)
     extra = {"task": task_name}
 
     last_run_date = get_last_run_date(task_name)
@@ -192,8 +138,8 @@ def proccess_cmd_result(
     """
     assert status is not None, "Status must indicate success (True) or fail (False)."
 
-    app_logger = setup_logger("unicron", APP_LOG_PATH)
-    task_logger = setup_logger(task_name, task_log_path, is_task=True)
+    app_logger = logger.setup_logger("unicron", constants.APP_LOG_PATH)
+    task_logger = logger.setup_logger(task_name, task_log_path, is_task=True)
 
     extra = {"task": task_name}
     output_log_msg = f"Output:\n{textwrap.indent(output, ' '*4)}"
@@ -229,10 +175,10 @@ def execute(task_name: str) -> bool:
     last_run_path = mk_last_run_path(task_name)
 
     task_log_path = mk_output_path(task_name)
-    task_logger = setup_logger(task_name, task_log_path, is_task=True)
+    task_logger = logger.setup_logger(task_name, task_log_path, is_task=True)
 
     task_logger.info("Executing...")
-    cmd = TASKS_DIR / task_name
+    cmd = constants.TASKS_DIR / task_name
     status, output = run_in_shell(str(cmd))
 
     proccess_cmd_result(task_name, task_log_path, last_run_path, status, output)
@@ -261,7 +207,7 @@ def get_tasks() -> List[str]:
     """
     Get Path objects for tasks in the configured tasks diectory.
     """
-    globbed_tasks = sorted(TASKS_DIR.iterdir())
+    globbed_tasks = sorted(constants.TASKS_DIR.iterdir())
 
     return [p.name for p in globbed_tasks if not p.name.startswith(".")]
 
@@ -274,7 +220,7 @@ def handle_tasks() -> Tuple[int, int, int]:
     """
     success = fail = skipped = 0
 
-    app_logger = setup_logger("unicron", APP_LOG_PATH, is_task=False)
+    app_logger = logger.setup_logger("unicron", constants.APP_LOG_PATH, is_task=False)
     extra = {"task": "unicron"}
 
     tasks = get_tasks()
@@ -303,8 +249,6 @@ def main() -> None:
 
     :raises: Exit script on error code if there are any failures.
     """
-    global VERBOSE  # pylint: disable=global-statement
-
     parser = argparse.ArgumentParser(
         description="Uniron task scheduler.",
         epilog="Run against the test var directory, using TEST=1 as script prefix.",
@@ -317,8 +261,7 @@ def main() -> None:
         action="store_true",
     )
     args = parser.parse_args()
-    if args.verbose:
-        VERBOSE = True
+    logger.VERBOSE = args.verbose
 
     _, fail, _ = handle_tasks()
 
