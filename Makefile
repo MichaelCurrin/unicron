@@ -18,6 +18,9 @@ install-dev:
 run:
 	python3 -m unicron.unicron --verbose
 
+run-quiet:
+	python3 -m unicron.unicron
+
 
 # View configured tasks.
 ls-tasks:
