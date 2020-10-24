@@ -16,7 +16,7 @@ install-dev:
 
 # Run all configured tasks in main VAR targets dir.
 run:
-	unicron/unicron.py --verbose
+	python3 -m unicron.unicron --verbose
 
 
 # View configured tasks.
