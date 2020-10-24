@@ -37,7 +37,6 @@ import argparse
 import sys
 from typing import List, Tuple
 
-# Only python -m works now because of the relative imports.
 from . import constants, history, logger, run
 
 
