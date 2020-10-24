@@ -15,13 +15,13 @@ os.environ["TEST"] = "true"
 
 
 from unicron.unicron import (
-    setup_logger,
     run_in_shell,
     mk_last_run_path,
     mk_output_path,
     get_last_run_date,
     check_need_to_run,
 )
+from unicron.logger import setup_logger
 
 
 APP_DIR = Path("unicron")
@@ -47,17 +47,20 @@ def test_run_in_shell_success():
 def test_run_in_shell_fail():
     cmd = "echo Fail! ; exit 1"
     success, output = run_in_shell(cmd)
+
     assert not success
     assert output == "Fail!"
 
 
 def test_mk_last_run_path():
     path = mk_last_run_path("foo")
+
     assert str(path).endswith("_test_var/last_run/foo.txt")
 
 
 def test_mk_output_path():
     path = mk_output_path("foo")
+
     assert str(path).endswith("_test_var/output/foo.log")
 
 
