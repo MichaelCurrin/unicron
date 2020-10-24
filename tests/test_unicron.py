@@ -14,14 +14,16 @@ from pathlib import Path
 os.environ["TEST"] = "true"
 
 
-from unicron.unicron import (
-    run_in_shell,
-    mk_last_run_path,
-    mk_output_path,
+from unicron.history import (
     get_last_run_date,
     check_need_to_run,
 )
 from unicron.logger import setup_logger
+from unicron.run import run_in_shell
+from unicron.paths import (
+    mk_last_run_path,
+    mk_output_path,
+)
 
 
 APP_DIR = Path("unicron")
@@ -40,6 +42,7 @@ def test_setup_logger():
 def test_run_in_shell_success():
     cmd = 'echo "Test output"'
     success, output = run_in_shell(cmd)
+
     assert success
     assert output == "Test output"
 
@@ -73,8 +76,10 @@ def test_get_last_run_date():
 
 
 def test_check_need_to_run():
+    # Expect to run.
     assert check_need_to_run("never_run_before.sh") is True
     assert check_need_to_run("fail.sh") is True
     assert check_need_to_run("old.sh") is True
 
+    # Expect not to run.
     assert check_need_to_run("today.sh") is False
