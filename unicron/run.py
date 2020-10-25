@@ -7,7 +7,7 @@ import textwrap
 from pathlib import Path
 from typing import Tuple
 
-from . import constants, logger, paths
+from . import constants, logger, history, paths
 
 
 def run_in_shell(cmd: str) -> Tuple[bool, str]:
@@ -42,8 +42,6 @@ def proccess_cmd_result(
     Log activity for the task and update the last run date if the task was run
     successfully.
     """
-    assert status is not None, "Status must indicate success (True) or fail (False)."
-
     app_logger = logger.setup_logger("unicron", constants.APP_LOG_PATH)
     task_logger = logger.setup_logger(task_name, task_log_path, is_task=True)
 
@@ -88,5 +86,21 @@ def execute(task_name: str) -> bool:
     status, output = run_in_shell(str(cmd))
 
     proccess_cmd_result(task_name, task_log_path, last_run_path, status, output)
+
+    return status
+
+
+def handle_task(task_name):
+    """
+    Run a task, if it needs to run now.
+
+    :return status: True on task success, False on failure and None on skipped.
+    """
+    should_run = history.check_need_to_run(task_name)
+
+    if should_run:
+        status = execute(task_name)
+    else:
+        status = None
 
     return status

@@ -35,38 +35,22 @@ symlink.
 """
 import argparse
 import sys
+from pathlib import Path
 from typing import List, Tuple
 
-from . import constants, history, logger, run
+from . import constants, logger, run
 
 
-def handle_task(task_name):
+def get_tasks(tasks_dir: Path) -> List[str]:
     """
-    Run a task, if it needs to run now.
-
-    :return status: True on task success, False on failure and None on not
-        running.
+    Get Path objects for tasks in a given tasks diectory.
     """
-    should_run = history.check_need_to_run(task_name)
-
-    if should_run:
-        status = run.execute(task_name)
-    else:
-        status = None
-
-    return status
-
-
-def get_tasks() -> List[str]:
-    """
-    Get Path objects for tasks in the configured tasks diectory.
-    """
-    globbed_tasks = sorted(constants.TASKS_DIR.iterdir())
+    globbed_tasks = sorted(tasks_dir.iterdir())
 
     return [p.name for p in globbed_tasks if not p.name.startswith(".")]
 
 
-def handle_tasks() -> Tuple[int, int, int]:
+def handle_tasks(tasks_dir: Path, app_log_path: Path) -> Tuple[int, int, int]:
     """
     Find tasks, check their run status for today and run any if needed.
 
@@ -74,15 +58,15 @@ def handle_tasks() -> Tuple[int, int, int]:
     """
     success = fail = skipped = 0
 
-    app_logger = logger.setup_logger("unicron", constants.APP_LOG_PATH, is_task=False)
+    app_logger = logger.setup_logger("unicron", app_log_path, is_task=False)
     extra = {"task": "unicron"}
 
-    tasks = get_tasks()
+    tasks = get_tasks(tasks_dir)
     msg = f"Task count: {len(tasks)}"
     app_logger.info(msg, extra=extra)
 
     for task_name in tasks:
-        status = handle_task(task_name)
+        status = run.handle_task(task_name)
 
         if status is True:
             success += 1
@@ -117,7 +101,9 @@ def main() -> None:
     args = parser.parse_args()
     logger.VERBOSE = args.verbose
 
-    _, fail, _ = handle_tasks()
+    _, fail, _ = handle_tasks(
+        tasks_dir=constants.TASKS_DIR, app_log_path=constants.APP_LOG_PATH
+    )
 
     if fail != 0:
         sys.exit(1)
