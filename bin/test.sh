@@ -7,12 +7,12 @@
 
 echo "Main - first run"
 echo "==="
-TEST=true unicron/unicron.py -v
+TEST=true python -m unicron.unicron -v
 echo
 echo
 
 echo "Main - second run"
 echo "==="
-TEST=true unicron/unicron.py -v
+TEST=true python -m unicron.unicron -v
 
 true

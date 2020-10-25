@@ -27,28 +27,67 @@
     * Application log - *var/app.log*
 - There is also `_test_var` directory for testing the application without affecting the main `var` directory.
 
+
 ## Sample
 
-Given a configured script `hello.sh` in the targets directory.
+Given an executable script `hello.sh` added to the targets directory.
 
-<!-- TODO: Update with new output -->
+- `hello.sh`
+    ```sh
+    echo 'Hello, word'
+    ```
+
+Running directly:
+
+```sh
+$ ./unicron/var/targets/hello.sh
+Hello, world!
+```
+
+
+Run with Unicron - note the verbose flag is implied in the `run` target of the `Makefile`.
 
 1. First run today - the script executes.
     ```bash
-    $ ./unicron.py --verbose
-    2020-01-05 19:23:05 INFO:unicron hello.sh - Success.
+    $ make run
+    2020-10-24 08:02:18,516 INFO:unicron.py unicron - Task count: 1
+    2020-10-24 08:02:18,532 INFO:run.py hello.sh - Success.
+    2020-10-24 08:02:18,537 INFO:unicron.py unicron - Succeeded: 1; Failed: 0; Skipped: 0
     ```
-2. Second run today - the script is skipped.
+2. A repeat run today - the script is skipped.
     ```bash
-    $ ./unicron.py --verbose
-    2020-01-05 19:23:56 INFO:unicron hello.sh - Skipping, since already ran today.
+    $ make run
+    2020-10-24 08:03:36,313 INFO:unicron.py unicron - Task count: 7
+    2020-10-24 08:03:36,317 INFO:history.py hello.sh - Skipping, since already ran today.
+    2020-10-24 08:02:18,537 INFO:unicron.py unicron - Succeeded: 0; Failed: 0; Skipped: 1
     ```
-3. First run tomorrow - the script executes.
+3. On the first run tomorrow - the script executes.
     ```bash
-    $ ./unicron.py --verbose
-    2020-01-06 12:22:00 INFO:unicron hello.sh - Success.
+    $ make run
+    2020-10-25 08:02:18,516 INFO:unicron.py unicron - Task count: 1
+    2020-10-25 08:02:18,532 INFO:run.py hello.sh - Success.
+    2020-10-25 08:02:18,537 INFO:unicron.py unicron - Succeeded: 1; Failed: 0; Skipped: 0
     ```
-4. Scheduling - add a single command to your _crontab_ configuration. For example, run every 30 minutes and only send mail if at least one job fails.
+
+Scheduling - add a single command to your _crontab_ configuration.
+
+For example, run every 30 minutes and only send mail if at least one job fails.
+
+```sh
+$ crontab -e
+```
+```
+*/30    *       *       *       *       ~/repos/unicron/bin/cron_target.sh
+```
+
+Then access runs using:
+
+```sh
+$ mail
+Mail version 8.1 6/6/93.  Type ? for help.
+"/var/mail/mcurrin": 1 message 1 new
+>N  1 mcurrin@C02WL0Y2HV2T  Sat Oct 24 20:00  17/836   "Unicron task failed!"
+```
 
 
 ## What is the point of running once but retrying?

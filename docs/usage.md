@@ -15,7 +15,7 @@ The main things you to do with _Unicron_ are:
 
 <details>
 <summary>
-    
+
 Click to expand.
 
 ```bash
@@ -64,7 +64,7 @@ The example output below is for the demo script which was setup using [Installat
     $ make run
     ```
     ```
-    unicron/unicron.py -v
+    python3 -m unicron.unicron -v
     2020-04-05 10:00:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:00:00,429 DEBUG:unicron.py hello.sh - Executing, since last run date is old.
     2020-04-05 10:00:02,224 INFO:unicron.py hello.sh - Success.
@@ -75,7 +75,7 @@ The example output below is for the demo script which was setup using [Installat
     $ make run
     ```
     ```
-    unicron/unicron.py -v
+    python3 -m unicron.unicron -v
     2020-04-05 10:10:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:10:00,429 INFO:unicron.py hello.sh - Skipping, since already ran today.
     2020-04-05 10:10:00,500 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
@@ -94,7 +94,7 @@ make: *** [run] Error 1
 Without any custom tasks setup, you start test _Unicron_ immediately by running the versioned test tasks.
 
 ```bash
-$ make run-test
+$ make debug
 ```
 
 
@@ -222,6 +222,7 @@ cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
 Instead of going through `make`, you can run the Python script directly:
 
 ```bash
-$ cd ~/repos/unicron/unicron
-$ ./unicron.py --help
+$ python3 -m unicron.unicron -v
 ```
+
+You have to use the `-m` syntax for the relative imports in the script to work. If they are not relative imports and just `import logger`, then the tests can't run properly.
