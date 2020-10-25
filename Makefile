@@ -57,6 +57,7 @@ log-tasks-long:
 # Tail both the app and task logs.
 log:
 	cd unicron/var && tail -F output/*.log app.log
+# Tail logs created by `debug` target.
 log-tests:
 	cd unicron/_test_var && tail -n20 -F output/*.log app.log
 
