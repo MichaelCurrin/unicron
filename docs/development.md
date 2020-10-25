@@ -1,6 +1,8 @@
 # Development
 
+
 ## Setup
+> Setup Unicron locally
 
 Create a virtual environment at the project root and activate it.
 
@@ -15,7 +17,11 @@ Install dev dependencies.
 $ make dev-install
 ```
 
+
 ## Checks
+> Run checks locally
+
+### Format and lint
 
 Format Python files and run linting checks.
 
@@ -23,28 +29,41 @@ Format Python files and run linting checks.
 $ make check
 ```
 
-Run tests script.
+### Tests
+
+Run unit tests.
 
 ```bash
-$ make test-output
+$ make unit
 ```
+
+
+## CI
+> Run Github Actions on the project
+
+See the [main.yml](https://github.com/MichaelCurrin/unicron/blob/master/.github/workflows/main.yml) workflow file in the repo.
+
+This sets up check to run on Github Actions.
+
+Nothing is persisted - the project is not packaged and distributed anyhere.
+
 
 ## Docs site
 
-Built on [Docsify-JS](docsify.js.org/).
+Built on [DocsifyJS](docsify.js.org/).
 
 ### Locally
 
 Install [Docsify CLI](https://www.npmjs.com/package/docsify-cli):
 
-```sh
-npm install -g docsify-cli
+```bash
+$ npm install -g docsify-cli
 ```
 
 Run local docs server from root:
 
-```sh
-make docs
+```bash
+$ make docs
 ```
 
 ### Remote

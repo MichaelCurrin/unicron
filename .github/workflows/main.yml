@@ -1,6 +1,6 @@
-name: Python package
+name: Python application
 
-on: [push]
+on: push
 
 jobs:
   build:
@@ -8,17 +8,27 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.6, 3.X]
+        python-version: [3.8, 3.X]
 
     steps:
       - uses: actions/checkout@v1
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies
-        run: make dev-install
-      - name: Check formatting.
-        run: make format
-      - name: Lint with Pylint.
+        run: make install-dev
+
+      - name: Check formatting
+        run: make format-check
+
+      - name: Check types
+        run: make typecheck
+
+      - name: Lint
         run: make lint
+
+      - name: Unit tests
+        run: make unit

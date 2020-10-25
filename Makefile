@@ -1,21 +1,25 @@
-# Show make targets and comments then exit.
-help:
+default: install-dev
+
+# Local pre-deploy command.
+all: install-dev format-check lint typecheck unit
+
+
+# Show make targets and comments.
+h help:
 	@egrep '(^\S)|^$$' Makefile
 
 
-# Install dev dependencies.
-dev-install:
+install-dev:
 	pip install pip --upgrade
-	pip install -r requirements-dev.txt
+	pip install -r requirements-dev.txt --upgrade
 
 
-# Use Unicron to run all configured tasks.
+# Run all configured tasks in main VAR targets dir.
 run:
-	unicron/unicron.py --verbose
+	python3 -m unicron.unicron --verbose
 
-# Run app in VERBOSE mode against the TEST VAR directory.
-run-test:
-	cd unicron && ./test.sh
+run-quiet:
+	python3 -m unicron.unicron
 
 
 # View configured tasks.
@@ -31,12 +35,12 @@ ls-test-runs:
 	cd unicron/_test_var/last_run/ && tail *
 
 
-# Make all tasks executable.
-permission:
+# Make all task scripts executable.
+perms:
 	chmod +x unicron/var/targets/*
 
 
-# Tail the app log.
+# Tail the app logs.
 log-app:
 	cd unicron/var && tail -F app.log
 # Same as above but with longer history.
@@ -47,39 +51,53 @@ log-app-long:
 # Tail the task logs.
 log-tasks:
 	cd unicron/var && tail -F output/*.log
-# Same as above but with longer history.
 log-tasks-long:
 	cd unicron/var && tail -n50 -F output/*.log
 
 # Tail both the app and task logs.
 log:
 	cd unicron/var && tail -F output/*.log app.log
-# As above, for test tasks. We make the _test_var path shown here for clarity.
+# Tail logs created by `debug` target.
 log-tests:
-	cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
+	cd unicron/_test_var && tail -n20 -F output/*.log app.log
 
 
-# Apply Black formatting to Python files.
 format:
 	black .
+format-check:
+	black . --diff --check
 
-# Lint with Pylint.
-lint:
-	pylint unicron/unicron.py
+pylint:
+	# Exit on error code on a fail. Expand failure to all non-fatal messages too.
+	pylint unicron tests || pylint-exit -efail -wfail -rfail -cfail $$?
 
-# Apply formatting and lint.
-c check: format lint
+lint: pylint
+
+# Apply formatting and linting fixes.
+fix: format lint
+
+typecheck:
+	mypy unicron tests
 
 
-# Reset tasks and logs in the test var dir.
+clean:
+	find . -name '*.pyc' -delete
+
+
+# Reset tasks and logs in the TEST VAR dir.
 reset:
-	cd unicron && ./reset.sh
+	bin/reset.sh
 
 # Run unit tests.
 unit: reset
-	pytest
+	TEST=true pytest
 
-.PHONY: docs
+# Integration test.
+debug: reset
+	bin/test.sh
+
+
 # Serve docs site.
+.PHONY: docs
 docs:
 	docsify serve docs

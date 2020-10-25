@@ -1,8 +1,5 @@
-# Python compiled binaries.
 __pycache__/
-.pytest_cache/
 
-# Python virtual environment.
 venv
 
 unicron/var/last_run/*.txt

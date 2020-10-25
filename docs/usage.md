@@ -16,6 +16,8 @@ The main things you to do with _Unicron_ are:
 <details>
 <summary>
 
+Click to expand.
+
 ```bash
 $ make help
 ```
@@ -31,14 +33,14 @@ $ make help
 
 ### Main
 
-```sh
-make ls-tasks
+```bash
+$ make ls-tasks
 ```
 
 ### Test
 
-```sh
-make ls-test-tasks
+```bash
+$ make ls-test-tasks
 ```
 ```
 -rwxr-xr-x  1 user  151928526  84  7 Feb 13:18 fail.sh
@@ -58,22 +60,22 @@ This step uses the verbose mode. This is so that _INFO_ and _DEBUG_ messages tha
 The example output below is for the demo script which was setup using [Installation](installation.md) instructions.
 
 - First run.
-    ```sh
+    ```bash
     $ make run
     ```
     ```
-    unicron/unicron.py -v
+    python3 -m unicron.unicron -v
     2020-04-05 10:00:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:00:00,429 DEBUG:unicron.py hello.sh - Executing, since last run date is old.
     2020-04-05 10:00:02,224 INFO:unicron.py hello.sh - Success.
     2020-04-05 10:00:02,300 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
     ```
 - Second run.
-    ```sh
+    ```bash
     $ make run
     ```
     ```
-    unicron/unicron.py -v
+    python3 -m unicron.unicron -v
     2020-04-05 10:10:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:10:00,429 INFO:unicron.py hello.sh - Skipping, since already ran today.
     2020-04-05 10:10:00,500 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
@@ -91,8 +93,8 @@ make: *** [run] Error 1
 
 Without any custom tasks setup, you start test _Unicron_ immediately by running the versioned test tasks.
 
-```sh
-$ make run-test
+```bash
+$ make debug
 ```
 
 
@@ -100,13 +102,13 @@ $ make run-test
 
 ### Main
 
-```sh
+```bash
 $ make ls-runs
 ```
 
 ### Test
 
-```sh
+```bash
 $ make ls-test-runs
 ```
 ```
@@ -134,7 +136,9 @@ Here we tail the task logs and app log as the same time. If you do this in one t
 <details>
 <summary>
 
-```
+Click to expand.
+
+```bash
 $ make log
 ```
 
@@ -164,7 +168,9 @@ $ make log
 <details>
 <summary>
 
-```
+Click to expand.
+
+```bash
 $ make log-test
 ```
 
@@ -209,3 +215,14 @@ cd unicron && tail -n20 -F _test_var/output/*.log _test_var/app.log
 ```
 
 </details>
+
+
+## Python CLI
+
+Instead of going through `make`, you can run the Python script directly:
+
+```bash
+$ python3 -m unicron.unicron -v
+```
+
+You have to use the `-m` syntax for the relative imports in the script to work. If they are not relative imports and just `import logger`, then the tests can't run properly.
