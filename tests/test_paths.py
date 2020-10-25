@@ -1,3 +1,7 @@
+"""
+Paths module tests.
+"""
+# pylint: disable=missing-function-docstring
 from unicron import paths
 
 

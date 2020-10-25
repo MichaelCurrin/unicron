@@ -1,3 +1,7 @@
+"""
+History module tests.
+"""
+# pylint: disable=missing-function-docstring
 import datetime
 
 from unicron import history
