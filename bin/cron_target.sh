@@ -9,8 +9,7 @@
 
 set -e
 
-SCRIPT_DIR=$(dirname $(dirname $(realpath $0)))
-
+SCRIPT_DIR=$(dirname $(dirname $(realpath "$0")))
 cd "$SCRIPT_DIR"
 
 set +e
