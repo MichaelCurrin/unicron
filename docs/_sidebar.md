@@ -1,5 +1,6 @@
 - [Home](/#unicron-homepage)
 - [Features](features.md)
+- [About](about.md)
 - Setup
     - [Installation](installation.md)
     - [Configure crontab](cron.md)
