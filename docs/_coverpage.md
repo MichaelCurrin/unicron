@@ -1,6 +1,6 @@
 # Unicron
 
-<img width="150" src="_media/logo_transparent.png" alt="Unicron logo" />
+<img width="150" src="_media/logo.svg" alt="Unicron logo" />
 
 
 > Scheduling daily tasks with ease, control and logging

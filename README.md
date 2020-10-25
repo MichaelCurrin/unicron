@@ -10,14 +10,14 @@
 
 
 <div align="center">
-    
+
 <a href="https://michaelcurrin.github.io/unicron/">
-    <img width="250" src="docs/_media/logo.png" alt="Unicron logo">
+    <img width="250" src="docs/_media/logo.svg" alt="Unicron logo">
 </a>
 
 - The easy way to take control of your scheduled tasks
 - Integrates with `crontab`.
-- Zero Python packages needed! 
+- Zero Python packages needed!
 - Just clone, configure and run. :snake: :tada: :unicorn:
 
 <a href="https://michaelcurrin.github.io/unicron/">
