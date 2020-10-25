@@ -85,11 +85,11 @@ def main() -> None:
     """
     Main command-line argument parser.
 
-    :raises: Exit script on error code if there are any failures.
+    Exit script on error code if there are any failures.
     """
     parser = argparse.ArgumentParser(
-        description="Uniron task scheduler.",
-        epilog="Run against the test var directory, using TEST=1 as script prefix.",
+        description="Unicron task scheduler.",
+        epilog="Run against the test var directory by using TEST=true as script prefix.",
     )
     parser.add_argument(
         "-v",
@@ -99,6 +99,7 @@ def main() -> None:
         action="store_true",
     )
     args = parser.parse_args()
+
     logger.VERBOSE = args.verbose
 
     _, fail, _ = handle_tasks(
