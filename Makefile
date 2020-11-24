@@ -1,6 +1,6 @@
 default: install-dev
 
-# Local pre-deploy command.
+# Local pre-release step.
 all: install-dev format-check lint typecheck unit
 
 
@@ -11,7 +11,7 @@ h help:
 
 install-dev:
 	pip install pip --upgrade
-	pip install -r requirements-dev.txt --upgrade
+	pip install -r requirements-dev.txt
 
 
 # Run all configured tasks in main VAR targets dir.
@@ -76,7 +76,7 @@ lint: pylint
 # Apply formatting and linting fixes.
 fix: format lint
 
-typecheck:
+t typecheck:
 	mypy unicron tests
 
 
