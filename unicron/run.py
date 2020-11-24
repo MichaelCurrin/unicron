@@ -5,7 +5,7 @@ import datetime
 import subprocess
 import textwrap
 from pathlib import Path
-from typing import Tuple
+from typing import Tuple, Optional
 
 from . import constants, logger, history, paths
 
@@ -90,17 +90,18 @@ def execute(task_name: str) -> bool:
     return status
 
 
-def handle_task(task_name):
+# Python 3.9 pylint bug https://github.com/PyCQA/pylint/issues/3882
+def handle_task(
+    task_name: str,
+) -> Optional[bool]:  # pylint: disable=unsubscriptable-object
     """
-    Run a task, if it needs to run now.
+    Run a task, if it still needs to run today.
 
     :return status: True on task success, False on failure and None on skipped.
     """
     should_run = history.check_need_to_run(task_name)
 
-    if should_run:
-        status = execute(task_name)
-    else:
-        status = None
+    if not should_run:
+        return None
 
-    return status
+    return execute(task_name)
