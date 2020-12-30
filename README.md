@@ -1,5 +1,5 @@
 # Unicron :clock1:
-> Easy scheduler to run tasks exactly once per day and retry at intervals if a task fails :repeat_one::hourglass_flowing_sand::unicorn:
+> The persistent but efficient scheduler for daily tasks :repeat_one::hourglass_flowing_sand::unicorn:
 
 [![Actions status](https://github.com/MichaelCurrin/unicron/workflows/Python%20application/badge.svg)](https://github.com/MichaelCurrin/unicron/actions)
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/tags/)
@@ -17,7 +17,8 @@
 
 - The easy way to take control of your scheduled tasks
 - Integrates with `crontab`.
-- Zero Python packages needed!
+- Configure as many tasks as you want.
+- Made with Python but zero packages needed!
 - Just clone, configure and run. :snake: :tada: :unicorn:
 
 <a href="https://michaelcurrin.github.io/unicron/">
