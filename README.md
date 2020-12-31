@@ -16,9 +16,10 @@
 </a>
 
 - The easy way to take control of your scheduled tasks
-- Integrates with `crontab`.
+- For example, scrape HTML pages or Twitter API data without running excessively, so you save on storage and avoid rate limits
+- Unicron integrates with `crontab` on macOS or Linux.
 - Configure as many tasks as you want.
-- Made with Python but zero packages needed!
+- Made with Python, but zero packages needed!
 - Just clone, configure and run. :snake: :tada: :unicorn:
 
 <a href="https://michaelcurrin.github.io/unicron/">
