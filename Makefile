@@ -13,6 +13,10 @@ install-dev:
 	pip install pip --upgrade
 	pip install -r requirements-dev.txt
 
+upgrade:
+	pip install pip --upgrade
+	pip install -r requirements-dev.txt --upgrade
+
 
 # Run all configured tasks in main VAR targets dir.
 run:
