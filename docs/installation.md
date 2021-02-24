@@ -13,7 +13,7 @@
 
 ### Install Python 3
 
-[install_python_3.md](//gist.githubusercontent.com/MichaelCurrin/57caae30bd7b0991098e9804a9494c23/raw/install_python_3.md ':include')
+[install_python_3.md](//gist.githubusercontent.com/MichaelCurrin/57caae30bd7b0991098e9804a9494c23/raw/install-python-3.md ':include')
 
 ### Install Crontab
 
