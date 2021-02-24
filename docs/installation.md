@@ -28,7 +28,7 @@ $ sudo apt install python3-crontab
 ```
 
 
-## Clone
+## Clone the repo
 
 ```bash
 $ git clone git@github.com:MichaelCurrin/unicron.git
@@ -36,7 +36,7 @@ $ cd unicron
 ```
 
 
-## Project dependencies
+## Install project packages
 
 There are _no_ Python packages needed to run the main application.
 
