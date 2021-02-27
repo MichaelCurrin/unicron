@@ -34,7 +34,7 @@ $ make fmt
 Run unit tests.
 
 ```bash
-$ make unit
+$ make test
 ```
 
 
