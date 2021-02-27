@@ -86,10 +86,6 @@ t typecheck:
 	mypy unicron tests
 
 
-clean:
-	find . -name '*.pyc' -delete
-
-
 # Reset tasks and logs in the TEST VAR dir.
 reset:
 	bin/reset.sh
@@ -101,6 +97,10 @@ unit: reset
 # Integration test.
 debug: reset
 	bin/test.sh
+
+
+clean:
+	find . -name '*.pyc' -delete
 
 
 # Serve docs site.
