@@ -9,6 +9,10 @@ h help:
 	@egrep '(^\S)|^$$' Makefile
 
 
+.PHONY: hooks
+hooks:
+	cd .git/hooks && ln -s -f ../../hooks/pre-push pre-push
+
 install-dev:
 	pip install pip --upgrade
 	pip install -r requirements-dev.txt
