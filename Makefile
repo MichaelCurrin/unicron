@@ -1,7 +1,7 @@
 default: install-dev
 
 # Local pre-release step.
-all: install-dev format-check lint typecheck unit
+all: install-dev fmt-check lint typecheck unit
 
 
 # Show make targets and comments.
@@ -66,10 +66,10 @@ log-tests:
 	cd unicron/_test_var && tail -n20 -F output/*.log app.log
 
 
-format:
+fmt:
 	black .
 	isort .
-format-check:
+fmt-check:
 	black . --diff --check
 	isort . --check-only
 
@@ -79,8 +79,8 @@ pylint:
 
 lint: pylint
 
-# Apply formatting and linting fixes.
-fix: format lint
+# Apply fmtting and linting fixes.
+fix: fmt lint
 
 t typecheck:
 	mypy unicron tests

@@ -16,10 +16,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     strategy:
       max-parallel: 4
-      
+
       matrix:
         python-version: [3.8, 3.X]
 
@@ -35,7 +35,7 @@ jobs:
         run: make install-dev
 
       - name: Check formatting
-        run: make format-check
+        run: make fmt-check
 
       - name: Check types
         run: make typecheck

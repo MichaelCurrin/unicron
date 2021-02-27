@@ -26,7 +26,7 @@ $ make dev-install
 Format Python files and run linting checks.
 
 ```bash
-$ make check
+$ make fmt
 ```
 
 ### Tests
