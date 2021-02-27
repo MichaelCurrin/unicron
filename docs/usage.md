@@ -68,7 +68,7 @@ The example output below is for the demo script which was setup using [Installat
     2020-04-05 10:00:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:00:00,429 DEBUG:unicron.py hello.sh - Executing, since last run date is old.
     2020-04-05 10:00:02,224 INFO:unicron.py hello.sh - Success.
-    2020-04-05 10:00:02,300 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
+    2020-04-05 10:00:02,300 INFO:unicron.py unicron - Succeeded: 1; Failed: 0; Skipped: 0
     ```
 - Second run.
     ```bash
@@ -78,7 +78,7 @@ The example output below is for the demo script which was setup using [Installat
     python3 -m unicron.unicron -v
     2020-04-05 10:10:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:10:00,429 INFO:unicron.py hello.sh - Skipping, since already ran today.
-    2020-04-05 10:10:00,500 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
+    2020-04-05 10:10:00,500 INFO:unicron.py unicron - Succeeded: 0; Failed: 0; Skipped: 1
     ```
 
 Once _Unicron_ has attempted all tasks, if any task failed then _Unicron_ will exit with an error status. This can be useful for control flow when using cron and `mail`. If running through `make`, the error will appear as follows:
@@ -155,10 +155,10 @@ $ make log
     2020-04-05 10:00:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:00:00,429 DEBUG:unicron.py hello.sh - Executing, since last run date is old.
     2020-04-05 10:00:02,224 INFO:unicron.py hello.sh - Success.
-    2020-04-05 10:00:02,300 INFO:unicron.py unicron - Suceeded: 1; Failed: 0; Skipped: 0
+    2020-04-05 10:00:02,300 INFO:unicron.py unicron - Succeeded: 1; Failed: 0; Skipped: 0
     2020-04-05 10:10:00,414 INFO:unicron.py unicron - Task count: 1
     2020-04-05 10:10:00,429 INFO:unicron.py hello.sh - Skipping, since already ran today.
-    2020-04-05 10:10:00,500 INFO:unicron.py unicron - Suceeded: 0; Failed: 0; Skipped: 1
+    2020-04-05 10:10:00,500 INFO:unicron.py unicron - Succeeded: 0; Failed: 0; Skipped: 1
 ```
 
 </details>
