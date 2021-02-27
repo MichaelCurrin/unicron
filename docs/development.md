@@ -43,9 +43,9 @@ $ make unit
 
 See the [main.yml](https://github.com/MichaelCurrin/unicron/blob/master/.github/workflows/main.yml) workflow file in the repo.
 
-This sets up check to run on Github Actions.
+This sets up checks to run on Github Actions.
 
-Nothing is persisted - the project is not packaged and distributed anyhere.
+Nothing is persisted - the project is not packaged and distributed anywhere.
 
 
 ## Docs site
@@ -54,13 +54,17 @@ Built on [DocsifyJS](docsify.js.org/).
 
 ### Locally
 
-Install [Docsify CLI](https://www.npmjs.com/package/docsify-cli):
+Requires Node.js installed.
+
+Optionally install [Docsify CLI](https://www.npmjs.com/package/docsify-cli).
 
 ```bash
 $ npm install -g docsify-cli
 ```
 
-Run local docs server from root:
+If you don't install it, it will be downloaded with `npx` in the next command but not installed.
+
+Run local docs server from the project root:
 
 ```bash
 $ make docs
