@@ -23,7 +23,7 @@ $ make dev-install
 
 ### Format and lint
 
-Format Python files and run linting checks.
+Format Python files and run linting and type checks.
 
 ```bash
 $ make fmt
