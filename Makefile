@@ -75,7 +75,7 @@ fmt:
 	isort .
 fmt-check:
 	black . --diff --check
-	isort . --check-only
+	isort . --diff --check-only
 
 pylint:
 	# Exit on error code on a fail. Expand failure to all non-fatal messages too.
