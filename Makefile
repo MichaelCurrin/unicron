@@ -79,7 +79,6 @@ pylint:
 
 lint: pylint
 
-# Apply fmtting and linting fixes.
 fix: fmt lint
 
 t typecheck:
