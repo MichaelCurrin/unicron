@@ -68,8 +68,10 @@ log-tests:
 
 format:
 	black .
+	isort .
 format-check:
 	black . --diff --check
+	isort . --check-only
 
 pylint:
 	# Exit on error code on a fail. Expand failure to all non-fatal messages too.
@@ -104,4 +106,4 @@ debug: reset
 # Serve docs site.
 .PHONY: docs
 docs:
-	docsify serve docs
+	npx docsify serve docs
