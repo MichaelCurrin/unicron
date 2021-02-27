@@ -92,9 +92,22 @@ reset:
 
 # Run unit tests.
 unit: reset
+	TEST=true pytest
+test-coverage: reset
 	TEST=true coverage run --source=unicron -m pytest
 
-# Integration test.
+test-report:
+	coverage report -m
+
+test: test-coverage test-report
+
+# Run tests and serve coverage output explorer.
+test-html: test-coverage
+	coverage html
+	npx docsify serve htmlcov
+
+
+# Integration tests. Requires manual inspection.
 debug: reset
 	bin/test.sh
 
