@@ -5,9 +5,9 @@ import datetime
 import subprocess
 import textwrap
 from pathlib import Path
-from typing import Tuple, Optional
+from typing import Optional, Tuple
 
-from . import constants, logger, history, paths
+from . import constants, history, logger, paths
 
 
 def run_in_shell(cmd: str) -> Tuple[bool, str]:
