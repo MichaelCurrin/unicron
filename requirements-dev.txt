@@ -6,3 +6,4 @@ pylint-exit>=1.2.0
 mypy>=0.800
 
 pytest>=6.2.2
+coverage>=5.4

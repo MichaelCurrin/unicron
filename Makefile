@@ -94,7 +94,7 @@ reset:
 
 # Run unit tests.
 unit: reset
-	TEST=true pytest
+	TEST=true coverage run --source=unicron -m pytest
 
 # Integration test.
 debug: reset
