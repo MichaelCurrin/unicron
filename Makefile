@@ -1,12 +1,10 @@
 default: install-dev
 
-# Local pre-release step.
 all: install-dev fmt-check lint typecheck unit
 
 
-# Show make targets and comments.
 h help:
-	@egrep '(^\S)|^$$' Makefile
+	@grep '^[a-z#]' Makefile
 
 
 .PHONY: hooks
@@ -93,7 +91,6 @@ t typecheck:
 reset:
 	bin/reset.sh
 
-# Run unit tests.
 unit: reset
 	TEST=true pytest
 test-coverage: reset
