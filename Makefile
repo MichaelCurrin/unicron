@@ -75,11 +75,9 @@ fmt-check:
 	black . --diff --check
 	isort . --diff --check-only
 
-pylint:
+lint:
 	# Exit on error code on a fail. Expand failure to all non-fatal messages too.
 	pylint unicron tests || pylint-exit -efail -wfail -rfail -cfail $$?
-
-lint: pylint
 
 fix: fmt lint
 
