@@ -1,5 +1,5 @@
 # Unicron docs
-> The persistent but efficient scheduler for daily tasks
+> The tenacious but efficient scheduler for daily tasks
 
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron.svg)](https://GitHub.com/MichaelCurrin/unicron/releases/)
 
