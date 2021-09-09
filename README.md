@@ -1,5 +1,5 @@
 # Unicron :clock1:
-> The persistent but efficient scheduler for daily tasks :repeat_one::hourglass_flowing_sand::unicorn:
+> The tenacious but efficient scheduler for daily tasks :repeat_one::hourglass_flowing_sand::unicorn:
 
 [![Python CI](https://github.com/MichaelCurrin/unicron/workflows/Python%20CI/badge.svg)](https://github.com/MichaelCurrin/unicron/actions?query=workflow:"Python+CI" "GitHub Actions workflow")
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/unicron?include_prereleases=&sort=semver)](https://github.com/MichaelCurrin/unicron/releases/)
