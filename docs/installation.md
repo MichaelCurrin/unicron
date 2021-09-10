@@ -47,4 +47,4 @@ If this is your first time using Unicron, you can skip ahead to the [Usage](usag
 
 ## Set up Unicron as a scheduled task
 
-Continue to the [Set up cron](setup_cron.md) page to setup Unicron as scheduled item which manages your configured tasks.
+Continue to the [Configure cron](cron.md) page to use cron set up Unicron as scheduled item, which then manages your configured tasks.
