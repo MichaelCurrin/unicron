@@ -23,12 +23,12 @@ def run_in_shell(cmd: str) -> Tuple[bool, str]:
         will be the error message.
     """
     try:
-        exitcode, output = subprocess.getstatusoutput(cmd)
+        exit_code, output = subprocess.getstatusoutput(cmd)
     except OSError as os_err:
         success = False
         output = str(os_err)
     else:
-        success = exitcode == 0
+        success = (exit_code == 0)
 
     return success, output
 
@@ -37,7 +37,7 @@ def proccess_cmd_result(
     task_name: str, task_log_path: Path, last_run_path: Path, status: bool, output: str
 ) -> None:
     """
-    Process the result of running a command.
+    Process the result from running a command.
 
     Log activity for the task and update the last run date if the task was run
     successfully.
@@ -74,7 +74,7 @@ def execute(task_name: str) -> bool:
     a log file dedicated to that task. This makes it easy to view the
     executable's history later.
 
-    :return status: True if ran without error, False otherwise.
+    :return status: True if the task ran without error, False otherwise.
     """
     last_run_path = paths.mk_last_run_path(task_name)
 
