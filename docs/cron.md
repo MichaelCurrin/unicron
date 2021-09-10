@@ -1,5 +1,5 @@
 # Configure crontab
-> Setup a single cron job
+> Set up a single cron job
 
 <!-- TODO move command above to SH script -->
 
