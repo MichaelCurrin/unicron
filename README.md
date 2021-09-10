@@ -19,9 +19,9 @@
 
 
 - The easy way to take control of your scheduled tasks.
-- For example, scrape HTML pages or Twitter API data without running excessively, so you save on storage and avoid rate limits.
+- Configure as many tasks as you want that will each run once a day.
+- For example, scrape HTML pages or Twitter API data - without running excessively, so you save on storage (avoiding duplicates) and avoid hitting rate limits.
 - Unicron integrates with `crontab` on macOS or Linux.
-- Configure as many tasks as you want.
 - Made with Python, but zero packages needed!
 - Just clone, configure and run. :snake: :tada: :unicorn:
 
