@@ -43,7 +43,7 @@ from . import constants, logger, run
 
 def get_tasks(tasks_dir: Path) -> List[str]:
     """
-    Get Path objects for tasks in a given tasks diectory.
+    Return tasks in a given tasks directory.
     """
     globbed_tasks = sorted(tasks_dir.iterdir())
 
@@ -52,9 +52,9 @@ def get_tasks(tasks_dir: Path) -> List[str]:
 
 def handle_tasks(tasks_dir: Path, app_log_path: Path) -> Tuple[int, int, int]:
     """
-    Find tasks, check their run status for today and run any if needed.
+    Find tasks, check their run status for today, and run tasks not yet successful.
 
-    :return: tuple of results.
+    :return: A tuple of result counts.
     """
     success = fail = skipped = 0
 
@@ -85,19 +85,20 @@ def main() -> None:
     """
     Main command-line argument parser.
 
-    Exit script on error code if there are any failures.
+    Exit app with error code if there are any task failures.
     """
     parser = argparse.ArgumentParser(
         description="Unicron task scheduler.",
-        epilog="Run against the test var directory by using TEST=true as script prefix.",
+        epilog="Run against the test var directory by using TEST=true as a prefix.",
     )
     parser.add_argument(
         "-v",
         "--verbose",
-        help="If supplied print all app log messages to the console and not"
+        help="If supplied, print all app log messages to the console and not"
         " just errors and higher",
         action="store_true",
     )
+
     args = parser.parse_args()
 
     logger.VERBOSE = args.verbose
