@@ -28,7 +28,7 @@ def run_in_shell(cmd: str) -> Tuple[bool, str]:
         success = False
         output = str(os_err)
     else:
-        success = (exit_code == 0)
+        success = exit_code == 0
 
     return success, output
 
