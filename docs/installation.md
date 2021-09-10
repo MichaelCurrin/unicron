@@ -4,9 +4,9 @@
 
 ## Requirements
 
-- Linux or macOS
+- Linux or macOS system 
 - [Python 3](https://python.org/)
-- Crontab (recommended for scheduling on macOS or Linux)
+- Crontab - recommended for scheduling on macOS or Linux.
 
 
 ## Install system dependencies
@@ -17,9 +17,9 @@
 
 ### Install Crontab
 
-I found this is installed usually on a fresh macOS or Linux setup.
+This is installed usually on a fresh macOS or Linux setup.
 
-Otherwise follow instructions below to install.
+Otherwise, follow instructions below to install.
 
 On Debian/Ubuntu:
 
@@ -45,6 +45,6 @@ But if you want to install and use the dev dependencies for local development, s
 If this is your first time using Unicron, you can skip ahead to the [Usage](usage.md) doc to see how to run Unicron.
 
 
-## Setup Unicron as a scheduled task
+## Set up Unicron as a scheduled task
 
-Continue to the [Setup cron](setup_cron.md) page to setup Unicron as scheduled item which manages your configured tasks.
+Continue to the [Set up cron](setup_cron.md) page to setup Unicron as scheduled item which manages your configured tasks.
