@@ -1,5 +1,7 @@
 """
 History module.
+
+Check when a task last ran and if it needs to run today.
 """
 import datetime
 
@@ -8,7 +10,7 @@ from . import constants, logger, paths
 
 def get_last_run_date(task_name: str):
     """
-    Get data of task's last run file and return as datetime object if set.
+    Get date of a task's last run file and return as a qdatetime object if set.
     """
     last_run_path = paths.mk_last_run_path(task_name)
 
