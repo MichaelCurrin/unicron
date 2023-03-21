@@ -53,8 +53,11 @@ def get_tasks(tasks_dir: Path) -> List[str]:
 def handle_tasks(tasks_dir: Path, app_log_path: Path) -> Tuple[int, int, int]:
     """
     Find tasks, check their run status for today, and run tasks not yet successful.
-
-    :return: A tuple of result counts.
+    
+    :param tasks_dir: Look for tasks in this directory.
+    :param app_log_path: Log messages to this path.
+    
+    :return: A tuple of result counts as success, failed, and skipped.
     """
     success = fail = skipped = 0
 
