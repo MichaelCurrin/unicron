@@ -1,6 +1,7 @@
 """
 Logger module tests.
 """
+
 # pylint: disable=missing-function-docstring
 from pathlib import Path
 

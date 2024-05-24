@@ -1,6 +1,7 @@
 """
 History module tests.
 """
+
 # pylint: disable=missing-function-docstring
 import datetime
 

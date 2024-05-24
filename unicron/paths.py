@@ -1,6 +1,7 @@
 """
 Paths module.
 """
+
 from pathlib import Path
 
 from . import constants

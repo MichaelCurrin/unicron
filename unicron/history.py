@@ -3,6 +3,7 @@ History module.
 
 Check when a task last ran and if it needs to run today.
 """
+
 import datetime
 
 from . import constants, logger, paths
