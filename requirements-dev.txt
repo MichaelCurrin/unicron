@@ -9,3 +9,4 @@ mypy~=0.991
 
 pytest~=7.4
 coverage~=5.4
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
